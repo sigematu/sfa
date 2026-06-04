@@ -1,0 +1,55 @@
+<?php
+declare(strict_types=1);
+
+namespace App\Model\Entity;
+
+use Cake\ORM\Entity;
+
+/**
+ * BpContact Entity
+ *
+ * @property int $id
+ * @property int $bp_id
+ * @property string $name
+ * @property string $kana
+ * @property string $email
+ * @property string|null $mobile_phone
+ * @property string|null $landline_phone
+ * @property string|null $position
+ * @property string|null $note
+ * @property int $status
+ * @property \Cake\I18n\FrozenTime $created
+ * @property string $created_id
+ * @property \Cake\I18n\FrozenTime|null $modified
+ * @property string|null $modified_id
+ *
+ * @property \App\Model\Entity\Bp $bp
+ */
+class BpContact extends Entity
+{
+    /**
+     * Fields that can be mass assigned using newEntity() or patchEntity().
+     *
+     * Note that when '*' is set to true, this allows all unspecified fields to
+     * be mass assigned. For security purposes, it is advised to set '*' to false
+     * (or remove it), and explicitly make individual fields accessible as needed.
+     *
+     * @var array<string, bool>
+     */
+    protected $_accessible = [
+        'bp_id' => true,
+        'name' => true,
+        'kana' => true,
+        'email' => true,
+        'mobile_phone' => true,
+        'landline_phone' => true,
+        'position' => true,
+        'note' => true,
+        'status' => true,
+        'created' => true,
+        'created_id' => true,
+        'modified' => true,
+        'modified_id' => true,
+        'bp' => true,
+    ];
+}

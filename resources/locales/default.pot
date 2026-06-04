@@ -1,0 +1,792 @@
+# LANGUAGE translation of CakePHP Application
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2025-03-05 01:37+0900\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: ./src/Controller/BpsController.php:56
+#: ./src/Controller/BpsController.php:81
+msgid "The bp has been saved."
+msgstr ""
+
+#: ./src/Controller/BpsController.php:60
+#: ./src/Controller/BpsController.php:85
+msgid "The bp could not be saved. Please, try again."
+msgstr ""
+
+#: ./src/Controller/BpsController.php:103
+msgid "The bp has been deleted."
+msgstr ""
+
+#: ./src/Controller/BpsController.php:105
+msgid "The bp could not be deleted. Please, try again."
+msgstr ""
+
+#: ./src/Controller/ClientsController.php:56
+#: ./src/Controller/ClientsController.php:81
+msgid "The client has been saved."
+msgstr ""
+
+#: ./src/Controller/ClientsController.php:60
+#: ./src/Controller/ClientsController.php:85
+msgid "The client could not be saved. Please, try again."
+msgstr ""
+
+#: ./src/Controller/ClientsController.php:103
+msgid "The client has been deleted."
+msgstr ""
+
+#: ./src/Controller/ClientsController.php:105
+msgid "The client could not be deleted. Please, try again."
+msgstr ""
+
+#: ./src/Controller/ContractsController.php:56
+#: ./src/Controller/ContractsController.php:84
+msgid "The contract has been saved."
+msgstr ""
+
+#: ./src/Controller/ContractsController.php:60
+#: ./src/Controller/ContractsController.php:88
+msgid "The contract could not be saved. Please, try again."
+msgstr ""
+
+#: ./src/Controller/ContractsController.php:109
+msgid "The contract has been deleted."
+msgstr ""
+
+#: ./src/Controller/ContractsController.php:111
+msgid "The contract could not be deleted. Please, try again."
+msgstr ""
+
+#: ./src/Controller/EngineersController.php:74
+#: ./src/Controller/EngineersController.php:99
+msgid "The engineer has been saved."
+msgstr ""
+
+#: ./src/Controller/EngineersController.php:78
+#: ./src/Controller/EngineersController.php:103
+msgid "The engineer could not be saved. Please, try again."
+msgstr ""
+
+#: ./src/Controller/EngineersController.php:121
+msgid "The engineer has been deleted."
+msgstr ""
+
+#: ./src/Controller/EngineersController.php:123
+msgid "The engineer could not be deleted. Please, try again."
+msgstr ""
+
+#: ./src/Controller/UsersController.php:69
+#: ./src/Controller/UsersController.php:93
+msgid "The user has been saved."
+msgstr ""
+
+#: ./src/Controller/UsersController.php:73
+#: ./src/Controller/UsersController.php:97
+msgid "The user could not be saved. Please, try again."
+msgstr ""
+
+#: ./src/Controller/UsersController.php:114
+msgid "The user has been deleted."
+msgstr ""
+
+#: ./src/Controller/UsersController.php:116
+msgid "The user could not be deleted. Please, try again."
+msgstr ""
+
+#: ./templates/Bps/add.php:9
+msgid "Add Bp"
+msgstr ""
+
+#: ./templates/Bps/add.php:11
+#: ./templates/Bps/edit.php:10
+#: ./templates/Bps/index.php:11
+#: ./templates/Bps/view.php:12
+#: ./templates/Clients/add.php:11
+#: ./templates/Clients/edit.php:10
+#: ./templates/Clients/index.php:11
+#: ./templates/Clients/view.php:12
+#: ./templates/Contracts/add.php:11
+#: ./templates/Contracts/edit.php:10
+#: ./templates/Contracts/index.php:11
+#: ./templates/Contracts/view.php:12
+#: ./templates/Engineers/add.php:11
+#: ./templates/Engineers/edit.php:10
+#: ./templates/Engineers/index.php:11
+#: ./templates/Engineers/view.php:12
+#: ./templates/Users/add.php:11
+#: ./templates/Users/edit.php:10
+#: ./templates/Users/index.php:11
+#: ./templates/Users/view.php:12
+#: ./templates/plugin/CakeLte/element/header/menu.php:2
+msgid "Home"
+msgstr ""
+
+#: ./templates/Bps/add.php:12
+#: ./templates/Bps/edit.php:11
+#: ./templates/Bps/index.php:12
+#: ./templates/Bps/view.php:13
+msgid "List Bps"
+msgstr ""
+
+#: ./templates/Bps/add.php:13
+#: ./templates/Clients/add.php:13
+#: ./templates/Contracts/add.php:13
+#: ./templates/Engineers/add.php:13
+#: ./templates/Users/add.php:13
+msgid "Add"
+msgstr ""
+
+#: ./templates/Bps/add.php:30
+#: ./templates/Bps/edit.php:37
+#: ./templates/Clients/add.php:29
+#: ./templates/Clients/edit.php:36
+#: ./templates/Contracts/add.php:51
+#: ./templates/Contracts/edit.php:51
+#: ./templates/Engineers/add.php:33
+#: ./templates/Engineers/edit.php:40
+#: ./templates/Users/add.php:43
+#: ./templates/Users/edit.php:50
+msgid "Save"
+msgstr ""
+
+#: ./templates/Bps/add.php:31
+#: ./templates/Bps/edit.php:38
+#: ./templates/Bps/view.php:64
+#: ./templates/Clients/add.php:30
+#: ./templates/Clients/edit.php:37
+#: ./templates/Clients/view.php:60
+#: ./templates/Contracts/add.php:52
+#: ./templates/Contracts/edit.php:52
+#: ./templates/Contracts/view.php:120
+#: ./templates/Engineers/add.php:34
+#: ./templates/Engineers/edit.php:41
+#: ./templates/Engineers/view.php:76
+#: ./templates/Users/add.php:44
+#: ./templates/Users/edit.php:51
+#: ./templates/Users/view.php:100
+msgid "Cancel"
+msgstr ""
+
+#: ./templates/Bps/edit.php:8
+msgid "Edit Bp"
+msgstr ""
+
+#: ./templates/Bps/edit.php:12
+#: ./templates/Bps/index.php:59
+#: ./templates/Bps/view.php:14
+#: ./templates/Bps/view.php:135
+#: ./templates/Clients/edit.php:12
+#: ./templates/Clients/index.php:51
+#: ./templates/Clients/view.php:14
+#: ./templates/Clients/view.php:131
+#: ./templates/Contracts/edit.php:12
+#: ./templates/Contracts/index.php:89
+#: ./templates/Contracts/view.php:14
+#: ./templates/Engineers/edit.php:12
+#: ./templates/Engineers/index.php:85
+#: ./templates/Engineers/view.php:14
+#: ./templates/Engineers/view.php:147
+#: ./templates/Users/edit.php:12
+#: ./templates/Users/index.php:73
+#: ./templates/Users/view.php:14
+#: ./templates/Users/view.php:159
+#: ./vendor/cakephp/cakephp/src/View/Helper/PaginatorHelper.php:1260
+msgid "View"
+msgstr ""
+
+#: ./templates/Bps/edit.php:13
+#: ./templates/Bps/index.php:60
+#: ./templates/Bps/view.php:63
+#: ./templates/Bps/view.php:136
+#: ./templates/Clients/edit.php:13
+#: ./templates/Clients/index.php:52
+#: ./templates/Clients/view.php:59
+#: ./templates/Clients/view.php:132
+#: ./templates/Contracts/edit.php:13
+#: ./templates/Contracts/index.php:90
+#: ./templates/Contracts/view.php:119
+#: ./templates/Engineers/edit.php:13
+#: ./templates/Engineers/index.php:86
+#: ./templates/Engineers/view.php:75
+#: ./templates/Engineers/view.php:148
+#: ./templates/Users/edit.php:13
+#: ./templates/Users/index.php:74
+#: ./templates/Users/view.php:99
+#: ./templates/Users/view.php:160
+msgid "Edit"
+msgstr ""
+
+#: ./templates/Bps/edit.php:31
+#: ./templates/Bps/index.php:61
+#: ./templates/Bps/view.php:57
+#: ./templates/Bps/view.php:137
+#: ./templates/Clients/edit.php:30
+#: ./templates/Clients/index.php:53
+#: ./templates/Clients/view.php:53
+#: ./templates/Clients/view.php:133
+#: ./templates/Contracts/edit.php:45
+#: ./templates/Contracts/index.php:91
+#: ./templates/Contracts/view.php:113
+#: ./templates/Engineers/edit.php:34
+#: ./templates/Engineers/index.php:87
+#: ./templates/Engineers/view.php:69
+#: ./templates/Engineers/view.php:149
+#: ./templates/Users/edit.php:44
+#: ./templates/Users/index.php:75
+#: ./templates/Users/view.php:93
+#: ./templates/Users/view.php:161
+msgid "Delete"
+msgstr ""
+
+#: ./templates/Bps/edit.php:33
+#: ./templates/Bps/index.php:61
+#: ./templates/Bps/view.php:59
+#: ./templates/Bps/view.php:137
+#: ./templates/Clients/edit.php:32
+#: ./templates/Clients/index.php:53
+#: ./templates/Clients/view.php:55
+#: ./templates/Clients/view.php:133
+#: ./templates/Contracts/edit.php:47
+#: ./templates/Contracts/index.php:91
+#: ./templates/Contracts/view.php:115
+#: ./templates/Engineers/edit.php:36
+#: ./templates/Engineers/index.php:87
+#: ./templates/Engineers/view.php:71
+#: ./templates/Engineers/view.php:149
+#: ./templates/Users/edit.php:46
+#: ./templates/Users/index.php:75
+#: ./templates/Users/view.php:95
+#: ./templates/Users/view.php:161
+msgid "Are you sure you want to delete # {0}?"
+msgstr ""
+
+#: ./templates/Bps/index.php:9
+msgid "Bps"
+msgstr ""
+
+#: ./templates/Bps/index.php:26
+msgid "New Bp"
+msgstr ""
+
+#: ./templates/Bps/index.php:40
+#: ./templates/Bps/view.php:102
+#: ./templates/Clients/index.php:39
+#: ./templates/Clients/view.php:98
+#: ./templates/Contracts/index.php:50
+#: ./templates/Engineers/index.php:57
+#: ./templates/Engineers/view.php:114
+#: ./templates/Users/index.php:50
+#: ./templates/Users/view.php:132
+msgid "Actions"
+msgstr ""
+
+#: ./templates/Bps/index.php:72
+#: ./templates/Clients/index.php:64
+#: ./templates/Contracts/index.php:102
+#: ./templates/Engineers/index.php:98
+#: ./templates/Users/index.php:86
+msgid "Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total"
+msgstr ""
+
+#: ./templates/Bps/view.php:10
+msgid "Bp"
+msgstr ""
+
+#: ./templates/Bps/view.php:25
+#: ./templates/Clients/view.php:25
+#: ./templates/Engineers/view.php:25
+#: ./templates/Users/view.php:10
+msgid "User"
+msgstr ""
+
+#: ./templates/Bps/view.php:29
+#: ./templates/Clients/view.php:29
+#: ./templates/Engineers/view.php:29
+msgid "Name"
+msgstr ""
+
+#: ./templates/Bps/view.php:33
+#: ./templates/Clients/view.php:33
+#: ./templates/Engineers/view.php:33
+msgid "Kana"
+msgstr ""
+
+#: ./templates/Bps/view.php:37
+#: ./templates/Bps/view.php:81
+#: ./templates/Clients/view.php:37
+#: ./templates/Clients/view.php:77
+#: ./templates/Contracts/view.php:37
+#: ./templates/Engineers/view.php:49
+#: ./templates/Engineers/view.php:93
+#: ./templates/Users/view.php:25
+#: ./templates/Users/view.php:117
+msgid "Id"
+msgstr ""
+
+#: ./templates/Bps/view.php:41
+msgid "Fee"
+msgstr ""
+
+#: ./templates/Bps/view.php:45
+#: ./templates/Bps/view.php:100
+#: ./templates/Clients/view.php:41
+#: ./templates/Clients/view.php:96
+#: ./templates/Contracts/view.php:101
+#: ./templates/Engineers/view.php:57
+#: ./templates/Engineers/view.php:112
+#: ./templates/Users/view.php:65
+#: ./templates/Users/view.php:130
+msgid "Created"
+msgstr ""
+
+#: ./templates/Bps/view.php:49
+#: ./templates/Bps/view.php:101
+#: ./templates/Clients/view.php:45
+#: ./templates/Clients/view.php:97
+#: ./templates/Contracts/view.php:105
+#: ./templates/Engineers/view.php:61
+#: ./templates/Engineers/view.php:113
+#: ./templates/Users/view.php:69
+#: ./templates/Users/view.php:131
+msgid "Modified"
+msgstr ""
+
+#: ./templates/Bps/view.php:72
+#: ./templates/Clients/view.php:68
+#: ./templates/Engineers/view.php:84
+msgid "Related Contracts"
+msgstr ""
+
+#: ./templates/Bps/view.php:74
+#: ./templates/Clients/view.php:70
+#: ./templates/Engineers/view.php:86
+#: ./templates/Users/view.php:110
+msgid "New"
+msgstr ""
+
+#: ./templates/Bps/view.php:75
+#: ./templates/Clients/view.php:71
+#: ./templates/Engineers/view.php:87
+#: ./templates/Users/view.php:111
+msgid "List "
+msgstr ""
+
+#: ./templates/Bps/view.php:82
+#: ./templates/Clients/view.php:78
+#: ./templates/Contracts/view.php:41
+#: ./templates/Engineers/view.php:94
+#: ./templates/Users/view.php:118
+msgid "User Id"
+msgstr ""
+
+#: ./templates/Bps/view.php:83
+#: ./templates/Clients/view.php:79
+#: ./templates/Contracts/view.php:45
+#: ./templates/Engineers/view.php:95
+msgid "Engineer Id"
+msgstr ""
+
+#: ./templates/Bps/view.php:84
+#: ./templates/Clients/view.php:80
+#: ./templates/Contracts/view.php:49
+#: ./templates/Engineers/view.php:96
+msgid "Client Id"
+msgstr ""
+
+#: ./templates/Bps/view.php:85
+#: ./templates/Clients/view.php:81
+#: ./templates/Contracts/view.php:53
+#: ./templates/Engineers/view.php:97
+msgid "Bp Id"
+msgstr ""
+
+#: ./templates/Bps/view.php:86
+#: ./templates/Clients/view.php:82
+#: ./templates/Contracts/view.php:25
+#: ./templates/Engineers/view.php:98
+msgid "Project"
+msgstr ""
+
+#: ./templates/Bps/view.php:87
+#: ./templates/Clients/view.php:83
+#: ./templates/Contracts/view.php:57
+#: ./templates/Engineers/view.php:99
+msgid "Sales"
+msgstr ""
+
+#: ./templates/Bps/view.php:88
+#: ./templates/Clients/view.php:84
+#: ./templates/Contracts/view.php:61
+#: ./templates/Engineers/view.php:100
+msgid "Sales Lower"
+msgstr ""
+
+#: ./templates/Bps/view.php:89
+#: ./templates/Clients/view.php:85
+#: ./templates/Contracts/view.php:65
+#: ./templates/Engineers/view.php:101
+msgid "Sales Upper"
+msgstr ""
+
+#: ./templates/Bps/view.php:90
+#: ./templates/Clients/view.php:86
+#: ./templates/Contracts/view.php:69
+#: ./templates/Engineers/view.php:102
+msgid "Cost"
+msgstr ""
+
+#: ./templates/Bps/view.php:91
+#: ./templates/Clients/view.php:87
+#: ./templates/Contracts/view.php:73
+#: ./templates/Engineers/view.php:103
+msgid "Cost Lower"
+msgstr ""
+
+#: ./templates/Bps/view.php:92
+#: ./templates/Clients/view.php:88
+#: ./templates/Contracts/view.php:77
+#: ./templates/Engineers/view.php:104
+msgid "Cost Upper"
+msgstr ""
+
+#: ./templates/Bps/view.php:93
+#: ./templates/Clients/view.php:89
+#: ./templates/Contracts/view.php:81
+#: ./templates/Engineers/view.php:105
+msgid "Profit"
+msgstr ""
+
+#: ./templates/Bps/view.php:94
+#: ./templates/Clients/view.php:90
+#: ./templates/Contracts/view.php:93
+#: ./templates/Engineers/view.php:106
+msgid "Order From"
+msgstr ""
+
+#: ./templates/Bps/view.php:95
+#: ./templates/Clients/view.php:91
+#: ./templates/Contracts/view.php:97
+#: ./templates/Engineers/view.php:107
+msgid "Order To"
+msgstr ""
+
+#: ./templates/Bps/view.php:96
+#: ./templates/Clients/view.php:92
+#: ./templates/Contracts/view.php:85
+#: ./templates/Engineers/view.php:108
+msgid "Cl Type"
+msgstr ""
+
+#: ./templates/Bps/view.php:97
+#: ./templates/Clients/view.php:93
+#: ./templates/Contracts/view.php:89
+#: ./templates/Engineers/view.php:109
+msgid "Bp Type"
+msgstr ""
+
+#: ./templates/Bps/view.php:98
+#: ./templates/Clients/view.php:94
+#: ./templates/Contracts/view.php:29
+#: ./templates/Engineers/view.php:110
+msgid "Cl Pic"
+msgstr ""
+
+#: ./templates/Bps/view.php:99
+#: ./templates/Clients/view.php:95
+#: ./templates/Contracts/view.php:33
+#: ./templates/Engineers/view.php:111
+msgid "Bp Pic"
+msgstr ""
+
+#: ./templates/Bps/view.php:107
+#: ./templates/Clients/view.php:103
+#: ./templates/Engineers/view.php:119
+msgid "Contracts record not found!"
+msgstr ""
+
+#: ./templates/Clients/add.php:9
+msgid "Add Client"
+msgstr ""
+
+#: ./templates/Clients/add.php:12
+#: ./templates/Clients/edit.php:11
+#: ./templates/Clients/index.php:12
+#: ./templates/Clients/view.php:13
+msgid "List Clients"
+msgstr ""
+
+#: ./templates/Clients/edit.php:8
+msgid "Edit Client"
+msgstr ""
+
+#: ./templates/Clients/index.php:9
+msgid "Clients"
+msgstr ""
+
+#: ./templates/Clients/index.php:26
+msgid "New Client"
+msgstr ""
+
+#: ./templates/Clients/view.php:10
+msgid "Client"
+msgstr ""
+
+#: ./templates/Contracts/add.php:9
+msgid "Add Contract"
+msgstr ""
+
+#: ./templates/Contracts/add.php:12
+#: ./templates/Contracts/edit.php:11
+#: ./templates/Contracts/index.php:12
+#: ./templates/Contracts/view.php:13
+msgid "List Contracts"
+msgstr ""
+
+#: ./templates/Contracts/edit.php:8
+msgid "Edit Contract"
+msgstr ""
+
+#: ./templates/Contracts/index.php:9
+msgid "Contracts"
+msgstr ""
+
+#: ./templates/Contracts/index.php:26
+msgid "New Contract"
+msgstr ""
+
+#: ./templates/Contracts/view.php:10
+msgid "Contract"
+msgstr ""
+
+#: ./templates/Engineers/add.php:9
+msgid "Add Engineer"
+msgstr ""
+
+#: ./templates/Engineers/add.php:12
+#: ./templates/Engineers/edit.php:11
+#: ./templates/Engineers/index.php:12
+#: ./templates/Engineers/view.php:13
+msgid "List Engineers"
+msgstr ""
+
+#: ./templates/Engineers/edit.php:8
+msgid "Edit Engineer"
+msgstr ""
+
+#: ./templates/Engineers/index.php:9
+msgid "Engineers"
+msgstr ""
+
+#: ./templates/Engineers/index.php:24
+msgid "リセット"
+msgstr ""
+
+#: ./templates/Engineers/index.php:40
+msgid "New Engineer"
+msgstr ""
+
+#: ./templates/Engineers/view.php:10
+msgid "Engineer"
+msgstr ""
+
+#: ./templates/Engineers/view.php:37
+msgid "Birthyear"
+msgstr ""
+
+#: ./templates/Engineers/view.php:41
+msgid "Exp Industry"
+msgstr ""
+
+#: ./templates/Engineers/view.php:45
+msgid "Exp Skill"
+msgstr ""
+
+#: ./templates/Engineers/view.php:53
+msgid "Type"
+msgstr ""
+
+#: ./templates/Users/add.php:9
+msgid "Add User"
+msgstr ""
+
+#: ./templates/Users/add.php:12
+#: ./templates/Users/edit.php:11
+#: ./templates/Users/index.php:12
+#: ./templates/Users/view.php:13
+msgid "List Users"
+msgstr ""
+
+#: ./templates/Users/edit.php:8
+msgid "Edit User"
+msgstr ""
+
+#: ./templates/Users/index.php:9
+msgid "Users"
+msgstr ""
+
+#: ./templates/Users/index.php:26
+msgid "New User"
+msgstr ""
+
+#: ./templates/Users/index.php:63
+#: ./templates/Users/index.php:65
+#: ./templates/Users/index.php:66
+#: ./templates/Users/view.php:78
+#: ./templates/Users/view.php:82
+#: ./templates/Users/view.php:86
+msgid "Yes"
+msgstr ""
+
+#: ./templates/Users/index.php:63
+#: ./templates/Users/index.php:65
+#: ./templates/Users/index.php:66
+#: ./templates/Users/view.php:78
+#: ./templates/Users/view.php:82
+#: ./templates/Users/view.php:86
+msgid "No"
+msgstr ""
+
+#: ./templates/Users/view.php:29
+#: ./templates/Users/view.php:120
+msgid "Username"
+msgstr ""
+
+#: ./templates/Users/view.php:33
+msgid "Email"
+msgstr ""
+
+#: ./templates/Users/view.php:37
+msgid "First Name"
+msgstr ""
+
+#: ./templates/Users/view.php:41
+msgid "Last Name"
+msgstr ""
+
+#: ./templates/Users/view.php:45
+msgid "Secret"
+msgstr ""
+
+#: ./templates/Users/view.php:49
+msgid "Role"
+msgstr ""
+
+#: ./templates/Users/view.php:53
+msgid "Additional Data"
+msgstr ""
+
+#: ./templates/Users/view.php:57
+msgid "Activation Date"
+msgstr ""
+
+#: ./templates/Users/view.php:61
+msgid "Tos Date"
+msgstr ""
+
+#: ./templates/Users/view.php:73
+msgid "Last Login"
+msgstr ""
+
+#: ./templates/Users/view.php:77
+msgid "Secret Verified"
+msgstr ""
+
+#: ./templates/Users/view.php:81
+#: ./templates/Users/view.php:128
+msgid "Active"
+msgstr ""
+
+#: ./templates/Users/view.php:85
+msgid "Is Superuser"
+msgstr ""
+
+#: ./templates/Users/view.php:108
+msgid "Related Social Accounts"
+msgstr ""
+
+#: ./templates/Users/view.php:119
+msgid "Provider"
+msgstr ""
+
+#: ./templates/Users/view.php:121
+msgid "Reference"
+msgstr ""
+
+#: ./templates/Users/view.php:122
+msgid "Avatar"
+msgstr ""
+
+#: ./templates/Users/view.php:123
+msgid "Description"
+msgstr ""
+
+#: ./templates/Users/view.php:124
+msgid "Link"
+msgstr ""
+
+#: ./templates/Users/view.php:125
+msgid "Token"
+msgstr ""
+
+#: ./templates/Users/view.php:126
+msgid "Token Secret"
+msgstr ""
+
+#: ./templates/Users/view.php:127
+msgid "Token Expires"
+msgstr ""
+
+#: ./templates/Users/view.php:129
+msgid "Data"
+msgstr ""
+
+#: ./templates/Users/view.php:137
+msgid "Social Accounts record not found!"
+msgstr ""
+
+#: ./templates/layout/error.php:36
+msgid "Back"
+msgstr ""
+
+#: ./templates/plugin/CakeLte/element/aside/main.php:9
+msgid "<i class=\"fab fa-github fa-fw\"></i> {0} {1}"
+msgstr ""
+
+#: ./templates/plugin/CakeLte/element/header/menu.php:5
+msgid "Debug"
+msgstr ""
+
+#: ./templates/plugin/CakeLte/element/header/menu.php:8
+msgid "Theme"
+msgstr ""
+
+#: ./templates/plugin/CakeLte/element/header/menu.php:11
+msgid "User"
+msgstr ""
+
+#: ./templates/plugin/CakeLte/element/header/menu.php:14
+msgid "Client"
+msgstr ""
+
+#: ./templates/plugin/CakeLte/element/header/menu.php:17
+msgid "Bp"
+msgstr ""
+
+#: ./templates/plugin/CakeLte/element/header/menu.php:20
+msgid "Engineer"
+msgstr ""
+
+#: ./templates/plugin/CakeLte/element/header/menu.php:23
+msgid "Contract"
+msgstr ""

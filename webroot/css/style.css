@@ -1,0 +1,32 @@
+/* Custom styles for Bills and BillItems */
+
+.table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.table th, .table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.table th {
+    background-color: #f2f2f2;
+    text-align: left;
+}
+
+.btn {
+    padding: 5px 10px;
+    font-size: 14px;
+    border-radius: 4px;
+}
+
+.btn-warning {
+    background-color: #ffc107;
+    color: #fff;
+    border: none;
+}
+
+.btn-warning:hover {
+    background-color: #e0a800;
+}

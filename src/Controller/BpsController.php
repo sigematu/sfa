@@ -1,0 +1,170 @@
+<?php
+declare(strict_types=1);
+
+namespace App\Controller;
+
+/**
+ * Bps Controller
+ *
+ * @property \App\Model\Table\BpsTable $Bps
+ * @method \App\Model\Entity\Bp[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
+ */
+class BpsController extends AppController
+{
+    public $paginate = [
+        'order' => ['Bps.id' => 'DESC'],
+    ];
+    public function initialize(): void
+    {
+        parent::initialize();
+
+        $this->loadComponent('Search.Search', [
+            'actions' => ['index'],
+        ]);
+        $this->loadComponent('Pic');
+        $this->loadComponent('MailNotify');
+    }
+
+    /**
+     * Index method
+     *
+     * @return \Cake\Http\Response|null|void Renders view
+     */
+    public function index()
+    {
+        $bps = $this->Bps
+            ->find('search', ['search' => $this->request->getQueryParams()])
+            ->contain(['Users']);
+
+        $this->set(compact('bps'), $this->paginate($bps));
+    }
+
+    /**
+     * View method
+     *
+     * @param string|null $id Bp id.
+     * @return \Cake\Http\Response|null|void Renders view
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     */
+    public function view($id = null)
+    {
+        $sq_created_dn = $this->Pic->getDisplayName($this->name, 'created_id');
+        $sq_modified_dn = $this->Pic->getDisplayName($this->name, 'modified_id');
+
+        $bp = $this->Bps
+            ->get($id, [
+                'fields' => [
+                    'Bps.id',
+                    'Bps.name',
+                    'Bps.kana',
+                    'Bps.url',
+                    'Bps.invoice_number',
+                    'Bps.note',
+                    'Bps.status',
+                    'Bps.created',
+                    'Bps.created_id',
+                    'Bps.modified',
+                    'Bps.modified_id',
+                    'created_dn' => $sq_created_dn,
+                    'modified_dn' => $sq_modified_dn
+                ],
+                'contain' => [
+                    'Users',
+                    'BpContacts' => function ($q) {
+                        return $q
+                            ->where(['BpContacts.status' => STATUS_ACTIVE])
+                            ->order(['BpContacts.id' => 'DESC'])
+                            ->limit(20);
+                    },
+                ],
+            ]);
+
+        $this->set(compact('bp'));
+    }
+
+    /**
+     * Add method
+     *
+     * @return \Cake\Http\Response|null|void Redirects on successful add, renders view otherwise.
+     */
+    public function add()
+    {
+        $bp = $this->Bps->newEmptyEntity();
+        if ($this->request->is('post')) {
+            $bp = $this->Bps->patchEntity($bp, $this->request->getData());
+            if ($savedData = $this->Bps->save($bp)) {
+                $this->Flash->success(__('The bp has been saved.'));
+
+                // メール送信
+                $controller = $this->request->getParam('controller');
+                $action = $this->request->getParam('action');
+                $this->MailNotify->mailSend($savedData, $controller, $action);
+
+                return $this->redirect(['action' => 'view', $savedData->id]);
+            }
+            $this->Flash->error(__('The bp could not be saved. Please, try again.'));
+        }
+        $users = $this->Bps->Users->find('list')->all();
+        $this->set(compact('bp', 'users'));
+    }
+
+    /**
+     * Edit method
+     *
+     * @param string|null $id Bp id.
+     * @return \Cake\Http\Response|null|void Redirects on successful edit, renders view otherwise.
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     */
+    public function edit($id = null)
+    {
+        $bp = $this->Bps->get($id, [
+            'contain' => [],
+        ]);
+        if ($this->request->is(['patch', 'post', 'put'])) {
+            $bp = $this->Bps->patchEntity($bp, $this->request->getData());
+            if ($savedData = $this->Bps->save($bp)) {
+                $this->Flash->success(__('The bp has been saved.'));
+
+                // メール送信
+                $controller = $this->request->getParam('controller');
+                $action = $this->request->getParam('action');
+                $this->MailNotify->mailSend($savedData, $controller, $action);
+
+                return $this->redirect(['action' => 'view', $id]);
+            }
+            $this->Flash->error(__('The bp could not be saved. Please, try again.'));
+        }
+        $users = $this->Bps->Users->find('list')->all();
+        $this->set(compact('bp', 'users'));
+    }
+
+    /**
+     * Delete method
+     *
+     * @param string|null $id Bp id.
+     * @return \Cake\Http\Response|null|void Redirects to index.
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     */
+    public function delete($id = null)
+    {
+        $this->request->allowMethod(['post', 'delete']);
+        $bp = $this->Bps->get($id);
+
+        // メール送信用に削除対象の名前を保存
+        $savedData = (object)[
+            'name' => $bp->name
+        ];
+        if ($this->Bps->delete($bp)) {
+            $this->Flash->success(__('The bp has been deleted.'));
+
+            // メール送信
+            $controller = $this->request->getParam('controller');
+            $action = $this->request->getParam('action');
+            $this->MailNotify->mailSend($savedData, $controller, $action);
+        } else {
+            $this->Flash->error(__('The bp could not be deleted. Please, try again.'));
+        }
+
+        return $this->redirect(['action' => 'index']);
+    }
+}

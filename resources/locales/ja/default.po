@@ -1,0 +1,549 @@
+# LANGUAGE translation of CakePHP Application
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2025-03-05 01:37+0900\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+###############################################################################
+# 項目(共通)
+###############################################################################
+msgid "Id"
+msgstr "ID"
+
+msgid "Active"
+msgstr "有効"
+
+msgid "Inactive"
+msgstr "無効"
+
+msgid "Created"
+msgstr "作成日"
+
+msgid "Modified"
+msgstr "変更日"
+
+msgid "Note"
+msgstr "備考"
+
+###############################################################################
+# 項目(ユーザ)
+###############################################################################
+msgid "Username"
+msgstr "ユーザ"
+
+msgid "Email"
+msgstr "メールアドレス"
+
+msgid "Bp"
+msgstr "BP"
+
+msgid "Name"
+msgstr "名前"
+
+msgid "Kana"
+msgstr "名前(カナ)"
+
+msgid "Mobile"
+msgstr "携帯電話"
+
+msgid "Landline"
+msgstr "固定電話"
+
+msgid "Position"
+msgstr "役職"
+
+msgid "Employee No."
+msgstr "社員ID"
+
+msgid "Belong"
+msgstr "所属"
+
+msgid "Proper Staff"
+msgstr "正社員"
+
+msgid "Bp Staff"
+msgstr "BP"
+
+msgid "Year of Industry Experience"
+msgstr "業界経験"
+
+msgid "Skill Experience"
+msgstr "主とする技術"
+
+msgid "Year of Skill Experience"
+msgstr "技術の経験年数"
+
+msgid "Skill Sheet"
+msgstr "スキルシート"
+
+msgid "Birthyear"
+msgstr "生まれ年"
+
+msgid "S(100byen-)"
+msgstr "S(1,000億円～)"
+
+msgid "A(30-100byen)"
+msgstr "A(300～1,000億円)"
+
+msgid "B(10-30byen)"
+msgstr "B(100～300億円)"
+
+msgid "C(3-10byen)"
+msgstr "C(30～100億円)"
+
+msgid "D(-3byen)"
+msgstr "D(～30億円)"
+
+msgid "Cl Pic"
+msgstr "営業担当"
+
+msgid "Bp Pic"
+msgstr "BP担当"
+
+###############################################################################
+# 共通(アクション)
+###############################################################################
+msgid "Actions"
+msgstr "アクション"
+
+msgid "View"
+msgstr "表示"
+
+msgid "Edit"
+msgstr "編集"
+
+msgid "Delete"
+msgstr "削除"
+
+msgid "Are you sure you want to delete # {0}?"
+msgstr "本当に削除しますか？"
+
+msgid "Save"
+msgstr "保存"
+
+msgid "Cancel"
+msgstr "キャンセル"
+
+msgid "New"
+msgstr "新規"
+
+msgid "List "
+msgstr "一覧"
+
+msgid "Open Search"
+msgstr "検索を開く"
+
+msgid "Search"
+msgstr "検索"
+
+msgid "Reset"
+msgstr "リセット"
+
+msgid "Company"
+msgstr "会社"
+
+msgid "Company Kana"
+msgstr "会社(カナ)"
+
+msgid "Company Kana must be less than 255 characters."
+msgstr "会社(カナ)は255文字以内にしてください。"
+
+msgid "Select Company"
+msgstr "会社を選択"
+
+msgid "Url"
+msgstr "URL"
+
+msgid "Invoice Number"
+msgstr "インボイス番号"
+
+msgid "13 digits excluding T"
+msgstr "Tを除く13桁の数字"
+
+msgid "Sales Rank"
+msgstr "売上ランク"
+
+msgid "Status"
+msgstr "ステータス"
+
+msgid "Client"
+msgstr "顧客"
+
+msgid "Bp"
+msgstr "BP"
+
+msgid "Engineer"
+msgstr "エンジニア"
+
+msgid "Contract"
+msgstr "契約"
+
+msgid "User"
+msgstr "ユーザ"
+
+msgid "Dev Tools"
+msgstr "開発支援"
+
+msgid "Theme"
+msgstr "テーマ"
+
+msgid "Debug"
+msgstr "デバッグ"
+
+msgid "Home"
+msgstr "ホーム"
+
+###############################################################################
+# 共通(ページネーション)
+###############################################################################
+msgid "Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total"
+msgstr "{{page}} / {{pages}} ページ、表示 {{current}} 件 / 合計 {{count}} 件"
+
+###############################################################################
+# メッセージ(個別)
+###############################################################################
+msgid "The client has been saved."
+msgstr "顧客を保存しました。"
+
+msgid "The client could not be saved. Please, try again."
+msgstr "顧客を保存できませんでした。"
+
+msgid "The client has been deleted."
+msgstr "顧客を削除しました。"
+
+msgid "The client could not be deleted. Please, try again."
+msgstr "顧客を削除できませんでした。"
+
+msgid "The bp has been saved."
+msgstr "BPを保存しました。"
+
+msgid "The bp could not be saved. Please, try again."
+msgstr "BPを保存できませんでした。"
+
+msgid "The bp has been deleted."
+msgstr "BPを削除しました。"
+
+msgid "The bp could not be deleted. Please, try again."
+msgstr "BPを削除できませんでした。"
+
+msgid "The engineer has been saved."
+msgstr "エンジニアを保存しました。"
+
+msgid "The engineer could not be saved. Please, try again."
+msgstr "エンジニアを保存できませんでした。"
+
+msgid "The engineer has been deleted."
+msgstr "エンジニアを削除しました。"
+
+msgid "The engineer could not be deleted. Please, try again."
+msgstr "エンジニアを削除できませんでした。"
+
+###############################################################################
+# ページ(共通)
+###############################################################################
+# タイトル
+msgid "Add"
+msgstr "追加"
+
+###############################################################################
+# ページ(ユーザ)
+###############################################################################
+# H1タイトル※未反映
+msgid "Users"
+msgstr "ユーザ一覧"
+
+# アクション
+msgid "List Users"
+msgstr "ユーザ一覧"
+
+# アクション
+msgid "Add User"
+msgstr "ユーザの追加"
+
+# アクション
+msgid "New User"
+msgstr "ユーザの追加"
+
+# アクション
+msgid "Edit User"
+msgstr "ユーザの編集"
+
+#: ./templates/Users/index.php:63
+#: ./templates/Users/index.php:65
+#: ./templates/Users/index.php:66
+#: ./templates/Users/view.php:78
+#: ./templates/Users/view.php:82
+#: ./templates/Users/view.php:86
+msgid "Yes"
+msgstr ""
+
+#: ./templates/Users/index.php:63
+#: ./templates/Users/index.php:65
+#: ./templates/Users/index.php:66
+#: ./templates/Users/view.php:78
+#: ./templates/Users/view.php:82
+#: ./templates/Users/view.php:86
+msgid "No"
+msgstr ""
+
+#: ./templates/Users/view.php:45
+msgid "Secret"
+msgstr ""
+
+#: ./templates/Users/view.php:49
+msgid "Role"
+msgstr "役割"
+
+#: ./templates/Users/view.php:53
+msgid "Additional Data"
+msgstr ""
+
+#: ./templates/Users/view.php:57
+msgid "Activation Date"
+msgstr "有効日"
+
+#: ./templates/Users/view.php:61
+msgid "Tos Date"
+msgstr ""
+
+#: ./templates/Users/view.php:73
+msgid "Last Login"
+msgstr "最終ログイン日"
+
+#: ./templates/Users/view.php:77
+msgid "Secret Verified"
+msgstr ""
+
+#: ./templates/Users/view.php:81
+#: ./templates/Users/view.php:128
+msgid "Active"
+msgstr "有効"
+
+#: ./templates/Users/view.php:85
+msgid "Is Superuser"
+msgstr "管理者"
+
+#: ./templates/Users/view.php:119
+msgid "Provider"
+msgstr ""
+
+#: ./templates/Users/view.php:121
+msgid "Reference"
+msgstr ""
+
+#: ./templates/Users/view.php:122
+msgid "Avatar"
+msgstr ""
+
+#: ./templates/Users/view.php:123
+msgid "Description"
+msgstr ""
+
+#: ./templates/Users/view.php:124
+msgid "Link"
+msgstr ""
+
+#: ./templates/Users/view.php:125
+msgid "Token"
+msgstr "トークン"
+
+#: ./templates/Users/view.php:126
+msgid "Token Secret"
+msgstr ""
+
+#: ./templates/Users/view.php:127
+msgid "Token Expires"
+msgstr "トークン有効日"
+
+#: ./templates/Users/view.php:129
+msgid "Data"
+msgstr "データ"
+
+###############################################################################
+# ページ(顧客)
+###############################################################################
+msgid "Clients"
+msgstr "顧客一覧"
+
+# パンくず
+msgid "List Clients"
+msgstr "顧客一覧"
+
+# ボタン
+msgid "New Client"
+msgstr "新規顧客"
+
+# ページタイトル
+msgid "Add Client"
+msgstr "顧客の追加"
+
+msgid "Sample Corporation"
+msgstr "株式会社サンプル"
+
+msgid "Sample"
+msgstr "サンプル"
+
+msgid "https://www.sample.com/"
+msgstr "https://www.sample.co.jp/"
+
+msgid "2025/3/1&#10;Change Corporation Name(Sample->Sample2)"
+msgstr "2025/3/1&#10;社名変更(サンプル→サンプル2)"
+
+# ページタイトル
+msgid "Edit Client"
+msgstr "顧客の編集"
+
+# 関連コンタクト
+msgid "Related Contacts"
+msgstr "関連担当者"
+
+msgid "Showing the most recent {0} records"
+msgstr "最新の{0}件を表示"
+
+msgid "No contacts found."
+msgstr "担当者が見つかりませんでした。"
+
+###############################################################################
+# ページ(顧客担当者)
+###############################################################################
+msgid "Client Contacts"
+msgstr "顧客担当者一覧"
+
+# パンくず
+msgid "List Client Contacts"
+msgstr "顧客担当者一覧"
+
+# ボタン
+msgid "Add Client Contact"
+msgstr "顧客担当者の追加"
+
+# ページタイトル
+msgid "Edit Client Contact"
+msgstr "顧客担当者の編集"
+
+# 項目
+msgid "Client Contact"
+msgstr "顧客担当者"
+
+msgid "Client Contact Kana"
+msgstr "顧客担当者(カナ)"
+
+###############################################################################
+# ページ(BP担当者)
+###############################################################################
+msgid "Bp Contacts"
+msgstr "BP担当者一覧"
+
+# パンくず
+msgid "List Bp Contacts"
+msgstr "BP担当者一覧"
+
+# ボタン
+msgid "Add Bp Contact"
+msgstr "BP担当者の追加"
+
+# ページタイトル
+msgid "Edit Bp Contact"
+msgstr "BP担当者の編集"
+
+# 項目
+msgid "Bp Contact"
+msgstr "BP担当者"
+
+msgid "Bp Contact Kana"
+msgstr "BP担当者(カナ)"
+
+###############################################################################
+# ページ(BP)
+###############################################################################
+msgid "Bps"
+msgstr "BP一覧"
+
+# パンくず
+msgid "List Bps"
+msgstr "BP一覧"
+
+# ボタン
+msgid "New Bp"
+msgstr "新規BP"
+
+# ページタイトル
+msgid "Add Bp"
+msgstr "BPの追加"
+
+# ページタイトル
+msgid "Edit Bp"
+msgstr "BPの編集"
+
+###############################################################################
+# ページ(エンジニア)
+###############################################################################
+msgid "Engineers"
+msgstr "エンジニア一覧"
+
+# パンくず
+msgid "List Engineers"
+msgstr "エンジニア一覧"
+
+# ボタン
+msgid "New Engineer"
+msgstr "新規エンジニア"
+
+# ページタイトル
+msgid "Add Engineer"
+msgstr "エンジニアの追加"
+
+# ページタイトル
+msgid "Edit Engineer"
+msgstr "エンジニアの編集"
+
+###############################################################################
+# 項目(エンジニア 編集)
+###############################################################################
+msgid "Browse"
+msgstr "参照"
+
+msgid "Choose file"
+msgstr "ファイルを選択してください"
+
+msgid "Current File"
+msgstr "現在のファイル"
+
+msgid "yyyy"
+msgstr "西暦"
+
+msgid "Taro Akiba"
+msgstr "秋葉 太郎"
+
+msgid "Taro Akiba kana"
+msgstr "アキバ タロウ"
+
+msgid "7 years"
+msgstr "7年"
+
+msgid "3 years"
+msgstr "3年"
+
+msgid "2025/3/1&#10;Change Name(Akiba->Akiba2)"
+msgstr "2025/3/1&#10;氏名変更(秋葉→秋葉2)"
+
+###############################################################################
+# テンプレート(初期値)
+###############################################################################
+#: ./templates/layout/error.php:36
+msgid "Back"
+msgstr ""
+
+#: ./templates/plugin/CakeLte/element/aside/main.php:9
+msgid "<i class=\"fab fa-github fa-fw\"></i> {0} {1}"
+msgstr ""

@@ -1,0 +1,876 @@
+# LANGUAGE translation of CakePHP Application
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2017-10-14 23:45+0000\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+###############################################################################
+# ページ(共通)
+###############################################################################
+msgid "You are not authorized to access that location."
+msgstr "アクセス権がありません。"
+
+###############################################################################
+# メール(パスワード再設定)
+###############################################################################
+# 画面
+msgid "Please enter your email or username to reset your password"
+msgstr "パスワードを再設定したいメールアドレス、もしくはユーザ名を入力してください。"
+
+msgid "If the account is valid, the system will send an instructional email to the address on record."
+msgstr "アカウントが有効な場合、パスワード再設定メールを登録済みのアドレスに送ります。"
+
+msgid "Reset password token was validated successfully"
+msgstr "パスワード再設定のメールアドレス認証は成功しました。"
+
+msgid "Reset password token could not be validated"
+msgstr "パスワード再設定のメールアドレス認証は失敗しました。"
+
+msgid "Your password does not match your confirm password. Please try again"
+msgstr "「パスワード」と「パスワード確認」は同じ文字列を入力してください。"
+
+msgid "Password has been changed successfully"
+msgstr "パスワードの再設定が成功しました。"
+
+# メール(件名)
+msgid "{0}Your reset password link"
+msgstr "【パスワード再設定】を行ってください"
+
+# メール(本文)
+msgid "Your password reset request has been accepted."
+msgstr "パスワード再設定の申請を受け付けました。"
+
+msgid "Reset your password here"
+msgstr "こちらをクリックして、パスワードを再設定してください。"
+
+msgid "If the link is not correctly displayed, please copy the following address in your web browser {0}"
+msgstr "リンクが正しく表示されない場合は、次のアドレスをブラウザにコピー＆ペーストしてください。 {0}"
+
+msgid "Please copy the following address in your web browser {0}"
+msgstr "次のアドレスをブラウザにコピー＆ペーストしてください。 {0}"
+
+msgid "If you do not recognize this email, please discard it."
+msgstr "本メールに心当たりがない場合は破棄してください。"
+
+# 無効
+msgid "Reference"
+msgstr "参照先"
+
+# 無効
+msgid "Users"
+msgstr "ユーザ"
+
+msgid ""
+msgstr ""
+
+###############################################################################
+# 未分類
+###############################################################################
+#: Auth/SocialAuthenticate.php:456
+msgid "Provider cannot be empty"
+msgstr "「provider」は空にできません。"
+
+#: Controller/SocialAccountsController.php:52
+msgid "Account validated successfully"
+msgstr "アカウントの認証に成功しました。"
+
+#: Controller/SocialAccountsController.php:54
+msgid "Account could not be validated"
+msgstr "アカウントの認証に失敗しました。"
+
+#: Controller/SocialAccountsController.php:57
+msgid "Invalid token and/or social account"
+msgstr "トークン、ソーシャルアカウントのいずれか、もしくは、両方が無効です。"
+
+#: Controller/SocialAccountsController.php:59;87
+msgid "Social Account already active"
+msgstr "ソーシャルアカウントはすでに有効化されています。"
+
+#: Controller/SocialAccountsController.php:61
+msgid "Social Account could not be validated"
+msgstr "ソーシャルアカウントの認証に失敗しました。"
+
+#: Controller/SocialAccountsController.php:80
+msgid "Email sent successfully"
+msgstr "メールの送信に成功しました。"
+
+#: Controller/SocialAccountsController.php:82
+msgid "Email could not be sent"
+msgstr "メールの送信に失敗しました。"
+
+#: Controller/SocialAccountsController.php:85
+msgid "Invalid account"
+msgstr "無効なアカウント"
+
+#: Controller/SocialAccountsController.php:89
+msgid "Email could not be resent"
+msgstr "メールの再送信に失敗しました。"
+
+#: Controller/Component/RememberMeComponent.php:68
+msgid "Invalid app salt, app salt must be at least 256 bits (32 bytes) long"
+msgstr "「app salt」が無効です。「app salt」は 256 bits (32 bytes) の長さが必要です。"
+
+#: Controller/Component/UsersAuthComponent.php:204
+msgid "You can't enable email validation workflow if use_email is false"
+msgstr "「use_email」が「false」の場合、メールアドレス認証手続きを利用する事ができません。"
+
+#: Controller/Traits/LinkSocialTrait.php:54
+msgid "Could not associate account, please try again."
+msgstr "アカウントを関連付けることができませんでした。再度実行してください。"
+
+#: Controller/Traits/LinkSocialTrait.php:77
+msgid "Social account was associated."
+msgstr "ソーシャルアカウントに関連付けることができました。"
+
+#: Controller/Traits/LoginTrait.php:104
+msgid "Issues trying to log in with your social account"
+msgstr "ソーシャルアカウントでログインしようとしていますが、それはできません。"
+
+#: Controller/Traits/LoginTrait.php:109
+#: Template/Users/social_email.ctp:16
+msgid "Please enter your email"
+msgstr "メールアドレスを入力してください。"
+
+#: Controller/Traits/LoginTrait.php:120
+msgid "Your user has not been validated yet. Please check your inbox for instructions"
+msgstr "あなたのアカウントはまだ認証されていません。手順についてはメールの受信ボックスを確認してください。"
+
+#: Controller/Traits/LoginTrait.php:125
+msgid "Your social account has not been validated yet. Please check your inbox for instructions"
+msgstr "あなたのソーシャルアカウントはまだ認証されていません。手順についてはメールの受信ボックスを確認してください。"
+
+#: Controller/Traits/LoginTrait.php:180
+#: Controller/Traits/RegisterTrait.php:82
+msgid "Invalid reCaptcha"
+msgstr "「私はロボットではありません」にチェックを入れてください。"
+
+#: Controller/Traits/LoginTrait.php:191
+msgid "You are already logged in"
+msgstr "すでにログインしています。"
+
+#: Controller/Traits/LoginTrait.php:212
+msgid "Please enable Google Authenticator first."
+msgstr "最初に Googleの認証システムを有効にしてください。"
+
+#: Controller/Traits/LoginTrait.php:287
+msgid "Verification code is invalid. Try again"
+msgstr "認証コードが無効です。改めて実行してください。"
+
+#: Controller/Traits/LoginTrait.php:340
+msgid "Username or password is incorrect"
+msgstr "ユーザ名 か パスワードが間違っています。"
+
+#: Controller/Traits/LoginTrait.php:363
+msgid "You've successfully logged out"
+msgstr "ログアウトしました。"
+
+#: Controller/Traits/PasswordManagementTrait.php:49;82
+#: Controller/Traits/ProfileTrait.php:50
+msgid "User was not found"
+msgstr "ユーザ情報は見つかりませんでした。"
+
+#: Controller/Traits/PasswordManagementTrait.php:70;78;86
+msgid "Password could not be changed"
+msgstr "パスワードは変更できませんでした。"
+
+#: Controller/Traits/PasswordManagementTrait.php:84
+msgid "{0}"
+msgstr ""
+
+#: Controller/Traits/PasswordManagementTrait.php:127
+msgid "Please check your email to continue with password reset process"
+msgstr "パスワード再設定のためのメールを送信しました。メールを確認してください。"
+
+#: Controller/Traits/PasswordManagementTrait.php:130
+#: Shell/UsersShell.php:247
+msgid "The password token could not be generated. Please try again"
+msgstr "パスワード再設定の処理を実行できませんでした。再度実行してください。"
+
+#: Controller/Traits/PasswordManagementTrait.php:136
+#: Controller/Traits/UserValidationTrait.php:107
+msgid "User {0} was not found"
+msgstr "{0} は見つかりませんでした。"
+
+#: Controller/Traits/PasswordManagementTrait.php:138
+msgid "The user is not active"
+msgstr "ユーザはパスワードを変更する権限がありません。"
+
+#: Controller/Traits/PasswordManagementTrait.php:140
+#: Controller/Traits/UserValidationTrait.php:102;111
+msgid "Token could not be reset"
+msgstr "パスワードの再設定が行えませんでした。"
+
+#: Controller/Traits/PasswordManagementTrait.php:164
+msgid "Google Authenticator token was successfully reset"
+msgstr "Googleの認証トークンが正常にリセットされました。"
+
+#: Controller/Traits/ProfileTrait.php:54
+msgid "Not authorized, please login first"
+msgstr "アクセスは許可されていません。先にログインしてください。"
+
+#: Controller/Traits/RegisterTrait.php:43
+msgid "You must log out to register a new user account"
+msgstr "ユーザ登録をするにはログアウトする必要があります。"
+
+#: Controller/Traits/RegisterTrait.php:89
+msgid "The user could not be saved"
+msgstr "ユーザ登録ができませんでした。入力内容を確認してください。"
+
+#: Controller/Traits/RegisterTrait.php:123
+msgid "You have registered successfully, please log in"
+msgstr "ユーザ登録に成功しました。ログインしてください。"
+
+#: Controller/Traits/RegisterTrait.php:125
+msgid "Please validate your account before log in"
+msgstr "メールアドレス認証のメールを送信しました。ログイン前にメールを確認してください。"
+
+#: Controller/Traits/SimpleCrudTrait.php:77;107
+msgid "The {0} has been saved"
+msgstr "保存しました。"
+
+#: Controller/Traits/SimpleCrudTrait.php:81;111
+msgid "The {0} could not be saved"
+msgstr "保存できませんでした。"
+
+#: Controller/Traits/SimpleCrudTrait.php:131
+msgid "The {0} has been deleted"
+msgstr "削除しました。"
+
+#: Controller/Traits/SimpleCrudTrait.php:133
+msgid "The {0} could not be deleted"
+msgstr "削除できませんでした。"
+
+#: Controller/Traits/SocialTrait.php:40
+msgid "The reCaptcha could not be validated"
+msgstr "「reCaptcha」の結果が正しくありません。"
+
+#: Controller/Traits/UserValidationTrait.php:43
+msgid "User account validated successfully"
+msgstr "ユーザ情報の入力チェックが成功しました。"
+
+#: Controller/Traits/UserValidationTrait.php:45
+msgid "User account could not be validated"
+msgstr "ユーザ情報の入力チェックが失敗しました。"
+
+#: Controller/Traits/UserValidationTrait.php:48
+msgid "User already active"
+msgstr "ユーザはすでに有効化されています。"
+
+#: Controller/Traits/UserValidationTrait.php:66
+msgid "Invalid validation type"
+msgstr "メールアドレス認証のタイプが正しくありません。"
+
+#: Controller/Traits/UserValidationTrait.php:69
+msgid "Invalid token or user account already validated"
+msgstr "メールアドレスの認証が無効か、すでにメールアドレスの認証は完了しています。"
+
+#: Controller/Traits/UserValidationTrait.php:71
+msgid "Token already expired"
+msgstr "メールアドレス認証の有効期限が過ぎています。"
+
+#: Controller/Traits/UserValidationTrait.php:97
+msgid "Token has been reset successfully. Please check your email."
+msgstr "メールアドレス認証のメールを再送信しました。メールを確認してください。"
+
+#: Controller/Traits/UserValidationTrait.php:109
+msgid "User {0} is already active"
+msgstr "ユーザ {0} はすでに有効化されています。"
+
+#: Mailer/UsersMailer.php:34
+msgid "Your account validation link"
+msgstr "【メールアドレス認証】を行ってください"
+
+#: Mailer/UsersMailer.php:75
+msgid "{0}Your social account validation link"
+msgstr "{0} ソーシャルアカウント認証のリンク送信"
+
+#: Model/Behavior/AuthFinderBehavior.php:49
+msgid "Missing 'username' in options data"
+msgstr "オプションデータに「username」がありません。"
+
+#: Model/Behavior/LinkSocialBehavior.php:53
+msgid "Social account already associated to another user"
+msgstr "ソーシャルアカウントはすでに別のユーザに関連付けられています。"
+
+#: Model/Behavior/PasswordBehavior.php:45
+msgid "Reference cannot be null"
+msgstr "「Reference」は nullにすることはできません。"
+
+#: Model/Behavior/PasswordBehavior.php:50
+msgid "Token expiration cannot be empty"
+msgstr "「Token」の「expiration」は空にすることはできません。"
+
+#: Model/Behavior/PasswordBehavior.php:56;117
+msgid "User not found"
+msgstr "ユーザが見つかりません。"
+
+#: Model/Behavior/PasswordBehavior.php:60
+#: Model/Behavior/RegisterBehavior.php:112;205
+msgid "User account already validated"
+msgstr "ユーザのアカウントはすでに認証されています。"
+
+#: Model/Behavior/PasswordBehavior.php:67
+msgid "User not active"
+msgstr "ユーザは有効化されていません。"
+
+#: Model/Behavior/PasswordBehavior.php:122
+msgid "The current password does not match"
+msgstr "現在のパスワードが一致しません。"
+
+#: Model/Behavior/PasswordBehavior.php:125
+msgid "You cannot use the current password as the new one"
+msgstr "現在のパスワードを新しいパスワードとして使用することはできません。"
+
+#: Model/Behavior/RegisterBehavior.php:90
+msgid "User not found for the given token and email."
+msgstr "メールアドレス認証とメールアドレスに該当するユーザがありません。"
+
+#: Model/Behavior/RegisterBehavior.php:93
+msgid "Token has already expired user with no token"
+msgstr "メールアドレス認証の有効期限が過ぎています。"
+
+#: Model/Behavior/SocialAccountBehavior.php:103;130
+msgid "Account already validated"
+msgstr "アカウントはすでに認証されています。"
+
+#: Model/Behavior/SocialAccountBehavior.php:106;133
+msgid "Account not found for the given token and email."
+msgstr "指定のメールアドレス認証とメールアドレスに該当するアカウントがありません。"
+
+#: Model/Behavior/SocialBehavior.php:82
+msgid "Unable to login user with reference {0}"
+msgstr "「reference {0} 」でログイン出来ません。"
+
+#: Model/Behavior/SocialBehavior.php:121
+msgid "Email not present"
+msgstr "メールアドレスがありません。"
+
+#: Model/Table/UsersTable.php:173
+msgid "Username already exists"
+msgstr "入力のユーザ名はすでに登録されています。"
+
+#: Model/Table/UsersTable.php:179
+msgid "Email already exists"
+msgstr "入力のメールアドレスはすでに登録されています。"
+
+#: Shell/UsersShell.php:58
+msgid "Utilities for CakeDC Users Plugin"
+msgstr "プラグイン「CakeCD/Users」のためのユーティリティ"
+
+#: Shell/UsersShell.php:60
+msgid "Activate an specific user"
+msgstr "特定のユーザをアクティブにします。"
+
+#: Shell/UsersShell.php:63
+msgid "Add a new superadmin user for testing purposes"
+msgstr "テスト目的で新しい「superadmin」を追加します。"
+
+#: Shell/UsersShell.php:66
+msgid "Add a new user"
+msgstr "新しいユーザを追加します。"
+
+#: Shell/UsersShell.php:69
+msgid "Change the role for an specific user"
+msgstr "特定のユーザの権限を変更します。"
+
+#: Shell/UsersShell.php:72
+msgid "Deactivate an specific user"
+msgstr "特定のユーザを無効化します。"
+
+#: Shell/UsersShell.php:75
+msgid "Delete an specific user"
+msgstr "特定のユーザを削除します。"
+
+#: Shell/UsersShell.php:78
+msgid "Reset the password via email"
+msgstr "メールでパスワードを再設定します。"
+
+#: Shell/UsersShell.php:81
+msgid "Reset the password for all users"
+msgstr "すべてのユーザのパスワードをリセットします。"
+
+#: Shell/UsersShell.php:84
+msgid "Reset the password for an specific user"
+msgstr "特定のユーザのパスワードをリセットします。"
+
+#: Shell/UsersShell.php:133;159
+msgid "Please enter a password."
+msgstr "パスワードを入力してください。"
+
+#: Shell/UsersShell.php:137
+msgid "Password changed for all users"
+msgstr "すべてのユーザのパスワードを変更します。"
+
+#: Shell/UsersShell.php:138;166
+msgid "New password: {0}"
+msgstr "新しいパスワード： {0}"
+
+#: Shell/UsersShell.php:156;184;262;359
+msgid "Please enter a username."
+msgstr "ユーザ名を入力してください。"
+
+#: Shell/UsersShell.php:165
+msgid "Password changed for user: {0}"
+msgstr "ユーザのパスワードが変更されました： {0}"
+
+#: Shell/UsersShell.php:187
+msgid "Please enter a role."
+msgstr "権限を入力してください。"
+
+#: Shell/UsersShell.php:193
+msgid "Role changed for user: {0}"
+msgstr "ユーザの権限が変更されました： {0}"
+
+#: Shell/UsersShell.php:194
+msgid "New role: {0}"
+msgstr "新しい権限： {0}"
+
+#: Shell/UsersShell.php:209
+msgid "User was activated: {0}"
+msgstr "ユーザが有効化されました： {0}"
+
+#: Shell/UsersShell.php:224
+msgid "User was de-activated: {0}"
+msgstr "ユーザが無効化されました： {0}"
+
+#: Shell/UsersShell.php:236
+msgid "Please enter a username or email."
+msgstr "ユーザ名か、メールアドレスを入力してください。"
+
+#: Shell/UsersShell.php:244
+msgid "Please ask the user to check the email to continue with password reset process"
+msgstr "パスワードリセットの手続きを続けるために、ユーザにメールアドレスをチェックするよう依頼してください。"
+
+#: Shell/UsersShell.php:308
+msgid "Superuser added:"
+msgstr "Superuser を追加しました："
+
+#: Shell/UsersShell.php:310
+msgid "User added:"
+msgstr "ユーザを追加しました："
+
+#: Shell/UsersShell.php:312
+msgid "Id: {0}"
+msgstr "ID： {0}"
+
+#: Shell/UsersShell.php:313
+msgid "Username: {0}"
+msgstr "ユーザ名： {0}"
+
+#: Shell/UsersShell.php:314
+msgid "Email: {0}"
+msgstr "メールアドレス： {0}"
+
+#: Shell/UsersShell.php:315
+msgid "Role: {0}"
+msgstr "権限： {0}"
+
+#: Shell/UsersShell.php:316
+msgid "Password: {0}"
+msgstr "パスワード ：{0}"
+
+#: Shell/UsersShell.php:318
+msgid "User could not be added:"
+msgstr "ユーザを追加できませんでした："
+
+#: Shell/UsersShell.php:321
+msgid "Field: {0} Error: {1}"
+msgstr "Field: {0} Error: {1}"
+
+#: Shell/UsersShell.php:337
+msgid "The user was not found."
+msgstr "ユーザが見つかりませんでした。"
+
+#: Shell/UsersShell.php:367
+msgid "The user {0} was not deleted. Please try again"
+msgstr "ユーザを削除できませんでした。再度実行してください。"
+
+#: Shell/UsersShell.php:369
+msgid "The user {0} was deleted successfully"
+msgstr "ユーザ {0} の削除に成功しました。"
+
+#: Template/Email/html/reset_password.ctp:21
+#: Template/Email/html/social_account_validation.ctp:14
+#: Template/Email/html/validation.ctp:21
+#: Template/Email/text/reset_password.ctp:20
+#: Template/Email/text/social_account_validation.ctp:22
+#: Template/Email/text/validation.ctp:20
+msgid "Hi {0}"
+msgstr "こんにちは {0}"
+
+#: Template/Email/html/reset_password.ctp:34
+#: Template/Email/html/social_account_validation.ctp:39
+#: Template/Email/html/validation.ctp:34
+#: Template/Email/text/reset_password.ctp:28
+#: Template/Email/text/social_account_validation.ctp:30
+#: Template/Email/text/validation.ctp:28
+msgid "Thank you"
+msgstr "ありがとうございます。"
+
+#: Template/Email/html/social_account_validation.ctp:18
+msgid "Activate your social login here"
+msgstr "ここでソーシャルログインを有効化してください。"
+
+#: Template/Email/html/validation.ctp:24
+msgid "Activate your account here"
+msgstr "ここであなたのアカウントを有効化してください。"
+
+#: Template/Email/text/reset_password.ctp:22
+#: Template/Email/text/validation.ctp:22
+msgid "Please copy the following address in your web browser {0}"
+msgstr "次のアドレスをブラウザにコピー＆ペーストしてください。 {0}"
+
+#: Template/Email/text/social_account_validation.ctp:24
+msgid "Please copy the following address in your web browser to activate your social login {0}"
+msgstr "ソーシャルログインを有効にするために、次のアドレスをブラウザにコピー＆ペーストしてください。 {0}"
+
+#: Template/Users/add.ctp:13
+#: Template/Users/edit.ctp:16
+#: Template/Users/index.ctp:13;26
+#: Template/Users/view.ctp:15
+msgid "Actions"
+msgstr "操作"
+
+#: Template/Users/add.ctp:15
+#: Template/Users/edit.ctp:27
+#: Template/Users/view.ctp:23
+msgid "List Users"
+msgstr "ユーザ一覧"
+
+#: Template/Users/add.ctp:21
+#: Template/Users/register.ctp:17
+msgid "Add User"
+msgstr "ユーザ追加"
+
+#: Template/Users/add.ctp:23
+#: Template/Users/edit.ctp:35
+#: Template/Users/index.ctp:22
+#: Template/Users/profile.ctp:30
+#: Template/Users/register.ctp:19
+#: Template/Users/view.ctp:33
+msgid "Username"
+msgstr "ユーザ名"
+
+#: Template/Users/add.ctp:24
+#: Template/Users/edit.ctp:36
+#: Template/Users/index.ctp:23
+#: Template/Users/profile.ctp:32
+#: Template/Users/register.ctp:20
+#: Template/Users/view.ctp:35
+msgid "Email"
+msgstr "メールアドレス"
+
+#: Template/Users/add.ctp:25
+#: Template/Users/register.ctp:21
+msgid "Password"
+msgstr "パスワード"
+
+#: Template/Users/add.ctp:26
+#: Template/Users/edit.ctp:37
+#: Template/Users/index.ctp:24
+#: Template/Users/register.ctp:26
+msgid "First name"
+msgstr "名"
+
+#: Template/Users/add.ctp:27
+#: Template/Users/edit.ctp:38
+#: Template/Users/index.ctp:25
+#: Template/Users/register.ctp:27
+msgid "Last name"
+msgstr "姓"
+
+#: Template/Users/add.ctp:30
+#: Template/Users/edit.ctp:53
+#: Template/Users/view.ctp:49;74
+msgid "Active"
+msgstr "有効"
+
+#: Template/Users/add.ctp:34
+#: Template/Users/change_password.ctp:25
+#: Template/Users/edit.ctp:57
+#: Template/Users/register.ctp:36
+#: Template/Users/request_reset_password.ctp:8
+#: Template/Users/resend_token_validation.ctp:20
+#: Template/Users/social_email.ctp:19
+msgid "Submit"
+msgstr "実行"
+
+#: Template/Users/change_password.ctp:5
+msgid "Please enter the new password"
+msgstr "新しいパスワードを入力してください。"
+
+#: Template/Users/change_password.ctp:10
+msgid "Current password"
+msgstr "現在のパスワード"
+
+#: Template/Users/change_password.ctp:16
+msgid "New password"
+msgstr "新しいパスワード"
+
+#: Template/Users/change_password.ctp:21
+#: Template/Users/register.ctp:24
+msgid "Confirm password"
+msgstr "パスワード（確認）"
+
+#: Template/Users/edit.ctp:21
+#: Template/Users/index.ctp:40
+msgid "Delete"
+msgstr "削除"
+
+#: Template/Users/edit.ctp:23
+#: Template/Users/index.ctp:40
+#: Template/Users/view.ctp:21
+msgid "Are you sure you want to delete # {0}?"
+msgstr "{0} を削除していいでしょうか？"
+
+#: Template/Users/edit.ctp:33
+#: Template/Users/view.ctp:17
+msgid "Edit User"
+msgstr "ユーザ更新"
+
+#: Template/Users/edit.ctp:39
+#: Template/Users/view.ctp:43
+msgid "Token"
+msgstr "トークン"
+
+#: Template/Users/edit.ctp:41
+msgid "Token expires"
+msgstr "トークン有効期限"
+
+#: Template/Users/edit.ctp:44
+msgid "API token"
+msgstr "APIトークン"
+
+#: Template/Users/edit.ctp:47
+msgid "Activation date"
+msgstr "有効化日時"
+
+#: Template/Users/edit.ctp:50
+msgid "TOS date"
+msgstr "利用規約承認日時"
+
+#: Template/Users/edit.ctp:63
+msgid "Reset Google Authenticator Token"
+msgstr "Google認証トークンのリセット"
+
+#: Template/Users/edit.ctp:69
+msgid "Are you sure you want to reset token for user \"{0}\"?"
+msgstr "ユーザ「 {0} 」のトークンをリセットしていいでしょうか？"
+
+#: Template/Users/index.ctp:15
+msgid "New {0}"
+msgstr "新しい {0}"
+
+#: Template/Users/index.ctp:37
+msgid "View"
+msgstr "表示"
+
+#: Template/Users/index.ctp:38
+msgid "Change password"
+msgstr "パスワード変更"
+
+#: Template/Users/index.ctp:39
+msgid "Edit"
+msgstr "編集"
+
+#: Template/Users/index.ctp:49
+msgid "previous"
+msgstr "前へ"
+
+#: Template/Users/index.ctp:51
+msgid "next"
+msgstr "次へ"
+
+#: Template/Users/login.ctp:19
+msgid "Please enter your username and password"
+msgstr "ユーザ名とパスワードを入力してください。"
+
+#: Template/Users/login.ctp:29
+msgid "Remember me"
+msgstr "ログイン状態を維持する"
+
+#: Template/Users/login.ctp:37
+msgid "Register"
+msgstr "ユーザ登録"
+
+#: Template/Users/login.ctp:43
+msgid "Reset Password"
+msgstr "パスワードのリセット"
+
+#: Template/Users/login.ctp:48
+msgid "Login"
+msgstr "ログイン"
+
+#: Template/Users/profile.ctp:21
+#: View/Helper/UserHelper.php:54
+msgid "{0} {1}"
+msgstr ""
+
+#: Template/Users/profile.ctp:27
+msgid "Change Password"
+msgstr "パスワード変更"
+
+#: Template/Users/profile.ctp:38
+#: Template/Users/view.ctp:68
+msgid "Social Accounts"
+msgstr "ソーシャルアカウント"
+
+#: Template/Users/profile.ctp:42
+#: Template/Users/view.ctp:73
+msgid "Avatar"
+msgstr "アバター"
+
+#: Template/Users/profile.ctp:43
+#: Template/Users/view.ctp:72
+msgid "Provider"
+msgstr "プロバイダー"
+
+#: Template/Users/profile.ctp:44
+msgid "Link"
+msgstr "リンク"
+
+#: Template/Users/profile.ctp:51
+msgid "Link to {0}"
+msgstr "{0} にリンク"
+
+#: Template/Users/register.ctp:29
+msgid "Accept TOS conditions?"
+msgstr "利用規約に同意しますか？"
+
+#: Template/Users/request_reset_password.ctp:5
+msgid "Please enter your email to reset your password"
+msgstr "パスワードをリセットするためにメールアドレスを入力してください。"
+
+#: Template/Users/resend_token_validation.ctp:15
+msgid "Resend Validation email"
+msgstr "メールアドレス認証のメールを再送信します。"
+
+#: Template/Users/resend_token_validation.ctp:17
+msgid "Email or username"
+msgstr "メールアドレス、もしくは、ユーザ名"
+
+#: Template/Users/verify.ctp:13
+msgid "Verification Code"
+msgstr "認証コード"
+
+#: Template/Users/verify.ctp:15
+msgid "<span class=\"glyphicon glyphicon-log-in\" aria-hidden=\"true\"></span> Verify"
+msgstr "<span class=\"glyphicon glyphicon-log-in\" aria-hidden=\"true\"></span> 確認する"
+
+#: Template/Users/view.ctp:19
+msgid "Delete User"
+msgstr "ユーザ削除"
+
+#: Template/Users/view.ctp:24
+msgid "New User"
+msgstr "新しいユーザ"
+
+#: Template/Users/view.ctp:31
+msgid "Id"
+msgstr "ID"
+
+#: Template/Users/view.ctp:37
+msgid "First Name"
+msgstr "名"
+
+#: Template/Users/view.ctp:39
+msgid "Last Name"
+msgstr "姓"
+
+#: Template/Users/view.ctp:41
+msgid "Role"
+msgstr "権限"
+
+#: Template/Users/view.ctp:45
+msgid "Api Token"
+msgstr "APIトークン"
+
+#: Template/Users/view.ctp:53
+msgid "Token Expires"
+msgstr "トークンの有効期限"
+
+#: Template/Users/view.ctp:55
+msgid "Activation Date"
+msgstr "有効化日時"
+
+#: Template/Users/view.ctp:57
+msgid "Tos Date"
+msgstr "利用規約承認日時"
+
+#: Template/Users/view.ctp:59;75
+msgid "Created"
+msgstr "登録日時"
+
+#: Template/Users/view.ctp:61;76
+msgid "Modified"
+msgstr "更新日時"
+
+#: View/Helper/UserHelper.php:45
+msgid "Sign in with"
+msgstr "以下でサインインします。"
+
+#: View/Helper/UserHelper.php:48
+msgid "fa fa-{0}"
+msgstr "fa fa-{0}"
+
+#: View/Helper/UserHelper.php:57
+msgid "btn btn-social btn-{0} "
+msgstr "btn btn-social btn-{0}"
+
+#: View/Helper/UserHelper.php:106
+msgid "Logout"
+msgstr "ログアウト"
+
+#: View/Helper/UserHelper.php:123
+msgid "Welcome, {0}"
+msgstr "{0} さん、ようこそ"
+
+#: View/Helper/UserHelper.php:146
+msgid "reCaptcha is not configured! Please configure Users.reCaptcha.key"
+msgstr "reCaptcha が設定されていません。Users.reCaptcha.key を設定してください。"
+
+#: View/Helper/UserHelper.php:205
+msgid "btn btn-social btn-{0}"
+msgstr "btn btn-social btn-{0}"
+
+#: View/Helper/UserHelper.php:211
+msgid "Connected with {0}"
+msgstr "{0} と接続しました"
+
+#: View/Helper/UserHelper.php:216
+msgid "Connect with {0}"
+msgstr "{0} と接続する"
+
+msgid "Send Mail"
+msgstr "メール送信"
+
+msgid "Please enter your Email or username."
+msgstr "メールアドレス、もしくは、ユーザ名を入力してください。"
+
+msgid "Submit Update"
+msgstr "更新実行"
+
+msgid "Are you sure you want to withdraw this site? \n Username : # {0}"
+msgstr "退会処理を行ってもよろしいでしょうか？ \n ユーザ名： # {0}"
+
+msgid "Display name"
+msgstr "表示名"
+
+msgid "Display Name"
+msgstr "表示名"
+
+msgid "Job"
+msgstr "職種"
+
+msgid "Status"
+msgstr "ステータス"

@@ -1,0 +1,41 @@
+.sidebar nav ul li.nav-item {
+    font-size: 12px;
+}
+
+.table-hover tbody tr:hover td {
+    background-color: #fff176 !important;
+}
+
+/* ===== Header (navbar) ダークテーマ調整 ===== */
+.main-header.navbar-dark {
+    background-color: #1f2d3d !important;
+    border-bottom: 1px solid #0f1924 !important;
+}
+.main-header.navbar-dark .nav-link {
+    color: rgba(255, 255, 255, 0.85) !important;
+    transition: background-color 0.15s ease, color 0.15s ease;
+}
+.main-header.navbar-dark .nav-link:hover,
+.main-header.navbar-dark .nav-link:focus {
+    color: #ffffff !important;
+    background-color: rgba(255, 255, 255, 0.08);
+    border-radius: 4px;
+}
+.main-header.navbar-dark .nav-item.dropdown.show > .nav-link {
+    color: #ffffff !important;
+    background-color: rgba(255, 255, 255, 0.12);
+    border-radius: 4px;
+}
+.main-header.navbar-dark .dropdown-menu {
+    background-color: #2b3a4a;
+    border: 1px solid #0f1924;
+}
+.main-header.navbar-dark .dropdown-menu .dropdown-item {
+    color: rgba(255, 255, 255, 0.85);
+}
+.main-header.navbar-dark .dropdown-menu .dropdown-item:hover,
+.main-header.navbar-dark .dropdown-menu .dropdown-item:focus {
+    color: #ffffff;
+    background-color: #3b5066;
+}
+
