@@ -1,4 +1,10 @@
 <li class="nav-item d-none d-sm-inline-block dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"><i class="fas fa-bolt mr-1"></i><?= __('Actions') ?></a>
+  <div class="dropdown-menu">
+    <?= $this->Html->link('<i class="fas fa-envelope-open-text mr-2"></i>' . __('Client Proposal'), '/client-proposals/', ['class' => 'dropdown-item', 'escape' => false]) ?>
+  </div>
+</li>
+<li class="nav-item d-none d-sm-inline-block dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"><i class="fas fa-building mr-1"></i><?= __('Client') ?></a>
   <div class="dropdown-menu">
     <?= $this->Html->link('<i class="fas fa-building mr-2"></i>' . __('Client'), '/clients/', ['class' => 'dropdown-item', 'escape' => false]) ?>

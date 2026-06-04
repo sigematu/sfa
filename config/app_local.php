@@ -91,4 +91,17 @@ return [
             'url' => env('EMAIL_TRANSPORT_DEFAULT_URL', null),
         ],
     ],
+
+    /*
+     * POP3 settings for client proposals mailbox import.
+     */
+    'Pop3ClientProposal' => [
+        'host' => env('POP3_CLIENT_PROPOSAL_HOST', 'dc14.etius.jp'),
+        'port' => (int)env('POP3_CLIENT_PROPOSAL_PORT', 995),
+        'username' => env('POP3_CLIENT_PROPOSAL_USER', 'sfa-teian@icz.co.jp'),
+        'password' => env('POP3_CLIENT_PROPOSAL_PASS', 'vhqrv4Bz'),
+        'ssl' => filter_var(env('POP3_CLIENT_PROPOSAL_SSL', true), FILTER_VALIDATE_BOOLEAN),
+        'novalidate_cert' => filter_var(env('POP3_CLIENT_PROPOSAL_NOVALIDATE_CERT', true), FILTER_VALIDATE_BOOLEAN),
+        'max_messages' => (int)env('POP3_CLIENT_PROPOSAL_MAX_MESSAGES', 100),
+    ],
 ];

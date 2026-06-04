@@ -185,6 +185,15 @@ msgstr "BP"
 msgid "Engineer"
 msgstr "エンジニア"
 
+msgid "Client Proposal"
+msgstr "顧客提案"
+
+msgid "Client Proposals"
+msgstr "顧客提案一覧"
+
+msgid "List Client Proposals"
+msgstr "顧客提案一覧"
+
 msgid "Contract"
 msgstr "契約"
 
@@ -248,12 +257,48 @@ msgstr "エンジニアを削除しました。"
 msgid "The engineer could not be deleted. Please, try again."
 msgstr "エンジニアを削除できませんでした。"
 
+msgid "Mail sync completed. {0} new message(s) imported."
+msgstr "メール受信を完了しました。新規 {0} 件を取り込みました。"
+
+msgid "Mail sync failed. Please check POP3 settings."
+msgstr "メール受信に失敗しました。POP3設定を確認してください。"
+
+msgid "POP3 extension (imap) is not enabled."
+msgstr "POP3受信に必要なIMAP拡張が有効ではありません。"
+
+msgid "POP3 settings are not configured."
+msgstr "POP3設定が未設定です。"
+
+msgid "Failed to connect to POP3 server."
+msgstr "POP3サーバーへの接続に失敗しました。"
+
 ###############################################################################
 # ページ(共通)
 ###############################################################################
 # タイトル
 msgid "Add"
 msgstr "追加"
+
+msgid "Fetch Mail"
+msgstr "メール受信"
+
+msgid "Date Time"
+msgstr "日時"
+
+msgid "Sender"
+msgstr "差出人"
+
+msgid "Recipient"
+msgstr "宛先"
+
+msgid "Subject"
+msgstr "件名"
+
+msgid "Body"
+msgstr "本文"
+
+msgid "No proposals found."
+msgstr "顧客提案メールはまだありません。"
 
 ###############################################################################
 # ページ(ユーザ)
