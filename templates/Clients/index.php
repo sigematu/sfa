@@ -16,6 +16,7 @@ $colDefs = [
     'id'           => __('Id'),
     'actions'      => __('Actions'),
     'company'      => __('Company'),
+    'parent'       => __('親会社'),
     'url'          => __('Url'),
     'sales-rank'   => __('Sales Rank'),
     'status'       => __('Status'),
@@ -74,6 +75,7 @@ $alwaysCols = ['actions', 'company'];
                     <th class="pc-id"><?= $this->Paginator->sort('id') ?></th>
                     <th class="pc-actions actions"><?= __('Actions') ?></th>
                     <th class="pc-company"><?= $this->Paginator->sort('name', __('Company')) ?></th>
+                    <th class="pc-parent"><?= __('親会社') ?></th>
                     <th class="pc-url"><?= $this->Paginator->sort('url') ?></th>
                     <th class="pc-sales-rank"><?= $this->Paginator->sort('sales_rank', __('Sales Rank')) ?></th>
                     <th class="pc-status"><?= $this->Paginator->sort('status') ?></th>
@@ -88,6 +90,11 @@ $alwaysCols = ['actions', 'company'];
                             <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $client->id], ['class' => 'btn btn-xs btn-outline-danger', 'escape' => false, 'confirm' => __('Are you sure you want to delete # {0}?', $client->id)]) ?>
                         </td>
                         <td class="pc-company"><?= $this->Html->link(h($this->Text->truncate(str_replace('株式会社', '', $client->name), 30)), ['action' => 'view', $client->id]) ?></td>
+                        <td class="pc-parent">
+                            <?php if (!empty($client->parent_client)): ?>
+                                <?= $this->Html->link(h($this->Text->truncate(str_replace('株式会社', '', (string)$client->parent_client->name), 30)), ['action' => 'view', $client->parent_client->id]) ?>
+                            <?php endif; ?>
+                        </td>
                         <td class="pc-url">
                             <?php if (!empty($client->url)): ?>
                                 <?= $this->Html->link($this->Text->truncate((string)$client->url, 30), $url = $client->url, ['target' => '_blank']) ?>

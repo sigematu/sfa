@@ -57,6 +57,18 @@ $this->Breadcrumbs->add([
               <?php endif; ?>
           </td>
       </tr>
+      <tr>
+          <th><?= __('親会社設定') ?></th>
+          <td><?= !empty($client->is_group) ? __('はい') : __('いいえ') ?></td>
+      </tr>
+      <tr>
+          <th><?= __('親会社') ?></th>
+          <td>
+            <?php if (!empty($client->parent_id) && !empty($client->parent_client)): ?>
+              <?= $this->Html->link(h($client->parent_client->name), ['action' => 'view', $client->parent_client->id]) ?>
+            <?php endif; ?>
+          </td>
+      </tr>
 
       <tr>
           <th><?= __('Note') ?></th>
@@ -132,7 +144,7 @@ $this->Breadcrumbs->add([
         <?php else: ?>
           <?php foreach ($client->client_contacts as $contact): ?>
             <tr>
-              <td><?= $this->Html->link($this->Text->truncate(h($contact->name), 20), ['controller' => 'ClientContacts', 'action' => 'view', $contact->id]) ?> (<?= $this->Text->truncate(h($contact->kana), 20) ?>)</td>
+              <td><?= $this->Html->link($this->Text->truncate(h($contact->name), 20), ['controller' => 'ClientContacts', 'action' => 'view', $contact->id]) ?> (<?= $this->Text->truncate((string)($contact->kana ?? ''), 20) ?>)</td>
               <td><?= $this->Text->truncate(h($contact->email), 30) ?></td>
               <td><?= h($contact->mobile_phone) ?></td>
               <td><?= h($contact->landline_phone) ?></td>

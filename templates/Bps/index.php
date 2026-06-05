@@ -16,6 +16,8 @@ $colDefs = [
     'id'             => __('Id'),
     'actions'        => __('Actions'),
     'company'        => __('Company'),
+    'location'       => __('所在地'),
+    'categories'     => __('区分'),
     'url'            => __('Url'),
     'invoice-number' => __('Invoice Number'),
     'status'         => __('Status'),
@@ -71,6 +73,8 @@ $alwaysCols = ['actions', 'company'];
                     <th class="pc-id"><?= $this->Paginator->sort('id') ?></th>
                     <th class="pc-actions actions"><?= __('Actions') ?></th>
                     <th class="pc-company"><?= $this->Paginator->sort('name', __('Company')) ?></th>
+                    <th class="pc-location"><?= $this->Paginator->sort('location', __('所在地')) ?></th>
+                    <th class="pc-categories"><?= __('区分') ?></th>
                     <th class="pc-url"><?= $this->Paginator->sort('url') ?></th>
                     <th class="pc-invoice-number"><?= $this->Paginator->sort('invoice_number', __('Invoice Number')) ?></th>
                     <th class="pc-status"><?= $this->Paginator->sort('status') ?></th>
@@ -84,7 +88,22 @@ $alwaysCols = ['actions', 'company'];
                             <?= $this->Html->link(__('Edit'), ['action' => 'edit', $bp->id], ['class' => 'btn btn-xs btn-outline-primary', 'escape' => false]) ?>
                             <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $bp->id], ['class' => 'btn btn-xs btn-outline-danger', 'escape' => false, 'confirm' => __('Are you sure you want to delete # {0}?', $bp->id)]) ?>
                         </td>
-                        <td class="pc-company"><?= $this->Html->link(h($this->Text->truncate(preg_replace('/株式会社|合同会社/', '', $bp->name), 30)), ['action' => 'view', $bp->id]) ?></td>
+                        <td class="pc-company"><?= $this->Html->link(h($this->Text->truncate(preg_replace('/株式会社|合同会社|有限会社/', '', $bp->name), 30)), ['action' => 'view', $bp->id]) ?></td>
+                        <td class="pc-location"><?= h(BP_LOCATION_LABELS[$bp->location] ?? '') ?></td>
+                        <td class="pc-categories">
+                            <?php
+                                $categoryLabels = [];
+                                if (!empty($bp->categories)) {
+                                    foreach (explode(',', (string)$bp->categories) as $category) {
+                                        $key = (int)$category;
+                                        if (isset(BP_CATEGORY_LABELS[$key])) {
+                                            $categoryLabels[] = BP_CATEGORY_LABELS[$key];
+                                        }
+                                    }
+                                }
+                                echo h(implode(' / ', $categoryLabels));
+                            ?>
+                        </td>
                         <td class="pc-url"><?= $this->Html->link($this->Text->truncate($bp->url, 30), $url = $bp->url, ['target' => '_blank']) ?></td>
                         <td class="pc-invoice-number">
                             <?php

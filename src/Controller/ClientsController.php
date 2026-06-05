@@ -37,7 +37,7 @@ class ClientsController extends AppController
     {
         $clients = $this->Clients
             ->find('search', ['search' => $this->request->getQueryParams()])
-            ->contain(['Users']);
+            ->contain(['Users', 'ParentClients']);
 
         $this->set(compact('clients'), $this->paginate($clients));
     }
@@ -61,6 +61,8 @@ class ClientsController extends AppController
                     'Clients.name',
                     'Clients.kana',
                     'Clients.url',
+                    'Clients.is_group',
+                    'Clients.parent_id',
                     'Clients.sales_rank',
                     'Clients.note',
                     'Clients.status',
@@ -73,6 +75,7 @@ class ClientsController extends AppController
                 ],
                 'contain' => [
                     'Users',
+                    'ParentClients',
                     'ClientContacts' => function ($q) {
                         return $q
                             ->where(['ClientContacts.status' => STATUS_ACTIVE])
@@ -108,7 +111,16 @@ class ClientsController extends AppController
             $this->Flash->error(__('The client could not be saved. Please, try again.'));
         }
         $users = $this->Clients->Users->find('list')->all();
-        $this->set(compact('client', 'users'));
+        $groupClients = $this->Clients->find('list', [
+            'keyField' => 'id',
+            'valueField' => function ($row) {
+                return str_replace('株式会社', '', (string)$row->name);
+            },
+        ])
+            ->where(['Clients.is_group' => 1])
+            ->order(['Clients.kana' => 'ASC'])
+            ->all();
+        $this->set(compact('client', 'users', 'groupClients'));
     }
 
     /**
@@ -138,7 +150,19 @@ class ClientsController extends AppController
             $this->Flash->error(__('The client could not be saved. Please, try again.'));
         }
         $users = $this->Clients->Users->find('list')->all();
-        $this->set(compact('client', 'users'));
+        $groupClients = $this->Clients->find('list', [
+            'keyField' => 'id',
+            'valueField' => function ($row) {
+                return str_replace('株式会社', '', (string)$row->name);
+            },
+        ])
+            ->where([
+                'Clients.is_group' => 1,
+                'Clients.id !=' => (int)$id,
+            ])
+            ->order(['Clients.kana' => 'ASC'])
+            ->all();
+        $this->set(compact('client', 'users', 'groupClients'));
     }
 
     /**

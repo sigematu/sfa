@@ -12,6 +12,8 @@ use Cake\ORM\Entity;
  * @property string $created_id
  * @property string $name
  * @property string $kana
+ * @property bool $is_group
+ * @property int|null $parent_id
  * @property \Cake\I18n\FrozenTime|null $created
  * @property \Cake\I18n\FrozenTime|null $modified
  *
@@ -32,6 +34,8 @@ class Client extends Entity
         'name' => true,
         'kana' => true,
         'url' => true,
+        'is_group' => true,
+        'parent_id' => true,
         'sales_rank' => true,
         'note' => true,
         'status' => true,

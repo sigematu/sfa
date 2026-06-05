@@ -3,6 +3,7 @@
                             $currentStatus = $status ?? null;
                             if ($currentStatus === null) {
                                 if (isset($client)) $currentStatus = $client->status;
+                                elseif (isset($clientContact)) $currentStatus = $clientContact->status;
                                 elseif (isset($bpContact)) $currentStatus = $bpContact->status;
                                 elseif (isset($bp)) $currentStatus = $bp->status;
                                 elseif (isset($engineer)) $currentStatus = $engineer->status;

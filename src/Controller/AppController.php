@@ -43,6 +43,11 @@ class AppController extends Controller
     {
         parent::initialize();
 
+        $this->paginate = array_merge([
+            'limit' => 50,
+            'maxLimit' => 100,
+        ], $this->paginate);
+
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
 

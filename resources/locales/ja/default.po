@@ -62,6 +62,18 @@ msgstr "固定電話"
 msgid "Position"
 msgstr "役職"
 
+msgid "Department"
+msgstr "部署"
+
+msgid "Category"
+msgstr "カテゴリ"
+
+msgid "Hierarchy"
+msgstr "階層"
+
+msgid "Select"
+msgstr "選択してください"
+
 msgid "Employee No."
 msgstr "社員ID"
 
@@ -176,6 +188,24 @@ msgstr "売上ランク"
 msgid "Status"
 msgstr "ステータス"
 
+msgid "Inactive Reason"
+msgstr "無効理由"
+
+msgid "Mail Delivery"
+msgstr "メール配信"
+
+msgid "Mail Delivery Attribute"
+msgstr "メール配信の属性"
+
+msgid "Deliver Responsible Area Only"
+msgstr "担当領域のみ配信する"
+
+msgid "Responsible Area"
+msgstr "担当領域"
+
+msgid "ON/OFF"
+msgstr "ON/OFF"
+
 msgid "Client"
 msgstr "顧客"
 
@@ -232,6 +262,18 @@ msgstr "顧客を削除しました。"
 
 msgid "The client could not be deleted. Please, try again."
 msgstr "顧客を削除できませんでした。"
+
+msgid "The client contact has been saved."
+msgstr "顧客担当者を保存しました。"
+
+msgid "The client contact could not be saved. Please, try again."
+msgstr "顧客担当者を保存できませんでした。"
+
+msgid "The client contact has been deleted."
+msgstr "顧客担当者を削除しました。"
+
+msgid "The client contact could not be deleted. Please, try again."
+msgstr "顧客担当者を削除できませんでした。"
 
 msgid "The bp has been saved."
 msgstr "BPを保存しました。"

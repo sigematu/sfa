@@ -8,8 +8,8 @@
 
 /* ===== Header (navbar) ダークテーマ調整 ===== */
 .main-header.navbar-dark {
-    background-color: #1f2d3d !important;
-    border-bottom: 1px solid #0f1924 !important;
+    background-color: #9f1d2e !important;
+    border-bottom: 1px solid #6f1220 !important;
 }
 .main-header.navbar-dark .nav-link {
     color: rgba(255, 255, 255, 0.85) !important;
@@ -18,17 +18,17 @@
 .main-header.navbar-dark .nav-link:hover,
 .main-header.navbar-dark .nav-link:focus {
     color: #ffffff !important;
-    background-color: rgba(255, 255, 255, 0.08);
+    background-color: rgba(255, 255, 255, 0.14);
     border-radius: 4px;
 }
 .main-header.navbar-dark .nav-item.dropdown.show > .nav-link {
     color: #ffffff !important;
-    background-color: rgba(255, 255, 255, 0.12);
+    background-color: rgba(255, 255, 255, 0.18);
     border-radius: 4px;
 }
 .main-header.navbar-dark .dropdown-menu {
-    background-color: #2b3a4a;
-    border: 1px solid #0f1924;
+    background-color: #7f1626;
+    border: 1px solid #5a101b;
 }
 .main-header.navbar-dark .dropdown-menu .dropdown-item {
     color: rgba(255, 255, 255, 0.85);
@@ -36,6 +36,58 @@
 .main-header.navbar-dark .dropdown-menu .dropdown-item:hover,
 .main-header.navbar-dark .dropdown-menu .dropdown-item:focus {
     color: #ffffff;
-    background-color: #3b5066;
+    background-color: #ab3143;
+}
+
+/* ===== Sidebar 別パターン(見やすさ重視) ===== */
+.main-sidebar.sidebar-dark-primary {
+    background: linear-gradient(180deg, #2f343c 0%, #232830 100%) !important;
+}
+
+.sidebar-dark-primary .brand-link {
+    border-bottom: 1px solid #424a55 !important;
+    background-color: rgba(255, 255, 255, 0.03);
+}
+
+.sidebar-dark-primary .nav-sidebar > .nav-item > .nav-link {
+    color: rgba(245, 247, 250, 0.92) !important;
+    border-radius: 6px;
+}
+
+.sidebar-dark-primary .nav-sidebar > .nav-item > .nav-link:hover {
+    background-color: #6f1c2d !important;
+    color: #ffffff !important;
+}
+
+.sidebar-dark-primary .nav-sidebar > .nav-item > .nav-link.active,
+.sidebar-dark-primary .nav-sidebar .nav-treeview > .nav-item > .nav-link.active {
+    background-color: #a82239 !important;
+    color: #ffffff !important;
+    box-shadow: inset 3px 0 0 #ffd6dd;
+}
+
+.sidebar-dark-primary .nav-treeview > .nav-item > .nav-link {
+    color: rgba(236, 239, 244, 0.9) !important;
+}
+
+.sidebar-dark-primary .nav-treeview > .nav-item > .nav-link:hover {
+    background-color: rgba(168, 34, 57, 0.35) !important;
+    color: #ffffff !important;
+}
+
+/* Sidebar user area (ICZ Admin / email) */
+.main-sidebar.sidebar-dark-primary .user-panel {
+    margin: 12px 10px !important;
+    padding: 10px 8px !important;
+    border: 1px solid #434b57 !important;
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.04) !important;
+}
+
+.main-sidebar.sidebar-dark-primary .user-panel .info,
+.main-sidebar.sidebar-dark-primary .user-panel .info a,
+.main-sidebar.sidebar-dark-primary .user-panel .info small,
+.main-sidebar.sidebar-dark-primary .user-panel .info span {
+    color: #f4f7fb !important;
 }
 

@@ -3,6 +3,7 @@
 /**
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Bp $bp
+ * @var string[] $categoryLabels
  */
 ?>
 
@@ -47,6 +48,14 @@ $this->Breadcrumbs->add([
             ?>
           </td>
       </tr>
+      <tr>
+          <th><?= __('所在地') ?></th>
+          <td><?= h(BP_LOCATION_LABELS[$bp->location] ?? '') ?></td>
+      </tr>
+        <tr>
+          <th><?= __('区分') ?></th>
+          <td><?= h(implode(' / ', $categoryLabels)) ?></td>
+        </tr>
 
       <tr>
           <th><?= __('Note') ?></th>

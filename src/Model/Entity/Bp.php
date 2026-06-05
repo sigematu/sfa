@@ -11,6 +11,8 @@ use Cake\ORM\Entity;
  * @property int $id
  * @property string $name
  * @property string $kana
+ * @property int|null $location
+ * @property string|null $categories
  * @property string $created_id
  * @property \Cake\I18n\FrozenTime|null $created
  * @property \Cake\I18n\FrozenTime|null $modified
@@ -33,6 +35,8 @@ class Bp extends Entity
         'kana' => true,
         'url' => true,
         'invoice_number' => true,
+        'location' => true,
+        'categories' => true,
         'note' => true,
         'status' => true,
         'created' => true,

@@ -3,6 +3,8 @@
 /**
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Bp $bp
+ * @var string[] $locations
+ * @var string[] $bpCategories
  */
 ?>
 <?php
@@ -39,7 +41,15 @@ $this->Breadcrumbs->add([
           <?= $this->Form->control('invoice_number', ['label' => __('Invoice Number'), 'placeholder' => __('13 digits excluding T')]); ?>
         </div>
         <div class="col">
+          <?= $this->Form->control('location', ['type' => 'select', 'label' => __('所在地'), 'options' => $locations, 'empty' => __('選択してください')]); ?>
+        </div>
+        <div class="col">
           <?= $this->element('parts/status_d'); ?>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <?= $this->Form->control('categories', ['label' => __('区分'), 'multiple' => 'checkbox', 'options' => $bpCategories]); ?>
         </div>
       </div>
     </div>

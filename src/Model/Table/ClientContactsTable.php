@@ -96,8 +96,7 @@ class ClientContactsTable extends Table
         $validator
             ->scalar('kana')
             ->maxLength('kana', 255)
-            ->requirePresence('kana', 'create')
-            ->notEmptyString('kana')
+            ->allowEmptyString('kana')
             ->add('kana', 'custom', [
                 'rule' => 'noSpaceStartEnd',
                 'provider' => 'custom',
@@ -106,8 +105,7 @@ class ClientContactsTable extends Table
 
         $validator
             ->email('email')
-            ->requirePresence('email', 'create')
-            ->notEmptyString('email');
+            ->allowEmptyString('email');
 
         $validator
             ->scalar('mobile_phone')
@@ -130,9 +128,21 @@ class ClientContactsTable extends Table
             ->allowEmptyString('landline_phone');
 
         $validator
-            ->scalar('position')
-            ->maxLength('position', 255)
+            ->scalar('department')
+            ->maxLength('department', 255)
+            ->allowEmptyString('department');
+
+        $validator
+            ->integer('position')
             ->allowEmptyString('position');
+
+        $validator
+            ->integer('category')
+            ->allowEmptyString('category');
+
+        $validator
+            ->integer('hierarchy')
+            ->allowEmptyString('hierarchy');
 
         $validator
             ->scalar('note')
@@ -142,6 +152,18 @@ class ClientContactsTable extends Table
             ->integer('status')
             ->requirePresence('status', 'create')
             ->notEmptyString('status');
+
+        $validator
+            ->integer('inactive_reason')
+            ->allowEmptyString('inactive_reason');
+
+        $validator
+            ->integer('mail_delivery')
+            ->allowEmptyString('mail_delivery');
+
+        $validator
+            ->integer('area_only_delivery')
+            ->allowEmptyString('area_only_delivery');
 
         $validator
             ->scalar('created_id')

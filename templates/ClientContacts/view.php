@@ -29,6 +29,9 @@ $this->Breadcrumbs->add([
         <th><?= __('Position') ?></th>
         <td><?= $this->element('parts/position_v', ['clientContact' => $clientContact]) ?></td>
       </tr>
+      <tr><th><?= __('Department') ?></th><td><?= h($clientContact->department ?? '') ?></td></tr>
+      <tr><th><?= __('Mail Delivery Attribute') ?></th><td><?= h(CLIENT_CONTACT_CATEGORY_LABELS[(int)($clientContact->category ?? 0)] ?? '') ?></td></tr>
+      <tr><th><?= __('Hierarchy') ?></th><td><?= h($hierarchyName ?? '') ?></td></tr>
       <tr><th><?= __('Status') ?></th><td><?= $clientContact->status === 1 ? __('Active') : __('Inactive') ?></td></tr>
       <tr><th><?= __('Note') ?></th><td><?= nl2br(h($clientContact->note)) ?></td></tr>
     </table>

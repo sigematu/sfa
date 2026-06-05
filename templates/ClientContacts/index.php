@@ -2,6 +2,8 @@
 /**
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\ClientContact[]|\Cake\Collection\CollectionInterface $clientContacts
+ * @var string[]|\Cake\Collection\CollectionInterface $clients
+ * @var array<int, string> $hierarchyMap
  */
 ?>
 <?php
@@ -16,10 +18,13 @@ $colDefs = [
     'actions'  => __('Actions'),
     'name'     => __('Name'),
     'company'  => __('Company'),
-    'email'    => __('Email'),
     'mobile'   => __('Mobile'),
     'landline' => __('Landline'),
+    'email'    => __('Email'),
+    'area'     => __('Responsible Area'),
+    'department' => __('Department'),
     'position' => __('Position'),
+    'hierarchy' => __('Hierarchy'),
     'status'   => __('Status'),
 ];
 $alwaysCols = ['actions', 'name'];
@@ -46,7 +51,7 @@ $alwaysCols = ['actions', 'name'];
                         foreach ($clients as $id => $name) {
                             $sanitizedClients[$id] = str_replace(['株式会社', '合同会社'], '', $name);
                         }
-                        echo $this->Form->control('client_id', ['options' => $sanitizedClients, 'empty' => true, 'label' => __('Company')]);
+                        echo $this->Form->control('client_id', ['options' => $sanitizedClients, 'empty' => true, 'label' => __('Company'), 'class' => 'select2']);
                     ?>
                 </div>
                 <div class="col">
@@ -83,10 +88,13 @@ $alwaysCols = ['actions', 'name'];
                     <th class="pc-actions actions"><?= __('Actions') ?></th>
                     <th class="pc-name"><?= $this->Paginator->sort('name', __('Name')) ?></th>
                     <th class="pc-company"><?= $this->Paginator->sort('client_id', __('Company')) ?></th>
-                    <th class="pc-email"><?= $this->Paginator->sort('email') ?></th>
                     <th class="pc-mobile"><?= $this->Paginator->sort('mobile_phone', __('Mobile')) ?></th>
                     <th class="pc-landline"><?= $this->Paginator->sort('landline_phone', __('Landline')) ?></th>
+                    <th class="pc-email"><?= $this->Paginator->sort('email') ?></th>
+                    <th class="pc-area"><?= $this->Paginator->sort('category', __('Responsible Area')) ?></th>
+                    <th class="pc-department"><?= $this->Paginator->sort('department', __('Department')) ?></th>
                     <th class="pc-position"><?= $this->Paginator->sort('position', __('Position')) ?></th>
+                    <th class="pc-hierarchy"><?= $this->Paginator->sort('hierarchy', __('Hierarchy')) ?></th>
                     <th class="pc-status"><?= $this->Paginator->sort('status') ?></th>
                 </tr>
             </thead>
@@ -99,12 +107,15 @@ $alwaysCols = ['actions', 'name'];
                         <?= $this->Html->link(__('Edit'), ['action' => 'edit', $clientContact->id], ['class' => 'btn btn-xs btn-outline-primary', 'escape' => false]) ?>
                         <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $clientContact->id], ['class' => 'btn btn-xs btn-outline-danger', 'escape' => false, 'confirm' => __('Are you sure you want to delete # {0}?', $clientContact->id)]) ?>
                     </td>
-                    <td class="pc-name"><?= $this->Html->link($this->Text->truncate(h($clientContact->name), 20), ['action' => 'view', $clientContact->id]) ?> (<?= $this->Text->truncate(h($clientContact->kana), 20) ?>)</td>
+                    <td class="pc-name"><?= $this->Html->link($this->Text->truncate(h($clientContact->name), 20), ['action' => 'view', $clientContact->id]) ?></td>
                     <td class="pc-company"><?= $clientContact->has('client') ? $this->Html->link(str_replace(['株式会社', '合同会社'], '', $clientContact->client->name), ['controller' => 'Clients', 'action' => 'view', $clientContact->client->id]) : '' ?></td>
-                    <td class="pc-email"><?= !empty($clientContact->email) ? $this->Html->link($this->Text->truncate($clientContact->email, 30), 'mailto:' . $clientContact->email) : '' ?></td>
                     <td class="pc-mobile"><?= h($clientContact->mobile_phone) ?></td>
                     <td class="pc-landline"><?= h($clientContact->landline_phone) ?></td>
+                    <td class="pc-email"><?= !empty($clientContact->email) ? $this->Html->link($this->Text->truncate($clientContact->email, 30), 'mailto:' . $clientContact->email) : '' ?></td>
+                    <td class="pc-area"><?= h(CLIENT_CONTACT_CATEGORY_LABELS[(int)($clientContact->category ?? 0)] ?? '') ?></td>
+                    <td class="pc-department"><?= h($clientContact->department ?? '') ?></td>
                     <td class="pc-position"><?= $this->element('parts/position_v', ['clientContact' => $clientContact]) ?></td>
+                    <td class="pc-hierarchy"><?= h($hierarchyMap[(int)($clientContact->hierarchy ?? 0)] ?? '') ?></td>
                     <td class="pc-status"><?= $this->element('parts/status_v', ['clientContact' => $clientContact]) ?></td>
                 </tr>
                 <?php endforeach; ?>

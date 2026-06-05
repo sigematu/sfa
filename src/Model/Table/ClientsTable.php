@@ -54,6 +54,15 @@ class ClientsTable extends Table
         $this->hasMany('ClientContacts', [
         'foreignKey' => 'client_id',
         ]);
+        $this->belongsTo('ParentClients', [
+            'className' => 'Clients',
+            'foreignKey' => 'parent_id',
+            'joinType' => 'LEFT',
+        ]);
+        $this->hasMany('ChildClients', [
+            'className' => 'Clients',
+            'foreignKey' => 'parent_id',
+        ]);
 
         $this->addBehavior("Search.Search");
         $this->searchManager()
@@ -100,8 +109,7 @@ class ClientsTable extends Table
         $validator
             ->scalar('kana')
             ->maxLength('kana', 255, __('Company Kana must be less than 255 characters.'))
-            ->requirePresence('kana', 'create')
-            ->notEmptyString('kana', __('This field is required.'))
+            ->allowEmptyString('kana')
             ->add('kana', 'custom', [
                 'rule' => 'noSpaceStartEnd',
                 'provider' => 'custom',
@@ -116,6 +124,14 @@ class ClientsTable extends Table
         $validator
             ->integer('sales_rank')
             ->allowEmptyString('sales_rank');
+
+        $validator
+            ->boolean('is_group')
+            ->notEmptyString('is_group');
+
+        $validator
+            ->integer('parent_id')
+            ->allowEmptyString('parent_id');
 
         $validator
             ->scalar('note')
@@ -139,6 +155,7 @@ class ClientsTable extends Table
     public function buildRules(RulesChecker $rules): RulesChecker
     {
         $rules->add($rules->existsIn('created_id', 'Users'), ['errorField' => 'created_id']);
+        $rules->add($rules->existsIn('parent_id', 'ParentClients'), ['errorField' => 'parent_id']);
         $rules->add($rules->isUnique(['name'], __('This name is already in use.')));
 
         // urlが空の場合、重複チェックを外す

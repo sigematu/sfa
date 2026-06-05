@@ -2,6 +2,7 @@
 /**
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\BpContact[]|\Cake\Collection\CollectionInterface $bpContacts
+ * @var string[]|\Cake\Collection\CollectionInterface $bps
  */
 ?>
 <?php
@@ -99,7 +100,7 @@ $alwaysCols = ['actions', 'name'];
                         <?= $this->Html->link(__('Edit'), ['action' => 'edit', $bpContact->id], ['class' => 'btn btn-xs btn-outline-primary', 'escape' => false]) ?>
                         <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $bpContact->id], ['class' => 'btn btn-xs btn-outline-danger', 'escape' => false, 'confirm' => __('Are you sure you want to delete # {0}?', $bpContact->id)]) ?>
                     </td>
-                    <td class="pc-name"><?= $this->Html->link($this->Text->truncate(h($bpContact->name), 20), ['action' => 'view', $bpContact->id]) ?> (<?= $this->Text->truncate(h($bpContact->kana), 20) ?>)</td>
+                    <td class="pc-name"><?= $this->Html->link($this->Text->truncate(h($bpContact->name), 20), ['action' => 'view', $bpContact->id]) ?></td>
                     <td class="pc-company"><?= $bpContact->has('bp') ? $this->Html->link(str_replace(['株式会社', '合同会社'], '', $bpContact->bp->name), ['controller' => 'Bps', 'action' => 'view', $bpContact->bp->id]) : '' ?></td>
                     <td class="pc-email"><?= !empty($bpContact->email) ? $this->Html->link($this->Text->truncate($bpContact->email, 30), 'mailto:' . $bpContact->email) : '' ?></td>
                     <td class="pc-mobile"><?= h($bpContact->mobile_phone) ?></td>

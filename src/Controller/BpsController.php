@@ -62,6 +62,8 @@ class BpsController extends AppController
                         'Bps.kana',
                         'Bps.url',
                         'Bps.invoice_number',
+                        'Bps.location',
+                        'Bps.categories',
                         'Bps.note',
                         'Bps.status',
                         'Bps.created',
@@ -87,7 +89,17 @@ class BpsController extends AppController
             return $this->redirect(['action' => 'index']);
         }
 
-        $this->set(compact('bp'));
+        $categoryLabels = [];
+        if (!empty($bp->categories)) {
+            foreach (explode(',', (string)$bp->categories) as $category) {
+                $key = (int)$category;
+                if (isset(BP_CATEGORY_LABELS[$key])) {
+                    $categoryLabels[] = BP_CATEGORY_LABELS[$key];
+                }
+            }
+        }
+
+        $this->set(compact('bp', 'categoryLabels'));
     }
 
     /**
@@ -99,7 +111,14 @@ class BpsController extends AppController
     {
         $bp = $this->Bps->newEmptyEntity();
         if ($this->request->is('post')) {
-            $bp = $this->Bps->patchEntity($bp, $this->request->getData());
+            $data = $this->request->getData();
+            $selectedCategories = array_values(array_unique(array_filter((array)($data['categories'] ?? []), function ($value) {
+                return isset(BP_CATEGORY_LABELS[(int)$value]);
+            })));
+            sort($selectedCategories);
+            $data['categories'] = implode(',', $selectedCategories);
+
+            $bp = $this->Bps->patchEntity($bp, $data);
             if ($savedData = $this->Bps->save($bp)) {
                 $this->Flash->success(__('The bp has been saved.'));
 
@@ -113,7 +132,9 @@ class BpsController extends AppController
             $this->Flash->error(__('The bp could not be saved. Please, try again.'));
         }
         $users = $this->Bps->Users->find('list')->all();
-        $this->set(compact('bp', 'users'));
+        $locations = BP_LOCATION_LABELS;
+        $bpCategories = BP_CATEGORY_LABELS;
+        $this->set(compact('bp', 'users', 'locations', 'bpCategories'));
     }
 
     /**
@@ -135,8 +156,19 @@ class BpsController extends AppController
             return $this->redirect(['action' => 'index']);
         }
 
+        if (!empty($bp->categories)) {
+            $bp->categories = explode(',', (string)$bp->categories);
+        }
+
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $bp = $this->Bps->patchEntity($bp, $this->request->getData());
+            $data = $this->request->getData();
+            $selectedCategories = array_values(array_unique(array_filter((array)($data['categories'] ?? []), function ($value) {
+                return isset(BP_CATEGORY_LABELS[(int)$value]);
+            })));
+            sort($selectedCategories);
+            $data['categories'] = implode(',', $selectedCategories);
+
+            $bp = $this->Bps->patchEntity($bp, $data);
             if ($savedData = $this->Bps->save($bp)) {
                 $this->Flash->success(__('The bp has been saved.'));
 
@@ -150,7 +182,9 @@ class BpsController extends AppController
             $this->Flash->error(__('The bp could not be saved. Please, try again.'));
         }
         $users = $this->Bps->Users->find('list')->all();
-        $this->set(compact('bp', 'users'));
+        $locations = BP_LOCATION_LABELS;
+        $bpCategories = BP_CATEGORY_LABELS;
+        $this->set(compact('bp', 'users', 'locations', 'bpCategories'));
     }
 
     /**

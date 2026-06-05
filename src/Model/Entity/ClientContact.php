@@ -17,9 +17,13 @@ use Cake\ORM\Entity;
  * @property string|null $landline_phone
  * @property string|null $department
  * @property int|null $position
- * @property int $category
+ * @property int|null $category
+ * @property int|null $hierarchy
  * @property string|null $note
  * @property int $status
+ * @property int|null $inactive_reason
+ * @property int $mail_delivery
+ * @property int $area_only_delivery
  * @property \Cake\I18n\FrozenTime $created
  * @property string $created_id
  * @property \Cake\I18n\FrozenTime|null $modified
@@ -48,8 +52,12 @@ class ClientContact extends Entity
         'department' => true,
         'position' => true,
         'category' => true,
+        'hierarchy' => true,
         'note' => true,
         'status' => true,
+        'inactive_reason' => true,
+        'mail_delivery' => true,
+        'area_only_delivery' => true,
         'created' => true,
         'created_id' => true,
         'modified' => true,

@@ -99,8 +99,7 @@ class BpsTable extends Table
         $validator
             ->scalar('kana')
             ->maxLength('kana', 255, __('Company Kana must be less than 255 characters.'))
-            ->requirePresence('kana', 'create')
-            ->notEmptyString('kana', __('This field is required.'))
+            ->allowEmptyString('kana')
             ->add('kana', 'custom', [
                 'rule' => 'noSpaceStartEnd',
                 'provider' => 'custom',
@@ -115,8 +114,15 @@ class BpsTable extends Table
         $validator
             ->integer('invoice_number', __('Invoice Number must be an integer.'))
             ->regex('invoice_number', '/^[0-9]{13}$/', __('Invoice Number must be entered as 13 digits.'))
-            ->requirePresence('invoice_number', 'create')
-            ->notEmptyString('invoice_number', __('This field is required.'));
+            ->allowEmptyString('invoice_number');
+
+        $validator
+            ->integer('location')
+            ->allowEmptyString('location');
+
+        $validator
+            ->scalar('categories')
+            ->allowEmptyString('categories');
 
         $validator
             ->scalar('note')
