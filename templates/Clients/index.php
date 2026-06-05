@@ -88,7 +88,11 @@ $alwaysCols = ['actions', 'company'];
                             <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $client->id], ['class' => 'btn btn-xs btn-outline-danger', 'escape' => false, 'confirm' => __('Are you sure you want to delete # {0}?', $client->id)]) ?>
                         </td>
                         <td class="pc-company"><?= $this->Html->link(h($this->Text->truncate(str_replace('株式会社', '', $client->name), 30)), ['action' => 'view', $client->id]) ?></td>
-                        <td class="pc-url"><?= $this->Html->link($this->Text->truncate($client->url, 30), $url = $client->url, ['target' => '_blank']) ?></td>
+                        <td class="pc-url">
+                            <?php if (!empty($client->url)): ?>
+                                <?= $this->Html->link($this->Text->truncate((string)$client->url, 30), $url = $client->url, ['target' => '_blank']) ?>
+                            <?php endif; ?>
+                        </td>
                         <td class="pc-sales-rank">
                             <?php if ($client->sales_rank === SALES_RANK_S): ?>
                                 <?= __('S(100byen-)') ?>

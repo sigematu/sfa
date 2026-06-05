@@ -39,9 +39,7 @@ class PagesControllerTest extends TestCase
     {
         Configure::write('debug', true);
         $this->get('/pages/home');
-        $this->assertResponseOk();
-        $this->assertResponseContains('CakePHP');
-        $this->assertResponseContains('<html>');
+        $this->assertRedirectContains('/login');
     }
 
     /**
@@ -53,9 +51,7 @@ class PagesControllerTest extends TestCase
     {
         Configure::write('debug', false);
         $this->get('/pages/not_existing');
-
-        $this->assertResponseError();
-        $this->assertResponseContains('Error');
+        $this->assertRedirectContains('/login');
     }
 
     /**
@@ -67,11 +63,7 @@ class PagesControllerTest extends TestCase
     {
         Configure::write('debug', true);
         $this->get('/pages/not_existing');
-
-        $this->assertResponseFailure();
-        $this->assertResponseContains('Missing Template');
-        $this->assertResponseContains('Stacktrace');
-        $this->assertResponseContains('not_existing.php');
+        $this->assertRedirectContains('/login');
     }
 
     /**
@@ -82,8 +74,7 @@ class PagesControllerTest extends TestCase
     public function testDirectoryTraversalProtection()
     {
         $this->get('/pages/../Layout/ajax');
-        $this->assertResponseCode(403);
-        $this->assertResponseContains('Forbidden');
+        $this->assertRedirectContains('/login');
     }
 
     /**

@@ -20,7 +20,7 @@ class BpsFixture extends TestFixture
         $this->records = [
             [
                 'id' => 1,
-                'user_id' => 1,
+                'created_id' => '00000000-0000-0000-0000-000000000001',
                 'name' => 'Lorem ipsum dolor sit amet',
                 'kana' => 'Lorem ipsum dolor sit amet',
                 'fee' => 1,

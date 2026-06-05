@@ -9,14 +9,13 @@ use Cake\ORM\Entity;
  * Bp Entity
  *
  * @property int $id
- * @property int $user_id
  * @property string $name
  * @property string $kana
+ * @property string $created_id
  * @property \Cake\I18n\FrozenTime|null $created
  * @property \Cake\I18n\FrozenTime|null $modified
  *
  * @property \App\Model\Entity\User $user
- * @property \App\Model\Entity\Contract[] $contracts
  */
 class Bp extends Entity
 {
@@ -30,7 +29,6 @@ class Bp extends Entity
      * @var array<string, bool>
      */
     protected $_accessible = [
-        'user_id' => true,
         'name' => true,
         'kana' => true,
         'url' => true,
@@ -41,7 +39,6 @@ class Bp extends Entity
         'created_id' => true,
         'modified' => true,
         'modified_id' => true,
-        'user' => true,
-        'contracts' => true
+        'user' => true
     ];
 }

@@ -1,2 +1,5 @@
 logs/*
 tmp/*
+resources/bp.xlsx
+resources/client.xlsx
+.phpunit.result.cache

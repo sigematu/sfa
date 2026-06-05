@@ -16,7 +16,6 @@ use Cake\Event\EventInterface;
  * Engineers Model
  *
  * @property \App\Model\Table\UsersTable&\Cake\ORM\Association\BelongsTo $Users
- * @property \App\Model\Table\ContractsTable&\Cake\ORM\Association\HasMany $Contracts
  *
  * @method \App\Model\Entity\Engineer newEmptyEntity()
  * @method \App\Model\Entity\Engineer newEntity(array $data, array $options = [])

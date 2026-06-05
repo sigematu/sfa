@@ -21,7 +21,6 @@ use Cake\ORM\Entity;
  * @property \Cake\I18n\FrozenTime|null $modified
  *
  * @property \App\Model\Entity\User $user
- * @property \App\Model\Entity\Contract[] $contracts
  */
 class Engineer extends Entity
 {
@@ -51,7 +50,6 @@ class Engineer extends Entity
         'created_id' => true,
         'modified' => true,
         'modified_id' => true,
-        'user' => true,
-        'contracts' => true
+        'user' => true
     ];
 }

@@ -54,7 +54,6 @@ $this->Breadcrumbs->add([
     </div>
   </div>
 
-  <?= $this->Form->hidden('user_id', ['value' => $this->request->getSession()->read('Auth.id')]); ?>
   <?= $this->Form->hidden('created_id', ['value' => $this->request->getSession()->read('Auth.id')]); ?>
   <?= $this->Form->end() ?>
 </div>

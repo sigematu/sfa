@@ -26,7 +26,6 @@ class BpsTableTest extends TestCase
     protected $fixtures = [
         'app.Bps',
         'app.Users',
-        'app.Contracts',
     ];
 
     /**

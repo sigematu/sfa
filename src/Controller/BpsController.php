@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use Cake\Datasource\Exception\RecordNotFoundException;
+
 /**
  * Bps Controller
  *
@@ -51,33 +53,39 @@ class BpsController extends AppController
         $sq_created_dn = $this->Pic->getDisplayName($this->name, 'created_id');
         $sq_modified_dn = $this->Pic->getDisplayName($this->name, 'modified_id');
 
-        $bp = $this->Bps
-            ->get($id, [
-                'fields' => [
-                    'Bps.id',
-                    'Bps.name',
-                    'Bps.kana',
-                    'Bps.url',
-                    'Bps.invoice_number',
-                    'Bps.note',
-                    'Bps.status',
-                    'Bps.created',
-                    'Bps.created_id',
-                    'Bps.modified',
-                    'Bps.modified_id',
-                    'created_dn' => $sq_created_dn,
-                    'modified_dn' => $sq_modified_dn
-                ],
-                'contain' => [
-                    'Users',
-                    'BpContacts' => function ($q) {
-                        return $q
-                            ->where(['BpContacts.status' => STATUS_ACTIVE])
-                            ->order(['BpContacts.id' => 'DESC'])
-                            ->limit(20);
-                    },
-                ],
-            ]);
+        try {
+            $bp = $this->Bps
+                ->get($id, [
+                    'fields' => [
+                        'Bps.id',
+                        'Bps.name',
+                        'Bps.kana',
+                        'Bps.url',
+                        'Bps.invoice_number',
+                        'Bps.note',
+                        'Bps.status',
+                        'Bps.created',
+                        'Bps.created_id',
+                        'Bps.modified',
+                        'Bps.modified_id',
+                        'created_dn' => $sq_created_dn,
+                        'modified_dn' => $sq_modified_dn
+                    ],
+                    'contain' => [
+                        'Users',
+                        'BpContacts' => function ($q) {
+                            return $q
+                                ->where(['BpContacts.status' => STATUS_ACTIVE])
+                                ->order(['BpContacts.id' => 'DESC'])
+                                ->limit(20);
+                        },
+                    ],
+                ]);
+        } catch (RecordNotFoundException $e) {
+            $this->Flash->error(__('The bp was not found.'));
+
+            return $this->redirect(['action' => 'index']);
+        }
 
         $this->set(compact('bp'));
     }
@@ -117,9 +125,16 @@ class BpsController extends AppController
      */
     public function edit($id = null)
     {
-        $bp = $this->Bps->get($id, [
-            'contain' => [],
-        ]);
+        try {
+            $bp = $this->Bps->get($id, [
+                'contain' => [],
+            ]);
+        } catch (RecordNotFoundException $e) {
+            $this->Flash->error(__('The bp was not found.'));
+
+            return $this->redirect(['action' => 'index']);
+        }
+
         if ($this->request->is(['patch', 'post', 'put'])) {
             $bp = $this->Bps->patchEntity($bp, $this->request->getData());
             if ($savedData = $this->Bps->save($bp)) {
@@ -148,7 +163,13 @@ class BpsController extends AppController
     public function delete($id = null)
     {
         $this->request->allowMethod(['post', 'delete']);
-        $bp = $this->Bps->get($id);
+        try {
+            $bp = $this->Bps->get($id);
+        } catch (RecordNotFoundException $e) {
+            $this->Flash->error(__('The bp was not found.'));
+
+            return $this->redirect(['action' => 'index']);
+        }
 
         // メール送信用に削除対象の名前を保存
         $savedData = (object)[

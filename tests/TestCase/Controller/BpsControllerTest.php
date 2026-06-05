@@ -24,7 +24,6 @@ class BpsControllerTest extends TestCase
     protected $fixtures = [
         'app.Bps',
         'app.Users',
-        'app.Contracts',
     ];
 
     /**

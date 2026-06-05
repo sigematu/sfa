@@ -12,7 +12,6 @@ use Cake\Validation\Validator;
  * Bps Model
  *
  * @property \App\Model\Table\UsersTable&\Cake\ORM\Association\BelongsTo $Users
- * @property \App\Model\Table\ContractsTable&\Cake\ORM\Association\HasMany $Contracts
  *
  * @method \App\Model\Entity\Bp newEmptyEntity()
  * @method \App\Model\Entity\Bp newEntity(array $data, array $options = [])
@@ -49,7 +48,7 @@ class BpsTable extends Table
         $this->addBehavior('Timestamp');
 
         $this->belongsTo('Users', [
-            'foreignKey' => 'user_id',
+            'foreignKey' => 'created_id',
             'joinType' => 'INNER',
         ]);
         $this->hasMany('BpContacts', [
@@ -81,9 +80,10 @@ class BpsTable extends Table
         $validator->setProvider('custom', 'App\Model\Validation\CustomValidator');
 
         $validator
-            ->integer('user_id')
-            ->requirePresence('user_id', 'create')
-            ->notEmptyString('user_id', __('This field is required.'));
+            ->scalar('created_id')
+            ->maxLength('created_id', 50)
+            ->requirePresence('created_id', 'create')
+            ->notEmptyString('created_id', __('This field is required.'));
 
         $validator
             ->scalar('name')
@@ -139,7 +139,7 @@ class BpsTable extends Table
      */
     public function buildRules(RulesChecker $rules): RulesChecker
     {
-        $rules->add($rules->existsIn('user_id', 'Users'), ['errorField' => 'user_id']);
+        $rules->add($rules->existsIn('created_id', 'Users'), ['errorField' => 'created_id']);
         $rules->add($rules->isUnique(['name'], __('This name is already in use.')));
         $rules->add($rules->isUnique(['invoice_number'], __('Invoice Number is already in use.')));
 

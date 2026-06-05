@@ -35,7 +35,11 @@ $this->Breadcrumbs->add([
       </tr>
       <tr>
           <th><?= __('Url') ?></th>
-          <td><?= $this->Html->link($client->url, $url = $client->url, ['target' => '_blank']) ?></td>
+          <td>
+            <?php if (!empty($client->url)): ?>
+              <?= $this->Html->link((string)$client->url, $url = $client->url, ['target' => '_blank']) ?>
+            <?php endif; ?>
+          </td>
       </tr>
       <tr>
           <th><?= __('Sales Rank') ?></th>
