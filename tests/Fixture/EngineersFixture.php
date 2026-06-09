@@ -20,7 +20,6 @@ class EngineersFixture extends TestFixture
         $this->records = [
             [
                 'id' => 1,
-                'user_id' => 1,
                 'type' => 1,
                 'name' => 'Lorem ipsum dolor sit amet',
                 'kana' => 'Lorem ipsum dolor sit amet',

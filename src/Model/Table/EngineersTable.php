@@ -15,8 +15,6 @@ use Cake\Event\EventInterface;
 /**
  * Engineers Model
  *
- * @property \App\Model\Table\UsersTable&\Cake\ORM\Association\BelongsTo $Users
- *
  * @method \App\Model\Entity\Engineer newEmptyEntity()
  * @method \App\Model\Entity\Engineer newEntity(array $data, array $options = [])
  * @method \App\Model\Entity\Engineer[] newEntities(array $data, array $options = [])
@@ -51,10 +49,6 @@ class EngineersTable extends Table
 
         $this->addBehavior('Timestamp');
 
-        $this->belongsTo('Users', [
-            'foreignKey' => 'user_id',
-            'joinType' => 'INNER',
-        ]);
         $this->addBehavior("Search.Search");
         $this->searchManager()
             ->value('belong')
@@ -90,11 +84,6 @@ class EngineersTable extends Table
     public function validationDefault(Validator $validator): Validator
     {
         $validator->setProvider('custom', 'App\Model\Validation\CustomValidator');
-
-        $validator
-            ->integer('user_id')
-            ->requirePresence('user_id', 'create')
-            ->notEmptyString('user_id', __('This field is required.'));
 
         $validator
             ->integer('emp_no')
@@ -194,7 +183,6 @@ class EngineersTable extends Table
      */
     public function buildRules(RulesChecker $rules): RulesChecker
     {
-        $rules->add($rules->existsIn('user_id', 'Users'), ['errorField' => 'user_id']);
         $rules->add($rules->isUnique(['name'], __('This name is already in use.')));
         $rules->add($rules->isUnique(['emp_no'], __('This Employee ID is already in use.')));
 

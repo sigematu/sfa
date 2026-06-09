@@ -9,7 +9,6 @@ use Cake\ORM\Entity;
  * Engineer Entity
  *
  * @property int $id
- * @property int $user_id
  * @property int $type
  * @property string $name
  * @property string $kana
@@ -34,7 +33,6 @@ class Engineer extends Entity
      * @var array<string, bool>
      */
     protected $_accessible = [
-        'user_id' => true,
         'emp_no' => true,
         'belong' => true,
         'name' => true,

@@ -18,6 +18,7 @@ use Cake\ORM\Entity;
  * @property string|null $department
  * @property int|null $position
  * @property int|null $category
+ * @property int|null $role
  * @property int|null $hierarchy
  * @property string|null $note
  * @property int $status
@@ -52,6 +53,7 @@ class ClientContact extends Entity
         'department' => true,
         'position' => true,
         'category' => true,
+        'role' => true,
         'hierarchy' => true,
         'note' => true,
         'status' => true,

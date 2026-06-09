@@ -142,12 +142,12 @@ return [
         ],
         [
             'role' => ['user', 'manager'],
-            'controller' => ['Clients', 'ClientContacts', 'Bps', 'BpContacts', 'Engineers'],
+            'controller' => ['Clients', 'ClientContacts', 'Bps', 'BpContacts', 'Engineers', 'ClientProposals'],
             'action' => '*',
         ],
         [
             'role' => 'viewer',
-            'controller' => ['Clients', 'ClientContacts', 'Bps', 'BpContacts', 'Engineers'],
+            'controller' => ['Clients', 'ClientContacts', 'Bps', 'BpContacts', 'Engineers', 'ClientProposals'],
             'action' => ['index', 'view', 'export', 'excel', 'download'],
         ],
     ]

@@ -35,7 +35,7 @@ class EngineersController extends AppController
     {
         $engineers = $this->Engineers
             ->find('search', ['search' => $this->request->getQueryParams()])
-            ->contain(['Users']);
+            ;
 
         $this->set(compact('engineers'), $this->paginate($engineers));
     }
@@ -131,8 +131,7 @@ class EngineersController extends AppController
             }
             $this->Flash->error(__('The engineer could not be saved. Please, try again.'));
         }
-        $users = $this->Engineers->Users->find('list')->all();
-        $this->set(compact('engineer', 'users'));
+        $this->set(compact('engineer'));
     }
 
     /**
@@ -191,8 +190,7 @@ class EngineersController extends AppController
             }
             $this->Flash->error(__('The engineer could not be saved. Please, try again.'));
         }
-        $users = $this->Engineers->Users->find('list')->all();
-        $this->set(compact('engineer', 'users'));
+        $this->set(compact('engineer'));
     }
 
     /**

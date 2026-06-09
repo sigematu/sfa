@@ -46,6 +46,26 @@ class ClientProposalsTable extends Table
             ->allowEmptyString('subject');
 
         $validator
+            ->integer('sales_status')
+            ->allowEmptyString('sales_status')
+            ->add('sales_status', 'inList', [
+                'rule' => ['inList', array_keys(CLIENT_PROPOSAL_SALES_STATUS_LABELS)],
+                'message' => __('Invalid sales status.'),
+            ]);
+
+        $validator
+            ->integer('sales_reason')
+            ->allowEmptyString('sales_reason')
+            ->add('sales_reason', 'inList', [
+                'rule' => ['inList', array_keys(CLIENT_PROPOSAL_REASON_LABELS)],
+                'message' => __('Invalid sales reason.'),
+            ]);
+
+        $validator
+            ->integer('bp_pic_id')
+            ->allowEmptyString('bp_pic_id');
+
+        $validator
             ->scalar('body_text')
             ->allowEmptyString('body_text');
 

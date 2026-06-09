@@ -3,7 +3,6 @@
 /**
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Client $client
- * @var string[]|\Cake\Collection\CollectionInterface $groupClients
  */
 ?>
 <?php
@@ -35,10 +34,7 @@ $this->Breadcrumbs->add([
           <?= $this->element('parts/sales_rank_e'); ?>
         </div>
         <div class="col">
-          <?= $this->Form->control('is_group', ['type' => 'checkbox', 'label' => __('親会社として設定')]); ?>
-        </div>
-        <div class="col">
-          <?= $this->Form->control('parent_id', ['label' => __('親会社'), 'options' => $groupClients, 'empty' => __('親会社なし')]); ?>
+          <?= $this->Form->control('group_name', ['type' => 'text', 'label' => __('グループ'), 'placeholder' => __('グループ名')]); ?>
         </div>
       </div>
       <div class="row">

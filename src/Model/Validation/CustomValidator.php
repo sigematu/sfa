@@ -16,14 +16,24 @@ class CustomValidator extends Validator
 
     public static function isMobilePhoneNumber($value)
     {
-        // 携帯番号（070/080/090から始まる11桁、ハイフンあり）
-        return (bool) preg_match('/^0[789]0-[0-9]{4}-[0-9]{4}$/', $value);
+        $value = self::normalizePhoneNumber((string)$value);
+        // 携帯番号（050/070/080/090から始まる11桁、ハイフンあり）
+        return (bool) preg_match('/^0(?:5|7|8|9)0-[0-9]{4}-[0-9]{4}$/', $value);
     }
 
     public static function isLandlinePhoneNumber($value)
     {
+        $value = self::normalizePhoneNumber((string)$value);
         // 固定電話（市外局番から始まる、ハイフンあり）
         return (bool) preg_match('/^0\d{1,4}-\d{1,4}-\d{4}$/', $value);
+    }
+
+    private static function normalizePhoneNumber(string $value): string
+    {
+        $normalized = trim($value);
+
+        // 全角系ハイフンを半角ハイフンに寄せる
+        return str_replace(['ー', 'ｰ', '－', '―', '−', '‐'], '-', $normalized);
     }
 
     public static function noSpaceStartEnd($value)

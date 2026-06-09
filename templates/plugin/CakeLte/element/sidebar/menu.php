@@ -11,9 +11,9 @@
   </a>
   <ul class="nav nav-treeview" style="display: block;">
     <li class="nav-item">
-      <a href="/crm/engineers?skill_sheet=0&sort=emp_no&direction=asc" class="nav-link">
+      <a href="/sfa/client-proposals?q=&sales_status=5&sales_reason=" class="nav-link">
         <i class="far fa-circle nav-icon"></i>
-        <p>[エンジニア] スキルシートなし</p>
+        <p>[顧客提案] 提案中</p>
       </a>
     </li>
   </ul>

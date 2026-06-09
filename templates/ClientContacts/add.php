@@ -17,6 +17,7 @@ $this->Breadcrumbs->add([
 ]);
 
   $queryClientId = (int)$this->request->getQuery('client_id');
+  $queryEmail = trim((string)$this->request->getQuery('email'));
   $initialHierarchyOptions = $hierarchyOptionsByClient[$queryClientId] ?? [];
 ?>
 
@@ -37,6 +38,7 @@ $this->Breadcrumbs->add([
                 'options' => $sanitizedClients,
                 'label' => __('Client'),
                 'default' => $queryClientId,
+                'class' => 'select2',
                 'empty' => __('Select Company') // 選択を促す空の選択肢
             ]);
           ?>
@@ -50,7 +52,7 @@ $this->Breadcrumbs->add([
       </div>
       <div class="row">
         <div class="col-md-3">
-          <?= $this->Form->control('email', ['label' => __('Email'), 'placeholder' => __('akiba@icz.co.jp')]); ?>
+          <?= $this->Form->control('email', ['label' => __('Email'), 'placeholder' => __('akiba@icz.co.jp'), 'default' => $queryEmail]); ?>
         </div>
         <div class="col-md-3">
           <?= $this->Form->control('mobile_phone', ['label' => __('Mobile'), 'placeholder' => __('090-1234-5678')]); ?>
@@ -67,10 +69,15 @@ $this->Breadcrumbs->add([
           <?= $this->element('parts/position_e'); ?>
         </div>
         <div class="col-md-3">
+          <?= $this->Form->control('hierarchy', ['type' => 'select', 'label' => __('Hierarchy'), 'options' => $initialHierarchyOptions, 'empty' => __('Select')]); ?>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3">
           <?= $this->Form->control('category', ['type' => 'select', 'label' => __('Mail Delivery Attribute'), 'options' => $categories, 'empty' => __('Select'), 'value' => $clientContact->category ?? CLIENT_CONTACT_CATEGORY_ALL]); ?>
         </div>
-        <div class="col-md-3">
-          <?= $this->Form->control('hierarchy', ['type' => 'select', 'label' => __('Hierarchy'), 'options' => $initialHierarchyOptions, 'empty' => __('Select')]); ?>
+        <div class="col-md-6">
+          <?= $this->element('parts/role_e'); ?>
         </div>
       </div>
       <div class="row">

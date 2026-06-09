@@ -21,13 +21,15 @@ $colDefs = [
     'mobile'   => __('Mobile'),
     'landline' => __('Landline'),
     'email'    => __('Email'),
-    'area'     => __('Responsible Area'),
     'department' => __('Department'),
     'position' => __('Position'),
     'hierarchy' => __('Hierarchy'),
+    'area'     => __('Responsible Area'),
+    'role'     => __('Role'),
     'status'   => __('Status'),
 ];
 $alwaysCols = ['actions', 'name'];
+$isAdmin = $this->request->getSession()->read('Auth.role') === \App\Model\Table\UsersTable::ROLE_ADMIN;
 ?>
 
 <p>
@@ -72,6 +74,21 @@ $alwaysCols = ['actions', 'name'];
     <div class="card-header d-sm-flex">
         <h2 class="card-title"></h2>
         <div class="card-toolbox">
+            <?php if ($isAdmin): ?>
+            <?= $this->Form->create(null, [
+                'url' => ['action' => 'import'],
+                'type' => 'file',
+                'class' => 'd-inline-flex align-items-center mr-2',
+            ]) ?>
+            <?= $this->Form->file('import_file', [
+                'class' => 'form-control form-control-sm mr-2',
+                'accept' => '.csv',
+                'label' => false,
+                'required' => true,
+            ]) ?>
+            <?= $this->Form->button(__('Import'), ['class' => 'btn btn-secondary btn-sm']) ?>
+            <?= $this->Form->end() ?>
+            <?php endif; ?>
             <?= $this->element('col_toggle', ['colToggleKey' => 'client_contacts_hidden_cols', 'colDefs' => $colDefs, 'alwaysCols' => $alwaysCols]) ?>
             <?= $this->Paginator->limitControl([], null, [
                 'label' => false,
@@ -91,10 +108,11 @@ $alwaysCols = ['actions', 'name'];
                     <th class="pc-mobile"><?= $this->Paginator->sort('mobile_phone', __('Mobile')) ?></th>
                     <th class="pc-landline"><?= $this->Paginator->sort('landline_phone', __('Landline')) ?></th>
                     <th class="pc-email"><?= $this->Paginator->sort('email') ?></th>
-                    <th class="pc-area"><?= $this->Paginator->sort('category', __('Responsible Area')) ?></th>
                     <th class="pc-department"><?= $this->Paginator->sort('department', __('Department')) ?></th>
                     <th class="pc-position"><?= $this->Paginator->sort('position', __('Position')) ?></th>
                     <th class="pc-hierarchy"><?= $this->Paginator->sort('hierarchy', __('Hierarchy')) ?></th>
+                    <th class="pc-area"><?= $this->Paginator->sort('category', __('Responsible Area')) ?></th>
+                    <th class="pc-role"><?= $this->Paginator->sort('role', __('Role')) ?></th>
                     <th class="pc-status"><?= $this->Paginator->sort('status') ?></th>
                 </tr>
             </thead>
@@ -112,10 +130,11 @@ $alwaysCols = ['actions', 'name'];
                     <td class="pc-mobile"><?= h($clientContact->mobile_phone) ?></td>
                     <td class="pc-landline"><?= h($clientContact->landline_phone) ?></td>
                     <td class="pc-email"><?= !empty($clientContact->email) ? $this->Html->link($this->Text->truncate($clientContact->email, 30), 'mailto:' . $clientContact->email) : '' ?></td>
-                    <td class="pc-area"><?= h(CLIENT_CONTACT_CATEGORY_LABELS[(int)($clientContact->category ?? 0)] ?? '') ?></td>
                     <td class="pc-department"><?= h($clientContact->department ?? '') ?></td>
                     <td class="pc-position"><?= $this->element('parts/position_v', ['clientContact' => $clientContact]) ?></td>
                     <td class="pc-hierarchy"><?= h($hierarchyMap[(int)($clientContact->hierarchy ?? 0)] ?? '') ?></td>
+                    <td class="pc-area"><?= h(CLIENT_CONTACT_CATEGORY_LABELS[(int)($clientContact->category ?? 0)] ?? '') ?></td>
+                    <td class="pc-role"><?= $this->element('parts/role_v', ['clientContact' => $clientContact]) ?></td>
                     <td class="pc-status"><?= $this->element('parts/status_v', ['clientContact' => $clientContact]) ?></td>
                 </tr>
                 <?php endforeach; ?>

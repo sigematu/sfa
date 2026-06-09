@@ -57,19 +57,10 @@ $this->Breadcrumbs->add([
               <?php endif; ?>
           </td>
       </tr>
-      <tr>
-          <th><?= __('親会社設定') ?></th>
-          <td><?= !empty($client->is_group) ? __('はい') : __('いいえ') ?></td>
-      </tr>
-      <tr>
-          <th><?= __('親会社') ?></th>
-          <td>
-            <?php if (!empty($client->parent_id) && !empty($client->parent_client)): ?>
-              <?= $this->Html->link(h($client->parent_client->name), ['action' => 'view', $client->parent_client->id]) ?>
-            <?php endif; ?>
-          </td>
-      </tr>
-
+            <tr>
+              <th><?= __('グループ') ?></th>
+              <td><?= h($client->group_name ?? '') ?></td>
+            </tr>
       <tr>
           <th><?= __('Note') ?></th>
           <td><?= nl2br(h($client->note) ?? '') ?></td>

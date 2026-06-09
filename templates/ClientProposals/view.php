@@ -3,6 +3,7 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\ClientProposal $clientProposal
  * @var \App\Model\Entity\ClientContact|null $matchedContact
+ * @var \Cake\Datasource\EntityInterface|null $senderUser
  */
 ?>
 <?php
@@ -31,11 +32,32 @@ if ($bodyText === '' && !empty($clientProposal->body_html)) {
         <td><?= h($clientProposal->received_at) ?></td>
       </tr>
       <tr>
-        <th><?= __('Sender') ?></th>
-        <td><?= h((string)$clientProposal->sender) ?></td>
+        <th><?= __('営業状況') ?></th>
+        <td><?= h($salesStatusLabels[(int)($clientProposal->sales_status ?? 0)] ?? '') ?></td>
       </tr>
       <tr>
-        <th><?= __('Recipient') ?></th>
+        <th><?= __('事由') ?></th>
+        <td><?= h($salesReasonLabels[(int)($clientProposal->sales_reason ?? 0)] ?? '') ?></td>
+      </tr>
+      <tr>
+        <th><?= __('営業') ?></th>
+        <td>
+          <?php
+            $senderRaw = (string)$clientProposal->sender;
+            $senderLabel = $senderRaw;
+            if (!empty($senderUser)) {
+              $senderName = (string)($senderUser->display_name ?? '');
+              if ($senderName === '') {
+                $senderName = (string)($senderUser->username ?? '');
+              }
+              $senderLabel = $senderName !== '' ? $senderName : $senderRaw;
+            }
+          ?>
+          <?= h($senderLabel) ?>
+        </td>
+      </tr>
+      <tr>
+        <th><?= __('顧客') ?></th>
         <td>
           <?php if (!empty($matchedContact)): ?>
             <?php if ($matchedContact->has('client')): ?>
@@ -52,7 +74,24 @@ if ($bodyText === '' && !empty($clientProposal->body_html)) {
                 ['controller' => 'ClientContacts', 'action' => 'view', $matchedContact->id]
             ) ?>
           <?php else: ?>
-            <?= h((string)$clientProposal->recipient) ?>
+            <?php
+              $rawRecipient = (string)$clientProposal->recipient;
+              preg_match('/[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/i', $rawRecipient, $recipientMatch);
+              $recipientEmail = strtolower((string)($recipientMatch[0] ?? ''));
+            ?>
+            <?= h($rawRecipient) ?>
+            <div class="mt-2">
+              <?= $this->Html->link(
+                  __('Add Client'),
+                  ['controller' => 'Clients', 'action' => 'add'],
+                  ['class' => 'btn btn-xs btn-outline-secondary mr-1']
+              ) ?>
+              <?= $this->Html->link(
+                  __('Add Client Contact'),
+                  ['controller' => 'ClientContacts', 'action' => 'add', '?' => ['email' => $recipientEmail]],
+                  ['class' => 'btn btn-xs btn-outline-secondary']
+              ) ?>
+            </div>
           <?php endif; ?>
         </td>
       </tr>

@@ -37,7 +37,7 @@ class ClientsController extends AppController
     {
         $clients = $this->Clients
             ->find('search', ['search' => $this->request->getQueryParams()])
-            ->contain(['Users', 'ParentClients']);
+            ->contain(['Users']);
 
         $this->set(compact('clients'), $this->paginate($clients));
     }
@@ -61,9 +61,8 @@ class ClientsController extends AppController
                     'Clients.name',
                     'Clients.kana',
                     'Clients.url',
-                    'Clients.is_group',
-                    'Clients.parent_id',
                     'Clients.sales_rank',
+                    'Clients.group_name',
                     'Clients.note',
                     'Clients.status',
                     'Clients.created',
@@ -75,7 +74,6 @@ class ClientsController extends AppController
                 ],
                 'contain' => [
                     'Users',
-                    'ParentClients',
                     'ClientContacts' => function ($q) {
                         return $q
                             ->where(['ClientContacts.status' => STATUS_ACTIVE])
@@ -110,17 +108,7 @@ class ClientsController extends AppController
             }
             $this->Flash->error(__('The client could not be saved. Please, try again.'));
         }
-        $users = $this->Clients->Users->find('list')->all();
-        $groupClients = $this->Clients->find('list', [
-            'keyField' => 'id',
-            'valueField' => function ($row) {
-                return str_replace('株式会社', '', (string)$row->name);
-            },
-        ])
-            ->where(['Clients.is_group' => 1])
-            ->order(['Clients.kana' => 'ASC'])
-            ->all();
-        $this->set(compact('client', 'users', 'groupClients'));
+        $this->set(compact('client'));
     }
 
     /**
@@ -149,20 +137,264 @@ class ClientsController extends AppController
             }
             $this->Flash->error(__('The client could not be saved. Please, try again.'));
         }
-        $users = $this->Clients->Users->find('list')->all();
-        $groupClients = $this->Clients->find('list', [
-            'keyField' => 'id',
-            'valueField' => function ($row) {
-                return str_replace('株式会社', '', (string)$row->name);
-            },
-        ])
-            ->where([
-                'Clients.is_group' => 1,
-                'Clients.id !=' => (int)$id,
-            ])
-            ->order(['Clients.kana' => 'ASC'])
-            ->all();
-        $this->set(compact('client', 'users', 'groupClients'));
+        $this->set(compact('client'));
+    }
+
+    /**
+     * Import method (CSV)
+     *
+     * @return \Cake\Http\Response|null
+     */
+    public function import()
+    {
+        $this->request->allowMethod(['post']);
+
+        $upload = $this->request->getData('import_file');
+        if (!$upload instanceof \Psr\Http\Message\UploadedFileInterface) {
+            $this->Flash->error(__('Import file was not provided.'));
+
+            return $this->redirect(['action' => 'index']);
+        }
+
+        if ($upload->getError() !== UPLOAD_ERR_OK) {
+            $this->Flash->error(__('Failed to upload import file.'));
+
+            return $this->redirect(['action' => 'index']);
+        }
+
+        $filename = (string)$upload->getClientFilename();
+        $ext = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
+        if ($ext !== 'csv') {
+            $this->Flash->error(__('Only CSV files are supported.'));
+
+            return $this->redirect(['action' => 'index']);
+        }
+
+        $stream = $upload->getStream();
+        $csv = (string)$stream;
+        if ($csv === '') {
+            $this->Flash->error(__('Import file is empty.'));
+
+            return $this->redirect(['action' => 'index']);
+        }
+
+        $handle = fopen('php://temp', 'r+');
+        fwrite($handle, $csv);
+        rewind($handle);
+
+        $header = fgetcsv($handle);
+        if ($header === false) {
+            fclose($handle);
+            $this->Flash->error(__('Header row could not be read.'));
+
+            return $this->redirect(['action' => 'index']);
+        }
+
+        $headerMap = $this->buildImportHeaderMap($header);
+        $colName = $this->findImportColumn($headerMap, ['name', 'company', '会社名', '顧客名']);
+        if ($colName === null) {
+            fclose($handle);
+            $this->Flash->error(__('Required header is missing: name'));
+
+            return $this->redirect(['action' => 'index']);
+        }
+
+        $colKana = $this->findImportColumn($headerMap, ['kana', '会社カナ', 'カナ']);
+        $colUrl = $this->findImportColumn($headerMap, ['url', 'URL']);
+        $colSalesRank = $this->findImportColumn($headerMap, ['sales_rank', '売上ランク']);
+        $colGroupName = $this->findImportColumn($headerMap, ['group_name', 'グループ']);
+        $colNote = $this->findImportColumn($headerMap, ['note', '備考']);
+        $colStatus = $this->findImportColumn($headerMap, ['status', 'ステータス']);
+
+        $authId = (string)$this->request->getSession()->read('Auth.id');
+        $activeStatus = defined('STATUS_ACTIVE') ? (int)STATUS_ACTIVE : 1;
+
+        $created = 0;
+        $updated = 0;
+        $skipped = 0;
+        $urlCleared = 0;
+        $updatedNames = [];
+        $skippedNames = [];
+        $urlClearedNames = [];
+
+        $conn = $this->Clients->getConnection();
+        $conn->begin();
+        try {
+            while (($row = fgetcsv($handle)) !== false) {
+                $name = $this->importCell($row, $colName);
+                if ($name === '') {
+                    $skipped++;
+                    $skippedNames[] = __('(empty row)');
+                    continue;
+                }
+
+                $entity = $this->Clients->find()->where(['name' => $name])->first();
+                $isNew = $entity === null;
+
+                $data = [
+                    'name' => $name,
+                    'kana' => $this->importCell($row, $colKana),
+                    'url' => $this->importCell($row, $colUrl),
+                    'group_name' => $this->importCell($row, $colGroupName),
+                    'note' => $this->importCell($row, $colNote),
+                ];
+
+                $salesRankRaw = $this->importCell($row, $colSalesRank);
+                $data['sales_rank'] = $this->parseImportSalesRank($salesRankRaw);
+
+                $statusRaw = $this->importCell($row, $colStatus);
+                $data['status'] = ctype_digit($statusRaw) ? (int)$statusRaw : $activeStatus;
+
+                if ($isNew) {
+                    $data['created_id'] = $authId !== '' ? $authId : '1';
+                    $entity = $this->Clients->newEntity($data);
+                } else {
+                    $data['modified_id'] = $authId !== '' ? $authId : '1';
+                    $entity = $this->Clients->patchEntity($entity, $data);
+                }
+
+                if (!$this->Clients->save($entity, ['atomic' => false])) {
+                    $errors = $entity->getErrors();
+                    $isUrlUniqueError = isset($errors['url']['_isUnique']);
+
+                    if ($isUrlUniqueError && !empty($data['url'])) {
+                        $data['url'] = '';
+                        if ($isNew) {
+                            $entity = $this->Clients->newEntity($data);
+                        } else {
+                            $entity = $this->Clients->patchEntity($entity, $data);
+                        }
+
+                        if ($this->Clients->save($entity, ['atomic' => false])) {
+                            $urlCleared++;
+                            $urlClearedNames[] = $name;
+                        } else {
+                            throw new \RuntimeException('Import failed: ' . json_encode($entity->getErrors(), JSON_UNESCAPED_UNICODE));
+                        }
+                    } else {
+                        throw new \RuntimeException('Import failed: ' . json_encode($errors, JSON_UNESCAPED_UNICODE));
+                    }
+                }
+
+                if ($isNew) {
+                    $created++;
+                } else {
+                    $updated++;
+                    $updatedNames[] = $name;
+                }
+            }
+
+            if ($conn->inTransaction()) {
+                $conn->commit();
+            }
+            fclose($handle);
+
+            $details = [];
+            if (!empty($updatedNames)) {
+                $details[] = __('updated names: {0}', implode(', ', array_values(array_unique($updatedNames))));
+            }
+            if (!empty($skippedNames)) {
+                $details[] = __('skipped names: {0}', implode(', ', array_values(array_unique($skippedNames))));
+            }
+            if (!empty($urlClearedNames)) {
+                $details[] = __('url_cleared names: {0}', implode(', ', array_values(array_unique($urlClearedNames))));
+            }
+
+            $message = __('Import completed. created: {0}, updated: {1}, skipped: {2}, url_cleared: {3}', $created, $updated, $skipped, $urlCleared);
+            if (!empty($details)) {
+                $message .= ' ' . implode(' / ', $details);
+            }
+
+            $this->Flash->success($message);
+        } catch (\Throwable $e) {
+            if ($conn->inTransaction()) {
+                $conn->rollback();
+            }
+            fclose($handle);
+            $this->Flash->error(__('Import failed. {0}', $e->getMessage()));
+        }
+
+        return $this->redirect(['action' => 'index']);
+    }
+
+    /**
+     * @param array<int, mixed> $headerRow
+     * @return array<string, int>
+     */
+    private function buildImportHeaderMap(array $headerRow): array
+    {
+        $map = [];
+        foreach ($headerRow as $index => $name) {
+            $key = $this->normalizeImportHeaderKey((string)$name);
+            if ($key !== '') {
+                $map[$key] = (int)$index;
+            }
+        }
+
+        return $map;
+    }
+
+    /**
+     * @param array<string, int> $headerMap
+     * @param array<int, string> $aliases
+     */
+    private function findImportColumn(array $headerMap, array $aliases): ?int
+    {
+        foreach ($aliases as $alias) {
+            $key = $this->normalizeImportHeaderKey($alias);
+            if (isset($headerMap[$key])) {
+                return $headerMap[$key];
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * @param array<int, mixed> $row
+     */
+    private function importCell(array $row, ?int $index): string
+    {
+        if ($index === null || !array_key_exists($index, $row)) {
+            return '';
+        }
+
+        return trim((string)$row[$index]);
+    }
+
+    private function normalizeImportHeaderKey(string $value): string
+    {
+        $key = str_replace("\xEF\xBB\xBF", '', $value);
+        $key = mb_strtolower(trim($key));
+        $key = str_replace([' ', '　'], '', $key);
+
+        return $key;
+    }
+
+    private function parseImportSalesRank(string $value): ?int
+    {
+        $raw = trim($value);
+        if ($raw === '') {
+            return null;
+        }
+
+        if (ctype_digit($raw)) {
+            $num = (int)$raw;
+
+            return ($num >= 1 && $num <= 6) ? $num : null;
+        }
+
+        $rank = strtolower($raw);
+        $map = [
+            's' => 1,
+            'a' => 2,
+            'b' => 3,
+            'c' => 4,
+            'd' => 5,
+            'e' => 6,
+        ];
+
+        return $map[$rank] ?? null;
     }
 
     /**

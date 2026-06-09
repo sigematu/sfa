@@ -2,7 +2,6 @@
 /**
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Client $client
- * @var string[]|\Cake\Collection\CollectionInterface $groupClients
  */
 ?>
 <?php
@@ -35,22 +34,7 @@ $this->Breadcrumbs->add([
           <?= $this->element('parts/sales_rank'); ?>
         </div>
         <div class="col">
-          <label class="font-weight-bold d-block mb-2"><?= __('親会社として設定') ?></label>
-          <div class="border rounded p-2 bg-light">
-            <div class="custom-control custom-switch">
-              <?= $this->Form->checkbox('is_group', [
-                  'id' => 'is-group-toggle',
-                  'class' => 'custom-control-input',
-                  'hiddenField' => true,
-              ]); ?>
-              <label class="custom-control-label" for="is-group-toggle"><?= __('この会社を親会社として扱う') ?></label>
-            </div>
-            <small class="text-muted d-block mt-2"><?= __('ONにすると、この会社は他社の「親会社」候補に表示されます。') ?></small>
-          </div>
-        </div>
-        <div class="col">
-          <?= $this->Form->control('parent_id', ['label' => __('親会社'), 'options' => $groupClients, 'empty' => __('親会社なし')]); ?>
-          <small class="text-muted d-block mt-1"><?= __('必要な場合のみ選択します。') ?></small>
+          <?= $this->Form->control('group_name', ['type' => 'text', 'label' => __('グループ'), 'placeholder' => __('グループ名')]); ?>
         </div>
       </div>
       <div class="row">

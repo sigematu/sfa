@@ -16,12 +16,13 @@ $colDefs = [
     'id'           => __('Id'),
     'actions'      => __('Actions'),
     'company'      => __('Company'),
-    'parent'       => __('親会社'),
+    'group-name'   => __('グループ'),
     'url'          => __('Url'),
     'sales-rank'   => __('Sales Rank'),
     'status'       => __('Status'),
 ];
 $alwaysCols = ['actions', 'company'];
+$isAdmin = $this->request->getSession()->read('Auth.role') === \App\Model\Table\UsersTable::ROLE_ADMIN;
 ?>
 
 <p>
@@ -43,6 +44,9 @@ $alwaysCols = ['actions', 'company'];
                     <?= $this->element('parts/sales_rank_e'); ?>
                 </div>
                 <div class="col">
+                    <?= $this->Form->control('group_name', ['label' => __('グループ')]); ?>
+                </div>
+                <div class="col">
                     <?= $this->element('parts/status_e'); ?>
                 </div>
                 <div class="col align-self-center">
@@ -59,6 +63,21 @@ $alwaysCols = ['actions', 'company'];
             <!-- -->
         </h2>
         <div class="card-toolbox">
+            <?php if ($isAdmin): ?>
+            <?= $this->Form->create(null, [
+                'url' => ['action' => 'import'],
+                'type' => 'file',
+                'class' => 'd-inline-flex align-items-center mr-2',
+            ]) ?>
+            <?= $this->Form->file('import_file', [
+                'class' => 'form-control form-control-sm mr-2',
+                'accept' => '.csv',
+                'label' => false,
+                'required' => true,
+            ]) ?>
+            <?= $this->Form->button(__('Import'), ['class' => 'btn btn-secondary btn-sm']) ?>
+            <?= $this->Form->end() ?>
+            <?php endif; ?>
             <?= $this->element('col_toggle', ['colToggleKey' => 'clients_hidden_cols', 'colDefs' => $colDefs, 'alwaysCols' => $alwaysCols]) ?>
             <?= $this->Paginator->limitControl([], null, [
                 'label' => false,
@@ -75,7 +94,7 @@ $alwaysCols = ['actions', 'company'];
                     <th class="pc-id"><?= $this->Paginator->sort('id') ?></th>
                     <th class="pc-actions actions"><?= __('Actions') ?></th>
                     <th class="pc-company"><?= $this->Paginator->sort('name', __('Company')) ?></th>
-                    <th class="pc-parent"><?= __('親会社') ?></th>
+                    <th class="pc-group-name"><?= $this->Paginator->sort('group_name', __('グループ')) ?></th>
                     <th class="pc-url"><?= $this->Paginator->sort('url') ?></th>
                     <th class="pc-sales-rank"><?= $this->Paginator->sort('sales_rank', __('Sales Rank')) ?></th>
                     <th class="pc-status"><?= $this->Paginator->sort('status') ?></th>
@@ -89,10 +108,13 @@ $alwaysCols = ['actions', 'company'];
                             <?= $this->Html->link(__('Edit'), ['action' => 'edit', $client->id], ['class' => 'btn btn-xs btn-outline-primary', 'escape' => false]) ?>
                             <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $client->id], ['class' => 'btn btn-xs btn-outline-danger', 'escape' => false, 'confirm' => __('Are you sure you want to delete # {0}?', $client->id)]) ?>
                         </td>
-                        <td class="pc-company"><?= $this->Html->link(h($this->Text->truncate(str_replace('株式会社', '', $client->name), 30)), ['action' => 'view', $client->id]) ?></td>
-                        <td class="pc-parent">
-                            <?php if (!empty($client->parent_client)): ?>
-                                <?= $this->Html->link(h($this->Text->truncate(str_replace('株式会社', '', (string)$client->parent_client->name), 30)), ['action' => 'view', $client->parent_client->id]) ?>
+                        <td class="pc-company"><?= $this->Html->link($this->Text->truncate(str_replace('株式会社', '', $client->name), 30), ['action' => 'view', $client->id]) ?></td>
+                        <td class="pc-group-name">
+                            <?php if (!empty($client->group_name)): ?>
+                                <?= $this->Html->link(
+                                    $this->Text->truncate((string)$client->group_name, 30),
+                                    ['action' => 'index', '?' => ['group_name' => $client->group_name]]
+                                ) ?>
                             <?php endif; ?>
                         </td>
                         <td class="pc-url">

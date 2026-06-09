@@ -113,7 +113,7 @@ class ClientContactsTable extends Table
             ->add('mobile_phone', 'custom', [
                 'rule' => 'isMobilePhoneNumber',
                 'provider' => 'custom',
-                'message' => __('Invalid mobile phone number format (e.g. 090-0000-0000).')
+                'message' => __('Invalid mobile phone number format (e.g. 050-0000-0000).')
             ])
             ->allowEmptyString('mobile_phone');
 
@@ -139,6 +139,10 @@ class ClientContactsTable extends Table
         $validator
             ->integer('category')
             ->allowEmptyString('category');
+
+        $validator
+            ->integer('role')
+            ->allowEmptyString('role');
 
         $validator
             ->integer('hierarchy')

@@ -54,20 +54,20 @@ class ClientsTable extends Table
         $this->hasMany('ClientContacts', [
         'foreignKey' => 'client_id',
         ]);
-        $this->belongsTo('ParentClients', [
-            'className' => 'Clients',
-            'foreignKey' => 'parent_id',
-            'joinType' => 'LEFT',
-        ]);
-        $this->hasMany('ChildClients', [
-            'className' => 'Clients',
-            'foreignKey' => 'parent_id',
-        ]);
 
         $this->addBehavior("Search.Search");
         $this->searchManager()
             ->value('sales_rank')
             ->value('status')
+            ->add('group_name', 'Search.Like', [
+                'before' => true,
+                'after' => true,
+                'comparison' => 'LIKE',
+                'fieldMode' => 'OR',
+                'wildcardAny' => '*',
+                'wildcardOne' => '?',
+                'fields' => ['group_name'],
+            ])
             ->add('q', 'Search.Like', [
                 'before' => true,
                 'after' => true,
@@ -126,12 +126,14 @@ class ClientsTable extends Table
             ->allowEmptyString('sales_rank');
 
         $validator
-            ->boolean('is_group')
-            ->notEmptyString('is_group');
-
-        $validator
-            ->integer('parent_id')
-            ->allowEmptyString('parent_id');
+            ->scalar('group_name')
+            ->maxLength('group_name', 255, __('Group name must be less than 255 characters.'))
+            ->allowEmptyString('group_name')
+            ->add('group_name', 'custom', [
+                'rule' => 'noSpaceStartEnd',
+                'provider' => 'custom',
+                'message' => __('Spaces at the beginning or end, or full-width spaces are not allowed.')
+            ]);
 
         $validator
             ->scalar('note')
@@ -155,7 +157,6 @@ class ClientsTable extends Table
     public function buildRules(RulesChecker $rules): RulesChecker
     {
         $rules->add($rules->existsIn('created_id', 'Users'), ['errorField' => 'created_id']);
-        $rules->add($rules->existsIn('parent_id', 'ParentClients'), ['errorField' => 'parent_id']);
         $rules->add($rules->isUnique(['name'], __('This name is already in use.')));
 
         // urlが空の場合、重複チェックを外す

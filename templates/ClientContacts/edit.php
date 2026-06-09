@@ -53,9 +53,6 @@ $initialHierarchyOptions = $hierarchyOptionsByClient[(int)($clientContact->clien
       </div>
       <div class="row">
         <div class="col-md-3">
-          <?= $this->Form->control('category', ['type' => 'select', 'label' => __('Responsible Area'), 'options' => $categories, 'empty' => __('Select'), 'value' => $clientContact->category ?? CLIENT_CONTACT_CATEGORY_ALL]); ?>
-        </div>
-        <div class="col-md-3">
           <?= $this->Form->control('department', ['type' => 'text', 'label' => __('Department')]); ?>
         </div>
         <div class="col-md-3">
@@ -63,6 +60,14 @@ $initialHierarchyOptions = $hierarchyOptionsByClient[(int)($clientContact->clien
         </div>
         <div class="col-md-3">
           <?= $this->Form->control('hierarchy', ['type' => 'select', 'label' => __('Hierarchy'), 'options' => $initialHierarchyOptions, 'empty' => __('Select'), 'class' => 'select2']); ?>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3">
+          <?= $this->Form->control('category', ['type' => 'select', 'label' => __('Responsible Area'), 'options' => $categories, 'empty' => __('Select'), 'value' => $clientContact->category ?? CLIENT_CONTACT_CATEGORY_ALL]); ?>
+        </div>
+        <div class="col-md-6">
+          <?= $this->element('parts/role_e'); ?>
         </div>
       </div>
       <div class="row">

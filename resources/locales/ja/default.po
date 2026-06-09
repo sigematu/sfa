@@ -29,8 +29,14 @@ msgstr "無効"
 msgid "Created"
 msgstr "作成日"
 
+msgid "Created User"
+msgstr "作成者"
+
 msgid "Modified"
 msgstr "変更日"
+
+msgid "Modified User"
+msgstr "更新者"
 
 msgid "Note"
 msgstr "備考"
@@ -100,6 +106,12 @@ msgstr "スキルシート"
 
 msgid "Birthyear"
 msgstr "生まれ年"
+
+msgid "years old"
+msgstr "才"
+
+msgid "year"
+msgstr "年"
 
 msgid "S(100byen-)"
 msgstr "S(1,000億円～)"
@@ -242,6 +254,9 @@ msgstr "デバッグ"
 msgid "Home"
 msgstr "ホーム"
 
+msgid "Toggle to switch between active and inactive."
+msgstr "有効と無効を切り替えます。"
+
 ###############################################################################
 # 共通(ページネーション)
 ###############################################################################
@@ -299,6 +314,9 @@ msgstr "エンジニアを削除しました。"
 msgid "The engineer could not be deleted. Please, try again."
 msgstr "エンジニアを削除できませんでした。"
 
+msgid "Spaces at the beginning or end, or full-width spaces are not allowed."
+msgstr "先頭・末尾の空白、または全角スペースは使用できません。"
+
 msgid "Mail sync completed. {0} new message(s) imported."
 msgstr "メール受信を完了しました。新規 {0} 件を取り込みました。"
 
@@ -313,6 +331,24 @@ msgstr "POP3設定が未設定です。"
 
 msgid "Failed to connect to POP3 server."
 msgstr "POP3サーバーへの接続に失敗しました。"
+
+msgid "Sales Job"
+msgstr "営業職"
+
+msgid "Non Sales Job"
+msgstr "非営業職"
+
+msgid "Accounting Job"
+msgstr "経理職"
+
+msgid "General User"
+msgstr "一般ユーザ"
+
+msgid "Viewer"
+msgstr "閲覧者"
+
+msgid "Admin"
+msgstr "管理者"
 
 ###############################################################################
 # ページ(共通)
