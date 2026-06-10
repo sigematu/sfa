@@ -104,4 +104,18 @@ return [
         'novalidate_cert' => filter_var(env('POP3_CLIENT_PROPOSAL_NOVALIDATE_CERT', true), FILTER_VALIDATE_BOOLEAN),
         'max_messages' => (int)env('POP3_CLIENT_PROPOSAL_MAX_MESSAGES', 100),
     ],
+
+    /*
+     * POP3 settings for BP procurement mailbox import.
+     * Same mail server as client proposals, separate mailbox user/address.
+     */
+    'Pop3BpProcurement' => [
+        'host' => env('POP3_BP_PROCUREMENT_HOST', 'dc14.etius.jp'),
+        'port' => (int)env('POP3_BP_PROCUREMENT_PORT', 995),
+        'username' => env('POP3_BP_PROCUREMENT_USER', 'sfa-chotatsu@icz.co.jp'),
+        'password' => env('POP3_BP_PROCUREMENT_PASS', 'vhqrv4Bz'),
+        'ssl' => filter_var(env('POP3_BP_PROCUREMENT_SSL', true), FILTER_VALIDATE_BOOLEAN),
+        'novalidate_cert' => filter_var(env('POP3_BP_PROCUREMENT_NOVALIDATE_CERT', true), FILTER_VALIDATE_BOOLEAN),
+        'max_messages' => (int)env('POP3_BP_PROCUREMENT_MAX_MESSAGES', 100),
+    ],
 ];

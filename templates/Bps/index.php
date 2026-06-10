@@ -23,6 +23,7 @@ $colDefs = [
     'status'         => __('Status'),
 ];
 $alwaysCols = ['actions', 'company'];
+$isAdmin = $this->request->getSession()->read('Auth.role') === \App\Model\Table\UsersTable::ROLE_ADMIN;
 ?>
 
 <p>
@@ -57,6 +58,21 @@ $alwaysCols = ['actions', 'company'];
             <!-- -->
         </h2>
         <div class="card-toolbox">
+            <?php if ($isAdmin): ?>
+            <?= $this->Form->create(null, [
+                'url' => ['action' => 'import'],
+                'type' => 'file',
+                'class' => 'd-inline-flex align-items-center mr-2',
+            ]) ?>
+            <?= $this->Form->file('import_file', [
+                'class' => 'form-control form-control-sm mr-2',
+                'accept' => '.csv',
+                'label' => false,
+                'required' => true,
+            ]) ?>
+            <?= $this->Form->button(__('Import'), ['class' => 'btn btn-secondary btn-sm']) ?>
+            <?= $this->Form->end() ?>
+            <?php endif; ?>
             <?= $this->element('col_toggle', ['colToggleKey' => 'bps_hidden_cols', 'colDefs' => $colDefs, 'alwaysCols' => $alwaysCols]) ?>
             <?= $this->Paginator->limitControl([], null, [
                 'label' => false,

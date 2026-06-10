@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Model\Table\UsersTable;
+use App\Service\BpImportService;
 use Cake\Datasource\Exception\RecordNotFoundException;
 
 /**
@@ -218,6 +220,79 @@ class BpsController extends AppController
             $this->MailNotify->mailSend($savedData, $controller, $action);
         } else {
             $this->Flash->error(__('The bp could not be deleted. Please, try again.'));
+        }
+
+        return $this->redirect(['action' => 'index']);
+    }
+
+    /**
+     * Import method (CSV). Admin only.
+     *
+     * @return \Cake\Http\Response|null
+     */
+    public function import()
+    {
+        $this->request->allowMethod(['post']);
+
+        $role = (string)$this->request->getSession()->read('Auth.role');
+        if ($role !== UsersTable::ROLE_ADMIN) {
+            $this->Flash->error(__('You are not authorized to import bps.'));
+
+            return $this->redirect(['action' => 'index']);
+        }
+
+        $upload = $this->request->getData('import_file');
+        if (!$upload instanceof \Psr\Http\Message\UploadedFileInterface) {
+            $this->Flash->error(__('Import file was not provided.'));
+
+            return $this->redirect(['action' => 'index']);
+        }
+
+        if ($upload->getError() !== UPLOAD_ERR_OK) {
+            $this->Flash->error(__('Failed to upload import file.'));
+
+            return $this->redirect(['action' => 'index']);
+        }
+
+        $filename = (string)$upload->getClientFilename();
+        if (strtolower(pathinfo($filename, PATHINFO_EXTENSION)) !== 'csv') {
+            $this->Flash->error(__('Only CSV files are supported.'));
+
+            return $this->redirect(['action' => 'index']);
+        }
+
+        $tmpPath = TMP . 'bp_import_' . uniqid('', true) . '.csv';
+        try {
+            $upload->moveTo($tmpPath);
+        } catch (\Throwable $e) {
+            $this->Flash->error(__('Failed to upload import file.'));
+
+            return $this->redirect(['action' => 'index']);
+        }
+
+        $operatorId = (string)$this->request->getSession()->read('Auth.id');
+
+        try {
+            $stats = (new BpImportService())->import($tmpPath, $operatorId);
+
+            $message = __(
+                'BP import completed. BP(created: {0}, updated: {1}), contact(created: {2}, updated: {3}), skipped: {4}.',
+                $stats['bp_created'],
+                $stats['bp_updated'],
+                $stats['contact_created'],
+                $stats['contact_updated'],
+                $stats['bp_skipped']
+            );
+            if (!empty($stats['warnings'])) {
+                $message .= ' ' . __('warnings: {0}', count($stats['warnings']));
+            }
+            $this->Flash->success($message);
+        } catch (\Throwable $e) {
+            $this->Flash->error(__('Import failed. {0}', $e->getMessage()));
+        } finally {
+            if (is_file($tmpPath)) {
+                @unlink($tmpPath);
+            }
         }
 
         return $this->redirect(['action' => 'index']);

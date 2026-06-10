@@ -236,6 +236,15 @@ msgstr "顧客提案一覧"
 msgid "List Client Proposals"
 msgstr "顧客提案一覧"
 
+msgid "BP Procurement"
+msgstr "BP調達"
+
+msgid "BP Procurements"
+msgstr "BP調達一覧"
+
+msgid "List BP Procurements"
+msgstr "BP調達一覧"
+
 msgid "Contract"
 msgstr "契約"
 
@@ -302,6 +311,30 @@ msgstr "BPを削除しました。"
 msgid "The bp could not be deleted. Please, try again."
 msgstr "BPを削除できませんでした。"
 
+msgid "Import"
+msgstr "インポート"
+
+msgid "You are not authorized to import bps."
+msgstr "BPをインポートする権限がありません。"
+
+msgid "Import file was not provided."
+msgstr "インポートファイルが指定されていません。"
+
+msgid "Failed to upload import file."
+msgstr "インポートファイルのアップロードに失敗しました。"
+
+msgid "Only CSV files are supported."
+msgstr "CSVファイルのみ対応しています。"
+
+msgid "BP import completed. BP(created: {0}, updated: {1}), contact(created: {2}, updated: {3}), skipped: {4}."
+msgstr "BPインポートが完了しました。BP(新規: {0}件、更新: {1}件)、担当者(新規: {2}件、更新: {3}件)、スキップ: {4}件。"
+
+msgid "warnings: {0}"
+msgstr "警告: {0}件"
+
+msgid "Import failed. {0}"
+msgstr "インポートに失敗しました。{0}"
+
 msgid "The engineer has been saved."
 msgstr "エンジニアを保存しました。"
 
@@ -331,6 +364,24 @@ msgstr "POP3設定が未設定です。"
 
 msgid "Failed to connect to POP3 server."
 msgstr "POP3サーバーへの接続に失敗しました。"
+
+msgid "The bp procurement has been saved."
+msgstr "BP調達を保存しました。"
+
+msgid "The bp procurement could not be saved. Please, try again."
+msgstr "BP調達を保存できませんでした。"
+
+msgid "Invalid bp procurement."
+msgstr "不正なBP調達です。"
+
+msgid "No update data was provided."
+msgstr "更新するデータがありません。"
+
+msgid "Invalid sales status."
+msgstr "不正な営業状況です。"
+
+msgid "Invalid sales reason."
+msgstr "不正な事由です。"
 
 msgid "Sales Job"
 msgstr "営業職"
@@ -377,6 +428,9 @@ msgstr "本文"
 
 msgid "No proposals found."
 msgstr "顧客提案メールはまだありません。"
+
+msgid "No procurements found."
+msgstr "BP調達メールはまだありません。"
 
 ###############################################################################
 # ページ(ユーザ)

@@ -16,5 +16,11 @@
         <p>[顧客提案] 提案中</p>
       </a>
     </li>
+    <li class="nav-item">
+      <a href="/sfa/bp-procurements?q=&sales_status=1&sales_reason=" class="nav-link">
+        <i class="far fa-circle nav-icon"></i>
+        <p>[BP調達] 調達中</p>
+      </a>
+    </li>
   </ul>
 </li>
