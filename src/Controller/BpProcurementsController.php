@@ -35,8 +35,19 @@ class BpProcurementsController extends AppController
         $searchReason = $this->normalizeOptionValue($this->request->getQuery('sales_reason'), BP_PROCUREMENT_REASON_LABELS);
         $badgePeriod = trim((string)$this->request->getQuery('badge_period'));
         $badgeSender = trim((string)$this->request->getQuery('badge_sender'));
+        $dateFrom = trim((string)$this->request->getQuery('date_from'));
+        $dateTo = trim((string)$this->request->getQuery('date_to'));
 
-        if (in_array($badgePeriod, ['day', 'week', 'month'], true)) {
+        if ($dateFrom !== '' && $dateTo !== '') {
+            try {
+                $query->where([
+                    'BpProcurements.received_at >=' => new FrozenTime($dateFrom . ' 00:00:00'),
+                    'BpProcurements.received_at <=' => new FrozenTime($dateTo . ' 23:59:59'),
+                ]);
+            } catch (\Throwable $e) {
+                // invalid date — ignore
+            }
+        } elseif (in_array($badgePeriod, ['day', 'week', 'month'], true)) {
             $range = $this->resolveBadgePeriodRange($badgePeriod);
             $query->where([
                 'BpProcurements.received_at >=' => $range['from'],

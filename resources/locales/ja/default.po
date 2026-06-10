@@ -365,6 +365,15 @@ msgstr "POP3設定が未設定です。"
 msgid "Failed to connect to POP3 server."
 msgstr "POP3サーバーへの接続に失敗しました。"
 
+msgid "The client proposal has been saved."
+msgstr "顧客提案を保存しました。"
+
+msgid "The client proposal could not be saved. Please, try again."
+msgstr "顧客提案を保存できませんでした。"
+
+msgid "Invalid client proposal."
+msgstr "不正な顧客提案です。"
+
 msgid "The bp procurement has been saved."
 msgstr "BP調達を保存しました。"
 

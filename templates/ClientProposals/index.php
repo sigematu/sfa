@@ -20,6 +20,8 @@
  * @var string $badgePeriod
  * @var string $badgeSender
  * @var int|null $badgeBpPic
+ * @var string $dateFrom
+ * @var string $dateTo
  */
 ?>
 <?php
@@ -426,6 +428,13 @@ $this->Breadcrumbs->add([
       ]) ?>
     </div>
     <div class="form-group mr-2 mb-2">
+      <input type="date" name="date_from" value="<?= h($dateFrom ?? '') ?>" class="form-control form-control-sm" placeholder="<?= __('開始日') ?>">
+    </div>
+    <div class="form-group mr-0 mb-2" style="line-height:2;padding:0 4px;">〜</div>
+    <div class="form-group mr-2 mb-2">
+      <input type="date" name="date_to" value="<?= h($dateTo ?? '') ?>" class="form-control form-control-sm" placeholder="<?= __('終了日') ?>">
+    </div>
+    <div class="form-group mr-2 mb-2">
       <?= $this->Form->control('sales_status', [
           'label' => false,
           'empty' => __('営業状況(すべて)'),
@@ -447,6 +456,9 @@ $this->Breadcrumbs->add([
       <?= $this->Form->button(__('Search'), ['class' => 'btn btn-primary btn-sm']) ?>
       <?= $this->Html->link(__('Reset'), ['action' => 'index'], ['class' => 'btn btn-default btn-sm ml-2']) ?>
     </div>
+    <?php if (!empty($badgeBpPic)): ?>
+      <input type="hidden" name="badge_bp_pic" value="<?= (int)$badgeBpPic ?>">
+    <?php endif; ?>
     <?= $this->Form->end() ?>
 
     <div class="cp-monthly-sales-status">

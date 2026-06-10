@@ -1,8 +1,12 @@
+<li class="nav-item d-none d-sm-inline-block">
+  <?= $this->Html->link('<i class="fas fa-tachometer-alt mr-1"></i>' . __('ダッシュボード'), '/dashboards/', ['class' => 'nav-link', 'escape' => false]) ?>
+</li>
 <li class="nav-item d-none d-sm-inline-block dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"><i class="fas fa-bolt mr-1"></i><?= __('Actions') ?></a>
   <div class="dropdown-menu">
     <?= $this->Html->link('<i class="fas fa-envelope-open-text mr-2"></i>' . __('Client Proposal'), '/client-proposals/', ['class' => 'dropdown-item', 'escape' => false]) ?>
     <?= $this->Html->link('<i class="fas fa-people-carry mr-2"></i>' . __('BP Procurement'), '/bp-procurements/', ['class' => 'dropdown-item', 'escape' => false]) ?>
+    <?= $this->Html->link('<i class="fas fa-bullseye mr-2"></i>' . __('顧客案件開拓'), '/client-business-developments/', ['class' => 'dropdown-item', 'escape' => false]) ?>
   </div>
 </li>
 <li class="nav-item d-none d-sm-inline-block dropdown">

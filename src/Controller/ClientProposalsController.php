@@ -36,8 +36,19 @@ class ClientProposalsController extends AppController
         $badgePeriod = trim((string)$this->request->getQuery('badge_period'));
         $badgeSender = trim((string)$this->request->getQuery('badge_sender'));
         $badgeBpPic = $this->normalizeSalesUserId($this->request->getQuery('badge_bp_pic'));
+        $dateFrom = trim((string)$this->request->getQuery('date_from'));
+        $dateTo = trim((string)$this->request->getQuery('date_to'));
 
-        if (in_array($badgePeriod, ['day', 'week', 'month'], true)) {
+        if ($dateFrom !== '' && $dateTo !== '') {
+            try {
+                $query->where([
+                    'ClientProposals.received_at >=' => new FrozenTime($dateFrom . ' 00:00:00'),
+                    'ClientProposals.received_at <=' => new FrozenTime($dateTo . ' 23:59:59'),
+                ]);
+            } catch (\Throwable $e) {
+                // invalid date — ignore
+            }
+        } elseif (in_array($badgePeriod, ['day', 'week', 'month'], true)) {
             $range = $this->resolveBadgePeriodRange($badgePeriod);
             $query->where([
                 'ClientProposals.received_at >=' => $range['from'],
@@ -49,7 +60,12 @@ class ClientProposalsController extends AppController
             $query->where(['ClientProposals.sender' => $badgeSender]);
         }
         if ($badgeBpPic !== null) {
-            $query->where(['ClientProposals.bp_pic_id' => $badgeBpPic]);
+            $query->where(function ($exp) use ($badgeBpPic) {
+                return $exp->or([
+                    'ClientProposals.bp_pic_id' => $badgeBpPic,
+                    'ClientProposals.sender'    => (string)$badgeBpPic,
+                ]);
+            });
         }
 
         if ($searchStatus !== null) {
@@ -120,7 +136,7 @@ class ClientProposalsController extends AppController
 
         $salesStatusLabels = CLIENT_PROPOSAL_SALES_STATUS_LABELS;
         $salesReasonLabels = CLIENT_PROPOSAL_REASON_LABELS;
-        $this->set(compact('clientProposals', 'proposalContactMap', 'salesStatusLabels', 'salesReasonLabels', 'senderUserMap', 'salesUserOptions', 'searchKeyword', 'searchStatus', 'searchReason', 'todayBadges', 'weeklyBadges', 'monthlyBadges', 'todayBpBadges', 'weeklyBpBadges', 'monthlyBpBadges', 'monthlySalesStatusTabs', 'badgePeriod', 'badgeSender', 'badgeBpPic'));
+        $this->set(compact('clientProposals', 'proposalContactMap', 'salesStatusLabels', 'salesReasonLabels', 'senderUserMap', 'salesUserOptions', 'searchKeyword', 'searchStatus', 'searchReason', 'todayBadges', 'weeklyBadges', 'monthlyBadges', 'todayBpBadges', 'weeklyBpBadges', 'monthlyBpBadges', 'monthlySalesStatusTabs', 'badgePeriod', 'badgeSender', 'badgeBpPic', 'dateFrom', 'dateTo'));
     }
 
     public function view($id = null)

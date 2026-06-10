@@ -123,6 +123,7 @@ $isAdmin = $this->request->getSession()->read('Auth.role') === \App\Model\Table\
                     <td class="pc-actions actions">
                         <!-- <?= $this->Html->link(__('View'), ['action' => 'view', $clientContact->id], ['class' => 'btn btn-xs btn-outline-primary', 'escape' => false]) ?> -->
                         <?= $this->Html->link(__('Edit'), ['action' => 'edit', $clientContact->id], ['class' => 'btn btn-xs btn-outline-primary', 'escape' => false]) ?>
+                        <?= $this->Html->link('<i class="fas fa-phone"></i> ' . __('Call'), ['controller' => 'ClientBusinessDevelopments', 'action' => 'add', '?' => ['client_id' => $clientContact->client_id, 'client_contact_id' => $clientContact->id]], ['class' => 'btn btn-xs btn-outline-success', 'escape' => false]) ?>
                         <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $clientContact->id], ['class' => 'btn btn-xs btn-outline-danger', 'escape' => false, 'confirm' => __('Are you sure you want to delete # {0}?', $clientContact->id)]) ?>
                     </td>
                     <td class="pc-name"><?= $this->Html->link($this->Text->truncate(h($clientContact->name), 20), ['action' => 'view', $clientContact->id]) ?></td>
