@@ -15,6 +15,7 @@ class ClientProposal extends Entity
         'subject' => true,
         'sales_status' => true,
         'sales_reason' => true,
+        'evaluation' => true,
         'bp_pic_id' => true,
         'body_text' => true,
         'body_html' => true,

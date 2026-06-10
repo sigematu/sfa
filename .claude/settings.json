@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(php -r ' *)",
+      "Bash(php -l templates/Dashboards/index.php)",
+      "Bash(php -l templates/element/monthly_status_summary.php)",
+      "Bash(php -l src/Controller/AppController.php)",
+      "Bash(php -l src/Controller/DashboardsController.php)"
+    ]
+  }
+}

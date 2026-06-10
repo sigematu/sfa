@@ -254,6 +254,146 @@ class AppController extends Controller
     }
 
     /**
+     * 指定テーブル・月のステータス別件数/割合サマリを、全体＋担当者別タブで作成する。
+     *
+     * @param string $tableName 対象テーブル名（エイリアス）
+     * @param string $dateField 月絞り込みに使う日時カラム
+     * @param string $assigneeField 担当者を表すカラム（数値ならユーザID）
+     * @param array<int, array{field:string, title:string, labels:array<int,string>}> $sections 集計対象セクション
+     * @param string|null $targetMonth 対象月（Y-m）
+     * @param array<string, mixed> $extraConditions 追加の絞り込み条件
+     * @return array<int, array{key:string, name:string, total:int, sections:array<int, array{title:string, total:int, rows:array<int, array{label:string, count:int, percentage:float}>}>}>
+     */
+    protected function buildMonthlyStatusSummaryTabs(
+        string $tableName,
+        string $dateField,
+        string $assigneeField,
+        array $sections,
+        ?string $targetMonth = null,
+        array $extraConditions = []
+    ): array {
+        [$from, $to] = $this->resolveMonthRange($targetMonth);
+
+        $selectFields = [$assigneeField => $assigneeField];
+        foreach ($sections as $section) {
+            $selectFields[$section['field']] = $section['field'];
+        }
+
+        $conditions = [
+            $tableName . '.' . $dateField . ' >=' => $from,
+            $tableName . '.' . $dateField . ' <=' => $to,
+        ] + $extraConditions;
+
+        $rows = TableRegistry::getTableLocator()->get($tableName)->find()
+            ->select(array_values($selectFields))
+            ->where($conditions)
+            ->enableHydration(false)
+            ->toArray();
+
+        // 担当者ID（数値）を収集して名前解決
+        $userIds = [];
+        foreach ($rows as $row) {
+            $raw = (string)($row[$assigneeField] ?? '');
+            if (ctype_digit($raw) && (int)$raw > 0) {
+                $userIds[(int)$raw] = (int)$raw;
+            }
+        }
+        $userNameMap = $this->lookupUserNames($userIds);
+
+        // 担当者ごとに行をグループ化
+        $groups = [];
+        foreach ($rows as $row) {
+            $raw = (string)($row[$assigneeField] ?? '');
+            if (ctype_digit($raw) && (int)$raw > 0) {
+                $key = $raw;
+                $name = $userNameMap[(int)$raw] ?? ('User #' . $raw);
+            } else {
+                $key = 'unset';
+                $name = '未設定';
+            }
+            if (!isset($groups[$key])) {
+                $groups[$key] = ['name' => $name, 'rows' => []];
+            }
+            $groups[$key]['rows'][] = $row;
+        }
+
+        // 件数降順で担当者を並べ替え
+        uasort($groups, static fn(array $a, array $b): int => count($b['rows']) <=> count($a['rows']));
+
+        // 全体タブを先頭に、続けて担当者タブ
+        $tabs = [[
+            'key' => 'all',
+            'name' => '全体',
+            'total' => count($rows),
+            'sections' => $this->computeStatusSections($rows, $sections),
+        ]];
+        foreach ($groups as $key => $group) {
+            $tabs[] = [
+                'key' => (string)$key,
+                'name' => $group['name'],
+                'total' => count($group['rows']),
+                'sections' => $this->computeStatusSections($group['rows'], $sections),
+            ];
+        }
+
+        return $tabs;
+    }
+
+    /**
+     * 行集合をセクション定義に従って件数/割合に集計する。
+     *
+     * @param array<int, array<string, mixed>> $rows
+     * @param array<int, array{field:string, title:string, labels:array<int,string>}> $sections
+     * @return array<int, array{title:string, total:int, rows:array<int, array{label:string, count:int, percentage:float}>}>
+     */
+    private function computeStatusSections(array $rows, array $sections): array
+    {
+        $result = [];
+        foreach ($sections as $section) {
+            $field = $section['field'];
+            $labels = $section['labels'];
+            $hasUnsetLabel = array_key_exists(0, $labels);
+
+            $counts = array_fill_keys(array_keys($labels), 0);
+            $extraUnset = 0;
+            $total = 0;
+            foreach ($rows as $row) {
+                $raw = $row[$field] ?? null;
+                $key = ($raw === null || $raw === '' || !ctype_digit((string)$raw)) ? 0 : (int)$raw;
+                if (array_key_exists($key, $counts)) {
+                    $counts[$key]++;
+                } elseif ($hasUnsetLabel) {
+                    $counts[0]++;
+                } else {
+                    $extraUnset++;
+                }
+                $total++;
+            }
+
+            $rowsOut = [];
+            foreach ($labels as $value => $label) {
+                $count = $counts[$value];
+                $rowsOut[] = [
+                    'label' => $label,
+                    'count' => $count,
+                    'percentage' => $total > 0 ? ($count / $total * 100) : 0.0,
+                ];
+            }
+            if (!$hasUnsetLabel && $extraUnset > 0) {
+                $rowsOut[] = [
+                    'label' => '未設定',
+                    'count' => $extraUnset,
+                    'percentage' => $total > 0 ? ($extraUnset / $total * 100) : 0.0,
+                ];
+            }
+
+            $result[] = ['title' => $section['title'], 'total' => $total, 'rows' => $rowsOut];
+        }
+
+        return $result;
+    }
+
+    /**
      * @return array{FrozenTime, FrozenTime, int, string, int}
      */
     private function resolveMonthRange(?string $targetMonth): array

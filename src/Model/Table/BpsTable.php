@@ -128,6 +128,23 @@ class BpsTable extends Table
             ->scalar('note')
             ->allowEmptyString('note');
 
+        for ($i = 1; $i <= 3; $i++) {
+            $validator
+                ->scalar("mail_email_{$i}")
+                ->maxLength("mail_email_{$i}", 255, __('Email must be less than 255 characters.'))
+                ->email("mail_email_{$i}", false, __('Email format is invalid.'))
+                ->allowEmptyString("mail_email_{$i}");
+
+            $validator
+                ->scalar("mail_dept_{$i}")
+                ->maxLength("mail_dept_{$i}", 255, __('Department or role must be less than 255 characters.'))
+                ->allowEmptyString("mail_dept_{$i}");
+
+            $validator
+                ->integer("mail_flag_{$i}")
+                ->allowEmptyString("mail_flag_{$i}");
+        }
+
         $validator
             ->integer('status')
             ->requirePresence('status', 'create')

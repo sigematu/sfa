@@ -15,6 +15,7 @@ class BpProcurement extends Entity
         'subject' => true,
         'sales_status' => true,
         'sales_reason' => true,
+        'evaluation' => true,
         'body_text' => true,
         'body_html' => true,
         'headers' => true,

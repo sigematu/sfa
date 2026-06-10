@@ -65,6 +65,23 @@ $monthLabel = (string)($calClientProposal['monthLabel'] ?? date('Y/m'));
 .dash-nav-month { font-size: 1.4rem; font-weight: 700; color: #202124; margin: 0 10px; letter-spacing: -.4px; }
 .dash-nav-today { font-size: .8rem; padding: 4px 13px; border: 1px solid #dadce0; border-radius: 18px; color: #3c4043; text-decoration: none; transition: background .15s; }
 .dash-nav-today:hover { background: #f1f3f4; text-decoration: none; }
+/* 月次ステータス集計 */
+.dash-summary-wrap { background: #fff; border-radius: 10px; box-shadow: 0 1px 6px rgba(0,0,0,.07); padding: 14px 18px 18px; margin-top: -8px; margin-bottom: 26px; }
+.dash-summary-tabs { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 14px; }
+.dash-summary-tab { border: 1px solid #dadce0; background: #fff; color: #3c4043; border-radius: 999px; padding: .26rem .8rem; font-size: .8rem; font-weight: 700; line-height: 1.2; cursor: pointer; transition: background .15s, border-color .15s; }
+.dash-summary-tab:hover { background: #f1f3f4; }
+.dash-summary-tab.is-active { background: var(--accent, #4361ee); border-color: var(--accent, #4361ee); color: #fff; }
+.dash-summary-panel[hidden] { display: none !important; }
+.dash-summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+.dash-summary-card { border: 1px solid #e8eaed; border-radius: 8px; overflow: hidden; background: #fff; }
+.dash-summary-card-head { display: flex; align-items: center; justify-content: space-between; padding: 8px 12px; border-bottom: 2px solid; background: #f8f9fa; }
+.dash-summary-card-title { font-size: .9rem; font-weight: 700; color: #202124; }
+.dash-summary-card-total { font-size: .78rem; font-weight: 700; color: #3c4043; background: #fff; border-radius: 20px; padding: 2px 10px; }
+.dash-summary-table { width: 100%; border-collapse: collapse; }
+.dash-summary-table th { padding: 6px 10px; text-align: left; font-size: .74rem; font-weight: 700; color: #5f6368; background: #fafafa; border-bottom: 1px solid #e8eaed; }
+.dash-summary-table td { padding: 6px 10px; font-size: .82rem; color: #3c4043; border-bottom: 1px solid #f1f3f4; }
+.dash-summary-table th.num, .dash-summary-table td.num { text-align: right; font-variant-numeric: tabular-nums; }
+.dash-summary-table tbody tr:last-child td { border-bottom: none; }
 </style>
 
 <div class="dash-nav-bar">
@@ -89,6 +106,11 @@ $monthLabel = (string)($calClientProposal['monthLabel'] ?? date('Y/m'));
     'todayDay'      => $todayDay,
 ]) ?>
 
+<?= $this->element('monthly_status_summary', [
+    'tabs'        => $summaryClientProposal,
+    'accentColor' => '#4361ee',
+]) ?>
+
 <?= $this->element('monthly_cal', [
     'calData'       => $calClientProposalBpPic,
     'title'         => '顧客提案（BP担当）',
@@ -98,6 +120,11 @@ $monthLabel = (string)($calClientProposal['monthLabel'] ?? date('Y/m'));
     'dateFromParam' => 'date_from',
     'dateToParam'   => 'date_to',
     'todayDay'      => $todayDay,
+]) ?>
+
+<?= $this->element('monthly_status_summary', [
+    'tabs'        => $summaryClientProposalBpPic,
+    'accentColor' => '#0096c7',
 ]) ?>
 
 <?= $this->element('monthly_cal', [
@@ -111,6 +138,11 @@ $monthLabel = (string)($calClientProposal['monthLabel'] ?? date('Y/m'));
     'todayDay'      => $todayDay,
 ]) ?>
 
+<?= $this->element('monthly_status_summary', [
+    'tabs'        => $summaryBpProcurement,
+    'accentColor' => '#2dc653',
+]) ?>
+
 <?= $this->element('monthly_cal', [
     'calData'       => $calClientBizDev,
     'title'         => '顧客案件開拓',
@@ -121,3 +153,30 @@ $monthLabel = (string)($calClientProposal['monthLabel'] ?? date('Y/m'));
     'dateToParam'   => 'date_to',
     'todayDay'      => $todayDay,
 ]) ?>
+
+<?= $this->element('monthly_status_summary', [
+    'tabs'        => $summaryClientBizDev,
+    'accentColor' => '#f4a261',
+]) ?>
+
+<script>
+  (function () {
+    document.querySelectorAll('[data-summary-group]').forEach(function (group) {
+      var tabs = group.querySelectorAll('[data-summary-tab]');
+      var panels = group.querySelectorAll('[data-summary-panel]');
+      tabs.forEach(function (tab) {
+        tab.addEventListener('click', function () {
+          var key = tab.getAttribute('data-summary-tab');
+          tabs.forEach(function (t) {
+            var active = t === tab;
+            t.classList.toggle('is-active', active);
+            t.setAttribute('aria-selected', active ? 'true' : 'false');
+          });
+          panels.forEach(function (panel) {
+            panel.hidden = panel.getAttribute('data-summary-panel') !== key;
+          });
+        });
+      });
+    });
+  })();
+</script>

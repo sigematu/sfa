@@ -33,6 +33,7 @@ class BpProcurementsController extends AppController
         $searchKeyword = trim((string)$this->request->getQuery('q'));
         $searchStatus = $this->normalizeOptionValue($this->request->getQuery('sales_status'), BP_PROCUREMENT_STATUS_LABELS);
         $searchReason = $this->normalizeOptionValue($this->request->getQuery('sales_reason'), BP_PROCUREMENT_REASON_LABELS);
+        $searchEvaluation = $this->normalizeOptionValue($this->request->getQuery('evaluation'), BP_PROCUREMENT_EVALUATION_LABELS);
         $badgePeriod = trim((string)$this->request->getQuery('badge_period'));
         $badgeSender = trim((string)$this->request->getQuery('badge_sender'));
         $dateFrom = trim((string)$this->request->getQuery('date_from'));
@@ -65,6 +66,9 @@ class BpProcurementsController extends AppController
         if ($searchReason !== null) {
             $query->where(['BpProcurements.sales_reason' => $searchReason]);
         }
+        if ($searchEvaluation !== null) {
+            $query->where(['BpProcurements.evaluation' => $searchEvaluation]);
+        }
 
         if ($searchKeyword !== '') {
             $query->where(function ($exp) use ($searchKeyword) {
@@ -80,7 +84,6 @@ class BpProcurementsController extends AppController
         $todayBadges = $this->buildSalesCountBadges(FrozenTime::now()->startOfDay(), FrozenTime::now()->endOfDay());
         $weeklyBadges = $this->buildSalesCountBadges(FrozenTime::now()->startOfWeek(), FrozenTime::now()->endOfWeek());
         $monthlyBadges = $this->buildSalesCountBadges(FrozenTime::now()->startOfMonth(), FrozenTime::now()->endOfMonth());
-        $monthlySalesStatusTabs = $this->buildMonthlySalesStatusTabs();
 
         $senderUserMap = $this->buildSenderUserMap($bpProcurements);
 
@@ -123,7 +126,8 @@ class BpProcurementsController extends AppController
 
         $salesStatusLabels = BP_PROCUREMENT_STATUS_LABELS;
         $salesReasonLabels = BP_PROCUREMENT_REASON_LABELS;
-        $this->set(compact('bpProcurements', 'procurementContactMap', 'salesStatusLabels', 'salesReasonLabels', 'senderUserMap', 'searchKeyword', 'searchStatus', 'searchReason', 'todayBadges', 'weeklyBadges', 'monthlyBadges', 'monthlySalesStatusTabs', 'badgePeriod', 'badgeSender'));
+        $evaluationLabels = BP_PROCUREMENT_EVALUATION_LABELS;
+        $this->set(compact('bpProcurements', 'procurementContactMap', 'salesStatusLabels', 'salesReasonLabels', 'evaluationLabels', 'senderUserMap', 'searchKeyword', 'searchStatus', 'searchReason', 'searchEvaluation', 'todayBadges', 'weeklyBadges', 'monthlyBadges', 'badgePeriod', 'badgeSender', 'dateFrom', 'dateTo'));
     }
 
     public function view($id = null)
@@ -166,6 +170,12 @@ class BpProcurementsController extends AppController
             $data['sales_reason'] = $this->normalizeOptionValue(
                 $this->request->getData('sales_reason'),
                 BP_PROCUREMENT_REASON_LABELS
+            );
+        }
+        if ($this->request->getData('evaluation') !== null) {
+            $data['evaluation'] = $this->normalizeOptionValue(
+                $this->request->getData('evaluation'),
+                BP_PROCUREMENT_EVALUATION_LABELS
             );
         }
 
@@ -354,110 +364,6 @@ class BpProcurementsController extends AppController
         return $badges;
     }
 
-    /**
-     * @return array<int, array{sender_id:int,name:string,total:int,rows:array<int, array{label:string,count:int,percentage:float}>}>
-     */
-    private function buildMonthlySalesStatusTabs(): array
-    {
-        $from = FrozenTime::now()->startOfMonth();
-        $to = FrozenTime::now()->endOfMonth();
-
-        $query = $this->BpProcurements->find();
-        $rows = $query
-            ->select([
-                'sender',
-                'sales_status',
-                'procurement_count' => $query->func()->count('id'),
-            ])
-            ->where([
-                'received_at >=' => $from,
-                'received_at <=' => $to,
-                'sender <>' => '',
-            ])
-            ->group(['sender', 'sales_status'])
-            ->enableHydration(false)
-            ->toArray();
-
-        if (empty($rows)) {
-            return [];
-        }
-
-        $senderIds = [];
-        $statusCountBySender = [];
-        foreach ($rows as $row) {
-            $sender = (string)($row['sender'] ?? '');
-            if (!ctype_digit($sender)) {
-                continue;
-            }
-
-            $senderId = (int)$sender;
-            $status = (int)($row['sales_status'] ?? 0);
-            $count = (int)($row['procurement_count'] ?? 0);
-            if ($count <= 0) {
-                continue;
-            }
-
-            $senderIds[$senderId] = true;
-            if (!isset($statusCountBySender[$senderId])) {
-                $statusCountBySender[$senderId] = [];
-            }
-            if (!isset($statusCountBySender[$senderId][$status])) {
-                $statusCountBySender[$senderId][$status] = 0;
-            }
-            $statusCountBySender[$senderId][$status] += $count;
-        }
-
-        if (empty($statusCountBySender)) {
-            return [];
-        }
-
-        $nameMap = [];
-        if (!empty($senderIds)) {
-            $users = TableRegistry::getTableLocator()->get('Users')->find()
-                ->select(['id', 'display_name', 'username'])
-                ->where(['id IN' => array_keys($senderIds)])
-                ->all();
-            foreach ($users as $user) {
-                $name = (string)($user->display_name ?? '');
-                if ($name === '') {
-                    $name = (string)($user->username ?? '');
-                }
-                $nameMap[(int)$user->id] = $name !== '' ? $name : (string)$user->id;
-            }
-        }
-
-        $tabs = [];
-        foreach ($statusCountBySender as $senderId => $statusCounts) {
-            $total = array_sum($statusCounts);
-            if ($total <= 0) {
-                continue;
-            }
-
-            $detailRows = [];
-            foreach (BP_PROCUREMENT_STATUS_LABELS as $statusValue => $statusLabel) {
-                $count = (int)($statusCounts[(int)$statusValue] ?? 0);
-                $percentage = $total > 0 ? round(($count / $total) * 100, 1) : 0.0;
-                $detailRows[] = [
-                    'label' => $statusLabel,
-                    'count' => $count,
-                    'percentage' => $percentage,
-                ];
-            }
-
-            $tabs[] = [
-                'sender_id' => $senderId,
-                'name' => $nameMap[$senderId] ?? (string)$senderId,
-                'total' => $total,
-                'rows' => $detailRows,
-            ];
-        }
-
-        usort($tabs, function (array $a, array $b): int {
-            return $b['total'] <=> $a['total'];
-        });
-
-        return $tabs;
-    }
 
     /**
      * @return array{from: \Cake\I18n\FrozenTime, to: \Cake\I18n\FrozenTime}

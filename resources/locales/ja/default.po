@@ -218,6 +218,33 @@ msgstr "担当領域"
 msgid "ON/OFF"
 msgstr "ON/OFF"
 
+msgid "Mail Recipients"
+msgstr "メール配信先"
+
+msgid "You can specify up to 5 mail recipients."
+msgstr "メール配信先は5件まで指定できます。"
+
+msgid "You can specify up to 3 mail recipients."
+msgstr "メール配信先は3件まで指定できます。"
+
+msgid "Department or Role"
+msgstr "部署または役割"
+
+msgid "Delivery"
+msgstr "配信"
+
+msgid "Sales Department / Manager"
+msgstr "営業部 / 担当部長"
+
+msgid "Email must be less than 255 characters."
+msgstr "メールアドレスは255文字未満で入力してください。"
+
+msgid "Email format is invalid."
+msgstr "メールアドレスの形式が正しくありません。"
+
+msgid "Department or role must be less than 255 characters."
+msgstr "部署または役割は255文字未満で入力してください。"
+
 msgid "Client"
 msgstr "顧客"
 

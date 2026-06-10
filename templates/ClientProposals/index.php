@@ -10,13 +10,13 @@
  * @var string $searchKeyword
  * @var int|null $searchStatus
  * @var int|null $searchReason
+ * @var int|null $searchEvaluation
  * @var array<int, array{name:string,count:int,sender:string}> $todayBadges
  * @var array<int, array{name:string,count:int,sender:string}> $weeklyBadges
  * @var array<int, array{name:string,count:int,sender:string}> $monthlyBadges
  * @var array<int, array{name:string,count:int,bp_pic_id:string}> $todayBpBadges
  * @var array<int, array{name:string,count:int,bp_pic_id:string}> $weeklyBpBadges
  * @var array<int, array{name:string,count:int,bp_pic_id:string}> $monthlyBpBadges
- * @var array<int, array{sender_id:int,name:string,total:int,rows:array<int, array{label:string,count:int,percentage:float}>}> $monthlySalesStatusTabs
  * @var string $badgePeriod
  * @var string $badgeSender
  * @var int|null $badgeBpPic
@@ -113,67 +113,6 @@ $this->Breadcrumbs->add([
   .cp-summary-badge:hover {
     text-decoration: none;
     filter: brightness(0.95);
-  }
-
-  .cp-monthly-sales-status {
-    margin: 10px 0 12px;
-    padding: 10px;
-    border: 1px solid #e6ebf0;
-    border-radius: 8px;
-    background: #fcfdff;
-  }
-
-  .cp-monthly-sales-title {
-    margin: 0 0 8px;
-    font-size: 0.95rem;
-    font-weight: 700;
-  }
-
-  .cp-monthly-sales-tabs {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-bottom: 10px;
-  }
-
-  .cp-monthly-sales-tab {
-    border: 1px solid #cfd6de;
-    background: #ffffff;
-    color: #3a4651;
-    border-radius: 999px;
-    padding: 0.28rem 0.82rem;
-    font-size: 0.86rem;
-    font-weight: 700;
-    line-height: 1.2;
-    cursor: pointer;
-  }
-
-  .cp-monthly-sales-tab.is-active {
-    background: #1f2d3d;
-    border-color: #1f2d3d;
-    color: #ffffff;
-  }
-
-  .cp-monthly-sales-panel[hidden] {
-    display: none !important;
-  }
-
-  .cp-monthly-sales-table {
-    margin-bottom: 0;
-    background: #ffffff;
-  }
-
-  .cp-monthly-sales-table th,
-  .cp-monthly-sales-table td {
-    padding-top: 0.45rem;
-    padding-bottom: 0.45rem;
-    vertical-align: middle;
-  }
-
-  .cp-monthly-sales-table td:nth-child(2),
-  .cp-monthly-sales-table td:nth-child(3) {
-    text-align: right;
-    font-variant-numeric: tabular-nums;
   }
 </style>
 
@@ -420,19 +359,13 @@ $this->Breadcrumbs->add([
 
     <?= $this->Form->create(null, ['type' => 'get', 'class' => 'form-inline']) ?>
     <div class="form-group mr-2 mb-2">
-      <?= $this->Form->control('q', [
+      <?= $this->Form->control('evaluation', [
           'label' => false,
-          'value' => $searchKeyword,
-          'placeholder' => __('宛先・件名で検索'),
+          'empty' => __('評価(すべて)'),
+          'options' => $evaluationLabels,
+          'value' => $searchEvaluation,
           'class' => 'form-control form-control-sm',
       ]) ?>
-    </div>
-    <div class="form-group mr-2 mb-2">
-      <input type="date" name="date_from" value="<?= h($dateFrom ?? '') ?>" class="form-control form-control-sm" placeholder="<?= __('開始日') ?>">
-    </div>
-    <div class="form-group mr-0 mb-2" style="line-height:2;padding:0 4px;">〜</div>
-    <div class="form-group mr-2 mb-2">
-      <input type="date" name="date_to" value="<?= h($dateTo ?? '') ?>" class="form-control form-control-sm" placeholder="<?= __('終了日') ?>">
     </div>
     <div class="form-group mr-2 mb-2">
       <?= $this->Form->control('sales_status', [
@@ -453,6 +386,21 @@ $this->Breadcrumbs->add([
       ]) ?>
     </div>
     <div class="form-group mr-2 mb-2">
+      <input type="date" name="date_from" value="<?= h($dateFrom ?? '') ?>" class="form-control form-control-sm" placeholder="<?= __('開始日') ?>">
+    </div>
+    <div class="form-group mr-0 mb-2" style="line-height:2;padding:0 4px;">〜</div>
+    <div class="form-group mr-2 mb-2">
+      <input type="date" name="date_to" value="<?= h($dateTo ?? '') ?>" class="form-control form-control-sm" placeholder="<?= __('終了日') ?>">
+    </div>
+    <div class="form-group mr-2 mb-2">
+      <?= $this->Form->control('q', [
+          'label' => false,
+          'value' => $searchKeyword,
+          'placeholder' => __('宛先・件名で検索'),
+          'class' => 'form-control form-control-sm',
+      ]) ?>
+    </div>
+    <div class="form-group mr-2 mb-2">
       <?= $this->Form->button(__('Search'), ['class' => 'btn btn-primary btn-sm']) ?>
       <?= $this->Html->link(__('Reset'), ['action' => 'index'], ['class' => 'btn btn-default btn-sm ml-2']) ?>
     </div>
@@ -460,52 +408,6 @@ $this->Breadcrumbs->add([
       <input type="hidden" name="badge_bp_pic" value="<?= (int)$badgeBpPic ?>">
     <?php endif; ?>
     <?= $this->Form->end() ?>
-
-    <div class="cp-monthly-sales-status">
-      <h3 class="cp-monthly-sales-title"><?= __('営業担当別 月次営業状況') ?></h3>
-      <?php if (empty($monthlySalesStatusTabs)): ?>
-        <div class="text-muted"><?= __('今月の集計データはありません。') ?></div>
-      <?php else: ?>
-        <?php $activeSalesTab = (string)$monthlySalesStatusTabs[0]['sender_id']; ?>
-        <div class="cp-monthly-sales-tabs" role="tablist" aria-label="<?= __('営業担当別月次集計') ?>">
-          <?php foreach ($monthlySalesStatusTabs as $tab): ?>
-            <?php $tabId = (string)$tab['sender_id']; ?>
-            <button
-              type="button"
-              class="cp-monthly-sales-tab <?= $tabId === $activeSalesTab ? 'is-active' : '' ?>"
-              data-sales-month-tab="<?= h($tabId) ?>"
-              aria-selected="<?= $tabId === $activeSalesTab ? 'true' : 'false' ?>"
-            >
-              <?= h($tab['name']) ?> (<?= h((string)$tab['total']) ?>)
-            </button>
-          <?php endforeach; ?>
-        </div>
-
-        <?php foreach ($monthlySalesStatusTabs as $tab): ?>
-          <?php $tabId = (string)$tab['sender_id']; ?>
-          <div class="cp-monthly-sales-panel" data-sales-month-panel="<?= h($tabId) ?>" <?= $tabId !== $activeSalesTab ? 'hidden' : '' ?>>
-            <table class="table table-sm table-bordered cp-monthly-sales-table">
-              <thead>
-                <tr>
-                  <th><?= __('営業状況') ?></th>
-                  <th><?= __('件数') ?></th>
-                  <th><?= __('割合') ?></th>
-                </tr>
-              </thead>
-              <tbody>
-                <?php foreach ($tab['rows'] as $row): ?>
-                  <tr>
-                    <td><?= h($row['label']) ?></td>
-                    <td><?= h((string)$row['count']) ?></td>
-                    <td><?= h(number_format((float)$row['percentage'], 1)) ?>%</td>
-                  </tr>
-                <?php endforeach; ?>
-              </tbody>
-            </table>
-          </div>
-        <?php endforeach; ?>
-      <?php endif; ?>
-    </div>
   </div>
 
   <div class="card-body table-responsive p-0">
@@ -513,6 +415,7 @@ $this->Breadcrumbs->add([
       <thead>
         <tr>
           <th><?= __('Actions') ?></th>
+          <th><?= __('評価') ?></th>
           <th><?= __('営業状況') ?></th>
           <th><?= __('事由') ?></th>
           <th><?= __('Date Time') ?></th>
@@ -525,7 +428,7 @@ $this->Breadcrumbs->add([
       <tbody>
         <?php if (empty($clientProposals->toArray())): ?>
           <tr>
-            <td colspan="8" class="text-muted"><?= __('No proposals found.') ?></td>
+            <td colspan="9" class="text-muted"><?= __('No proposals found.') ?></td>
           </tr>
         <?php else: ?>
           <?php foreach ($clientProposals as $proposal): ?>
@@ -546,6 +449,7 @@ $this->Breadcrumbs->add([
               <?php $proposalFormId = 'proposal-sales-form-' . (int)$proposal->id; ?>
               <?php $salesStatusValue = $proposal->sales_status !== null ? (int)$proposal->sales_status : CLIENT_PROPOSAL_SALES_STATUS_PROPOSING; ?>
               <?php $salesReasonValue = $proposal->sales_reason !== null ? (int)$proposal->sales_reason : CLIENT_PROPOSAL_REASON_UNSET; ?>
+              <?php $evaluationValue = $proposal->evaluation !== null ? (int)$proposal->evaluation : CLIENT_PROPOSAL_EVALUATION_UNSET; ?>
               <td>
                 <?= $this->Form->create(null, [
                     'url' => ['action' => 'updateSalesResult'],
@@ -555,6 +459,19 @@ $this->Breadcrumbs->add([
                 <?= $this->Form->hidden('proposal_id', ['value' => (int)$proposal->id]) ?>
                 <?= $this->Form->button(__('保存'), ['class' => 'btn btn-secondary btn-sm']) ?>
                 <?= $this->Form->end() ?>
+              </td>
+              <td>
+                <select
+                  name="evaluation"
+                  form="<?= h($proposalFormId) ?>"
+                  class="form-control form-control-sm"
+                >
+                  <?php foreach ($evaluationLabels as $value => $label): ?>
+                    <option value="<?= h((string)$value) ?>" <?= ($evaluationValue === (int)$value) ? 'selected' : '' ?>>
+                      <?= h($label) ?>
+                    </option>
+                  <?php endforeach; ?>
+                </select>
               </td>
               <td>
                 <select
@@ -706,31 +623,6 @@ $this->Breadcrumbs->add([
     tabs.forEach(function (tab) {
       tab.addEventListener('click', function () {
         setActive(tab.getAttribute('data-period-tab'));
-      });
-    });
-  })();
-
-  (function () {
-    var tabs = document.querySelectorAll('[data-sales-month-tab]');
-    var panels = document.querySelectorAll('[data-sales-month-panel]');
-    if (!tabs.length || !panels.length) {
-      return;
-    }
-
-    function setActive(tabId) {
-      tabs.forEach(function (tab) {
-        var active = tab.getAttribute('data-sales-month-tab') === tabId;
-        tab.classList.toggle('is-active', active);
-        tab.setAttribute('aria-selected', active ? 'true' : 'false');
-      });
-      panels.forEach(function (panel) {
-        panel.hidden = panel.getAttribute('data-sales-month-panel') !== tabId;
-      });
-    }
-
-    tabs.forEach(function (tab) {
-      tab.addEventListener('click', function () {
-        setActive(tab.getAttribute('data-sales-month-tab'));
       });
     });
   })();
