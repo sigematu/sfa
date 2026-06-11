@@ -5,6 +5,7 @@
  * @var \App\Model\Entity\ClientContact $clientContact
  * @var string[]|\Cake\Collection\CollectionInterface $clients
  * @var array<int, string> $categories
+ * @var array<int, string> $locations
  * @var array<int, array<int, string>> $hierarchyOptionsByClient
  */
 ?>
@@ -66,10 +67,21 @@ $this->Breadcrumbs->add([
           <?= $this->Form->control('department', ['type' => 'text', 'label' => __('Department')]); ?>
         </div>
         <div class="col-md-3">
-          <?= $this->element('parts/position_e'); ?>
+          <?= $this->Form->control('position_title', ['type' => 'text', 'label' => __('役職')]); ?>
+        </div>
+        <div class="col-md-3">
+          <?= $this->element('parts/position_e', ['positionLabel' => __('役職クラス')]); ?>
         </div>
         <div class="col-md-3">
           <?= $this->Form->control('hierarchy', ['type' => 'select', 'label' => __('Hierarchy'), 'options' => $initialHierarchyOptions, 'empty' => __('Select')]); ?>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3">
+          <?= $this->Form->control('location', ['type' => 'select', 'label' => __('所在地'), 'options' => $locations, 'empty' => __('Select')]); ?>
+        </div>
+        <div class="col-md-3">
+          <?= $this->Form->control('base', ['type' => 'text', 'label' => __('拠点')]); ?>
         </div>
       </div>
       <div class="row">

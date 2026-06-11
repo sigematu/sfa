@@ -26,11 +26,14 @@ $this->Breadcrumbs->add([
       <tr><th><?= __('Mobile') ?></th><td><?= h($clientContact->mobile_phone) ?></td></tr>
       <tr><th><?= __('Landline') ?></th><td><?= h($clientContact->landline_phone) ?></td></tr>
       <tr><th><?= __('Department') ?></th><td><?= h($clientContact->department ?? '') ?></td></tr>
+      <tr><th><?= __('役職') ?></th><td><?= h($clientContact->position_title ?? '') ?></td></tr>
       <tr>
-        <th><?= __('Position') ?></th>
+        <th><?= __('役職クラス') ?></th>
         <td><?= $this->element('parts/position_v', ['clientContact' => $clientContact]) ?></td>
       </tr>
       <tr><th><?= __('Hierarchy') ?></th><td><?= h($hierarchyName ?? '') ?></td></tr>
+      <tr><th><?= __('所在地') ?></th><td><?= h(CLIENT_CONTACT_LOCATION_LABELS[(int)($clientContact->location ?? 0)] ?? '') ?></td></tr>
+      <tr><th><?= __('拠点') ?></th><td><?= h($clientContact->base ?? '') ?></td></tr>
       <tr><th><?= __('Mail Delivery Attribute') ?></th><td><?= h(CLIENT_CONTACT_CATEGORY_LABELS[(int)($clientContact->category ?? 0)] ?? '') ?></td></tr>
       <tr><th><?= __('Role') ?></th><td><?= $this->element('parts/role_v', ['clientContact' => $clientContact]) ?></td></tr>
       <tr><th><?= __('Status') ?></th><td><?= $clientContact->status === 1 ? __('Active') : __('Inactive') ?></td></tr>

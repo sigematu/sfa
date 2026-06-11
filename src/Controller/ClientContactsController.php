@@ -129,7 +129,8 @@ class ClientContactsController extends AppController
         $clients = $this->ClientContacts->Clients->find('list', ['order' => ['kana' => 'ASC']])->all();
         $categories = CLIENT_CONTACT_CATEGORY_LABELS;
         $inactiveReasons = CLIENT_CONTACT_INACTIVE_REASON_LABELS;
-        $this->set(compact('clientContact', 'clients', 'client_id', 'email', 'categories', 'inactiveReasons', 'hierarchyOptionsByClient'));
+        $locations = CLIENT_CONTACT_LOCATION_LABELS;
+        $this->set(compact('clientContact', 'clients', 'client_id', 'email', 'categories', 'inactiveReasons', 'locations', 'hierarchyOptionsByClient'));
     }
 
     /**
@@ -166,7 +167,8 @@ class ClientContactsController extends AppController
         $clients = $this->ClientContacts->Clients->find('list', ['order' => ['kana' => 'ASC']])->all();
         $categories = CLIENT_CONTACT_CATEGORY_LABELS;
         $inactiveReasons = CLIENT_CONTACT_INACTIVE_REASON_LABELS;
-        $this->set(compact('clientContact', 'clients', 'categories', 'inactiveReasons', 'hierarchyOptionsByClient'));
+        $locations = CLIENT_CONTACT_LOCATION_LABELS;
+        $this->set(compact('clientContact', 'clients', 'categories', 'inactiveReasons', 'locations', 'hierarchyOptionsByClient'));
     }
 
     /**
@@ -406,6 +408,9 @@ class ClientContactsController extends AppController
         $department = trim((string)($data['department'] ?? ''));
         $data['department'] = $department === '' ? null : $department;
 
+        $positionTitle = trim((string)($data['position_title'] ?? ''));
+        $data['position_title'] = $positionTitle === '' ? null : $positionTitle;
+
         $data['category'] = isset(CLIENT_CONTACT_CATEGORY_LABELS[(int)($data['category'] ?? 0)])
             ? (int)$data['category']
             : null;
@@ -413,6 +418,13 @@ class ClientContactsController extends AppController
         $data['role'] = isset(CLIENT_CONTACT_ROLE_LABELS[(int)($data['role'] ?? 0)])
             ? (int)$data['role']
             : null;
+
+        $data['location'] = isset(CLIENT_CONTACT_LOCATION_LABELS[(int)($data['location'] ?? 0)])
+            ? (int)$data['location']
+            : null;
+
+        $base = trim((string)($data['base'] ?? ''));
+        $data['base'] = $base === '' ? null : $base;
 
         $clientId = (int)($data['client_id'] ?? 0);
         $hierarchy = (int)($data['hierarchy'] ?? 0);

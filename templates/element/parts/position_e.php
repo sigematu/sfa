@@ -1,5 +1,5 @@
           <?= $this->Form->control('position', [
-              'label' => __('Position'),
+              'label' => $positionLabel ?? __('Position'),
               'type' => 'select',
               'options' => [
                   POS_CEO => __('社長・代表'),

@@ -5,7 +5,20 @@
       "Bash(php -l templates/Dashboards/index.php)",
       "Bash(php -l templates/element/monthly_status_summary.php)",
       "Bash(php -l src/Controller/AppController.php)",
-      "Bash(php -l src/Controller/DashboardsController.php)"
+      "Bash(php -l src/Controller/DashboardsController.php)",
+      "Bash(c:/xampp82/mysql/bin/mysql.exe -u root -e \"USE sfa; SHOW COLUMNS FROM clients;\")",
+      "Bash(c:/xampp82/mysql/bin/mysql.exe -u root sfa -e \"SHOW COLUMNS FROM clients;\")",
+      "Bash(c:/xampp82/mysql/bin/mysql.exe -u root sfa -e \"SHOW COLUMNS FROM clients LIKE 'account';\")",
+      "Bash(c:/xampp82/mysql/bin/mysql.exe -u root sfa -e \"SHOW COLUMNS FROM client_contacts;\")",
+      "Bash(c:/xampp82/mysql/bin/mysql.exe -u root sfa -e \"SHOW COLUMNS FROM client_contacts WHERE Field IN \\('location','base'\\);\")",
+      "Bash(php -l templates/ClientContacts/add.php)",
+      "Bash(php -l templates/ClientContacts/view.php)",
+      "Bash(php -l templates/Clients/add.php)",
+      "Bash(php -l templates/Clients/view.php)",
+      "Bash(php -l templates/ClientContacts/edit.php)",
+      "Bash(php -l templates/element/parts/position_e.php)",
+      "Bash(php -l src/Controller/ClientContactsController.php)",
+      "Bash(php -l src/Model/Entity/ClientContact.php)"
     ]
   }
 }

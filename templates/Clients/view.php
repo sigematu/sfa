@@ -57,6 +57,10 @@ $this->Breadcrumbs->add([
               <?php endif; ?>
           </td>
       </tr>
+      <tr>
+          <th><?= __('口座') ?></th>
+          <td><?= (int)($client->account ?? 0) === 1 ? __('あり') : __('なし') ?></td>
+      </tr>
             <tr>
               <th><?= __('グループ') ?></th>
               <td><?= h($client->group_name ?? '') ?></td>

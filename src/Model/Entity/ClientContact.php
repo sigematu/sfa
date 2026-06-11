@@ -16,10 +16,13 @@ use Cake\ORM\Entity;
  * @property string|null $mobile_phone
  * @property string|null $landline_phone
  * @property string|null $department
+ * @property string|null $position_title
  * @property int|null $position
  * @property int|null $category
  * @property int|null $role
  * @property int|null $hierarchy
+ * @property int|null $location
+ * @property string|null $base
  * @property string|null $note
  * @property int $status
  * @property int|null $inactive_reason
@@ -51,10 +54,13 @@ class ClientContact extends Entity
         'mobile_phone' => true,
         'landline_phone' => true,
         'department' => true,
+        'position_title' => true,
         'position' => true,
         'category' => true,
         'role' => true,
         'hierarchy' => true,
+        'location' => true,
+        'base' => true,
         'note' => true,
         'status' => true,
         'inactive_reason' => true,

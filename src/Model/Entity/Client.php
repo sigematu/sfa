@@ -35,6 +35,7 @@ class Client extends Entity
         'url' => true,
         'group_name' => true,
         'sales_rank' => true,
+        'account' => true,
         'note' => true,
         'mail_email_1' => true,
         'mail_dept_1' => true,

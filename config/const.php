@@ -150,6 +150,20 @@ define("CLIENT_CONTACT_INACTIVE_REASON_LABELS", [
     CLIENT_CONTACT_INACTIVE_REASON_RESPONSE => 'レスポンス悪い',
 ]);
 
+// 顧客担当者 所在地
+define("CLIENT_CONTACT_LOCATION_LABELS", [
+    1 => '東京23区',
+    2 => '東京区外',
+    3 => '横浜',
+    4 => '川崎',
+    5 => '神奈川ほか',
+    6 => '埼玉',
+    7 => '千葉',
+    8 => '東京支社',
+    9 => '神奈川支社',
+    10 => '大阪',
+]);
+
 // 顧客提案 営業状況
 define("CLIENT_PROPOSAL_SALES_STATUS_PROPOSING", 5); // 提案中
 define("CLIENT_PROPOSAL_SALES_STATUS_INTERVIEW", 1); // 面談

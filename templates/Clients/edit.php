@@ -34,6 +34,21 @@ $this->Breadcrumbs->add([
           <?= $this->element('parts/sales_rank'); ?>
         </div>
         <div class="col">
+          <label class="d-block"><?= __('口座') ?></label>
+          <?= $this->Form->hidden('account', ['value' => 0]); ?>
+          <div class="custom-control custom-switch mt-2">
+            <?= $this->Form->checkbox('account', [
+                'id' => 'account-toggle',
+                'class' => 'custom-control-input',
+                'value' => 1,
+                'required' => false,
+                'hiddenField' => false,
+                'checked' => (int)($client->account ?? 0) === 1,
+            ]); ?>
+            <label class="custom-control-label" for="account-toggle"><?= __('あり') ?> / <?= __('なし') ?></label>
+          </div>
+        </div>
+        <div class="col">
           <?= $this->Form->control('group_name', ['type' => 'text', 'label' => __('グループ'), 'placeholder' => __('グループ名')]); ?>
         </div>
       </div>
